@@ -1,8 +1,12 @@
+body {
+  background: rgb(0,17,79);
+  background: linear-gradient(90deg, rgba(0,17,79,1) 0%, rgba(51,102,204,1) 100%);
+}
+
 .main {
-  background-color: #3366CC;
-  padding: 76.5px 9px
-  /* background-size: cover;
-  font-family: 'IBMPlexMono', sans-serif; */
+  /* background-size: cover; */
+  padding: 70px 0px;
+  font-family: 'IBMPlexMono', sans-serif;
 }
 
 div.form-box {
@@ -61,15 +65,73 @@ div.form-box {
   font-family: 'Kanit', sans-serif;
 }
 
-p {
-  animation-duration: 3s;
-  animation-name: slidein;
-}
-
 .mark {
   border-radius: 15px;
-  background-color:antiquewhite;
+  background-color:rgb(250, 235, 215, 1);
 }
 
+/* This is our style for the invalid fields */
+input.invalid {
+  border-color: #900;
+  background-color: #fdd;
+}
+
+input.invalid:focus {
+  outline: none;
+}
+
+/* This is the style of our error messages */
+.error {
+  width: 100%;
+  padding: 0;
+
+  font-size: 80%;
+  color: white;
+  background-color: #900;
+  border-radius: 0 0 5px 5px;
+
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 0.3em;
+}
+
+input[type="email"], input[type="password"] {
+  /* appearance: none; */
+  width: 100%;
+  border: none;
+  /* margin-top: 20px; */
+  /* font-family: inherit; */
+  /* font-size: 90%; */
+  /* box-sizing: border-box; */
+  padding: 6px
+}
+
+/* Style for the email input field when it's invalid */
+input[type="email"].invalid, input[type="password"].invalid {
+  border-color: #900; /* Red border color for invalid input */
+  background-color: #fdd; /* Light red background for invalid input */
+}
+
+/* Style for the email input field when focused */
+input[type="email"]:focus, input[type="password"].invalid {
+  outline: none; /* Remove the default focus outline */
+  border-color: #3366CC; /* Border color when focused */
+}
+
+/* .red
+{
+     margin-top: 5px;
+     color: red;
+     font-weight: bold;
+}
+    
+.green
+{
+     margin-top: 5px;
+     color: green;
+     font-weight: bold;
+} */
 
 
