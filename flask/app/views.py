@@ -17,10 +17,17 @@ def db_connection():
         return '<h1>db is broken.</h1>' + str(e)
 
 @app.route('/')
-def homepage():
-    return app.send_static_file("homepage.html")
+def firstpage():
+    return app.send_static_file("firstpage.html")
 
 @app.route('/signup')
 def signup():
     return app.send_static_file("signup.html")
 
+@app.route('/login')
+def login():
+    return app.send_static_file("login.html")
+
+@app.route('/feedpage')
+def feedpage():
+    return app.send_static_file("feedpage.html")
