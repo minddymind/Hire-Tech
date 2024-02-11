@@ -1,5 +1,5 @@
 body {
-	background: linear-gradient(-45deg, #3366CC,#00114f);
+	background: linear-gradient(-45deg, #3366CC,#7058f8, #00114f);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
 	height: 100vh;
@@ -20,7 +20,7 @@ body {
 nav {
 	background-color: #3366CC;
 	width: 100%;
-	height: inherit;
+	height: 50px;
 }
 
 nav > p {
