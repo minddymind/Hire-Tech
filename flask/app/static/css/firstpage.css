@@ -16,3 +16,22 @@ body {
 		background-position: 0% 50%;
 	}
 }
+
+nav {
+	background-color: #3366CC;
+	width: 100%;
+	height: inherit;
+}
+
+nav > p {
+	flex-direction: row;
+}
+
+.get-start-btn {
+	border: none;
+	border-radius: 10px;
+}
+
+.get-start-btn:focus {
+	box-shadow: 0 0 0;
+}
