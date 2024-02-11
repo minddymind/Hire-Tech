@@ -1,6 +1,6 @@
 .maincontent{
   background-color: #3366CC;
-  padding: 76.7px 0px;
+  background-size: cover;
   font-family: 'IBMPlexMono', sans-serif;
 }
 
@@ -58,6 +58,11 @@ div.form-box {
   font-size: 1.2rem;
   color: white;
   font-family: 'Kanit', sans-serif;
+}
+
+p {
+  animation-duration: 3s;
+  animation-name: slidein;
 }
 
 
