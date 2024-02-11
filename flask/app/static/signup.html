@@ -24,7 +24,8 @@
         0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700
         &family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
-        <title>HireThec</title>
+
+        <title>HireThec - Signup</title>
     </head>
     <body>
         <div class="main">
@@ -40,27 +41,32 @@
                         <div class="form-box px-5 py-4">
                             <form>
                                 <h2 class="text-center mb-4">Join HireTech!</h2>
-                                <!-- <p class="desc-form">Create Username</p> -->
-                                <input type="text" name="" placeholder="Username" class="form-control mb-3">
-                                <!-- <p class="desc-form">Email</p> -->
-                                <input type="text" name="" placeholder="Email" class="form-control mb-3">
-                                <!-- <p class="desc-form">Create Password</p> -->
-                                <div class="input-group">
-                                    <input type="password" name="" placeholder="Password" class="form-control border-end-0">
-                                    <span class="input-group-text bg-white border-start-0"><i class="fa-solid fa-eye"></i></span>
-                                </div>
-                                <br>
-                                <!-- <p class="desc-form">Confirm Password</p> -->
-                                <div class="input-group">
-                                    <input type="password" name="" placeholder="Confirm Password" class="form-control border-end-0">
-                                    <span class="input-group-text bg-white border-start-0"><i class="fa-solid fa-eye"></i></span>
-                                </div>
+                                <label class="desc-form">Create Username</label>
+                                <input type="text" name="" id="username" placeholder="Username" class="form-control mb-3" required>
+                                <label class="desc-form">Gmail</label>
+                                <input type="email" id="mail" name="mail" placeholder="Email" class="form-control mb-3" required>
+                                <!-- <span class="error" aria-live="polite"></span> -->
+                                <label class="desc-form">Create Password</label>
+                                <!-- <div class="input-group"> -->
+                                <input type="password" id="password" name="password" class="form-control md-3" 
+                                placeholder="Password" required>
+                                <!-- <span class="error" aria-live="polite"></span> -->
+                                    <!-- <span class="input-group-text bg-white border-start-0"><i class="fa-solid fa-eye"></i></span> -->
+                                <!-- </div> -->
+                                <lable class="desc-form">Confirm Password</label>
+                                <!-- <div class="input-group"> -->
+                                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control md-3" 
+                                placeholder="Confirm Password" required>
+                                <!-- <span class="error" aria-live="polite"></span> -->
+                                    <!-- <i class="bi bi-eye-slash" id="toggleconfirmPassword"></i> -->
+                                    <!-- <span class="input-group-text bg-white border-start-0"><i class="fa-solid fa-eye"></i></span> -->
+                                <!-- </div> -->
                                 <!-- <div>
                                     <input type="checkbox" name="">
                                     <label></label>
                                 </div> -->
                                 <br>
-                                <button class="register-btn form-control mb-3">Create account</button>
+                                <button type="submit" class="register-btn form-control mb-3">Create account</button>
                                 <p class="text-center">Have an account? <a href="" class="link"><b>Log in</b></a></p>
                             </form>
                         </div>
@@ -68,5 +74,55 @@
                 </div>
             </div>
         </div>
+        <script>
+            const form = document.querySelector("form");
+            const email = document.getElementById("mail");
+            const error = email.nextElementSibling;
+        
+            // As per the HTML Specification
+            const emailRegExp =
+              /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+          
+            // Now we can rebuild our validation constraint
+            // Because we do not rely on CSS pseudo-class, we have to
+            // explicitly set the valid/invalid class on our email field
+            window.addEventListener("load", () => {
+              // Here, we test if the field is empty (remember, the field is not required)
+              // If it is not, we check if its content is a well-formed email address.
+              const isValid = email.value.length === 0 || emailRegExp.test(email.value);
+              email.className = isValid ? "valid" : "invalid";
+            });
+          
+            // This defines what happens when the user types in the field
+            email.addEventListener("input", () => {
+              const isValid = email.value.length === 0 || emailRegExp.test(email.value);
+              if (isValid) {
+                email.className = "valid";
+                error.textContent = "";
+                error.className = "error";
+              } else {
+                email.className = "invalid";
+              }
+            });
+          
+            // This defines what happens when the user tries to submit the data
+            form.addEventListener("submit", (event) => {
+              event.preventDefault();
+          
+              const isValid = email.value.length === 0 || emailRegExp.test(email.value);
+              if (!isValid) {
+                email.className = "invalid";
+                error.textContent = "I expect an email";
+                error.className = "error active";
+              } else {
+                email.className = "valid";
+                error.textContent = "";
+                error.className = "error";
+                form.submit();
+              }
+            });
+
+        </script> 
     </body>
+
 </html>
