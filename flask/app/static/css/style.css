@@ -1,7 +1,8 @@
-.maincontent{
+.main {
   background-color: #3366CC;
-  background-size: cover;
-  font-family: 'IBMPlexMono', sans-serif;
+  padding: 76.5px 9px
+  /* background-size: cover;
+  font-family: 'IBMPlexMono', sans-serif; */
 }
 
 div.form-box {
@@ -63,6 +64,11 @@ div.form-box {
 p {
   animation-duration: 3s;
   animation-name: slidein;
+}
+
+.mark {
+  border-radius: 15px;
+  background-color:antiquewhite;
 }
 
 
