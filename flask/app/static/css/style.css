@@ -4,6 +4,9 @@ body {
 }
 
 .main {
+  /* background-image: url(/static/img/career-job.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%; */
   /* background-size: cover; */
   padding: 70px 0px;
   font-family: 'IBMPlexMono', sans-serif;
