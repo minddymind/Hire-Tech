@@ -1,7 +1,7 @@
 from flask import (jsonify, render_template,
                    request, url_for, flash, redirect)
 
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.urls import url_parse
 
 from sqlalchemy.sql import text
@@ -12,7 +12,7 @@ from app import db
 from app import login_manager
 from app.models.authuser import AuthUser
 
-@login_manager
+@login_manager.user_loader
 def load_user(user_id):
     return AuthUser.query.get(int(user_id))
 
@@ -67,7 +67,7 @@ def signup():
             if user:
                 # if email was exists. send user to sign up again
 
-                # flash('Email address already exists')
+                flash('Email address already exists')
                 return redirect(url_for('signup'))
         
         #Section 3 add new user after validated all
