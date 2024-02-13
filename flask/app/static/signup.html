@@ -27,6 +27,8 @@
 
         <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
 
+        <!-- <script defer src="static/js/validation.js"></script> -->
+
         <title>HireThec - Signup</title>
     </head>
     <body>
@@ -41,33 +43,46 @@
                     </div>
                     <div class="col-lg-5 col-md-10 col-sm-12">
                         <div class="form-box px-5 py-3">
-                          <h2 class="text-center mb-4">Join HireTech!</h2>
-                            <form>
-                                <!-- Gmail -->
-                                <label for="gmail" class="form-label">Gmail :</label>
-                                <input type="email" id="mail" class="form-control mb-3" placeholder="@example.com" required>
-                                <!-- <span class="error" aria-live="polite"></span> -->
-                                <!-- Name -->
-                                <label for="name" class="form-label">Name :</label>
-                                <input type="text" id="name" class="form-control mb-3" placeholder="สมชาย ทรงแบด" required minlength="8">
-                              
-                                <!-- Password -->
-                                <label for="password" class="form-label">Create Password :</label>
-                                <input type="password" id="password" class="form-control mb-3" 
-                                placeholder="Password must least 8" required>
+                          <form id="form">
+                            <h2 class="text-center">Join HireTech!</h2>
+                            <div class="input-control">
+                              <!-- Gmail -->
+                              <label for="email" class="form-label">Email :</label>
+                              <input type="email" name="email" id="email" class="form-control" placeholder="@example.com" required>
+                              <!-- <div class="error" id="emailErr"></div> -->
+                              <!-- <span class="error" aria-live="polite"></span> -->
+                            </div>
+                            <div class="input-control">
+                              <!-- Name -->
+                              <label for="name" class="form-label">Name :</label>
+                              <input type="text" name="name" id="name" class="form-control" placeholder="สมชาย ทรงแบด" required>
+                              <!-- <div class="error" id="nameErr"></div> -->
+                            </div>
 
-                                <!-- Confirm Password -->
-                                <label for="confirm" class="form-label">Confirm Password :</label>
-                                <input type="password" id="confirm" placeholder="Confirm Password" class="form-control mb-3" required minlength="8">
-                                <!-- <br> -->
-                                <button type="submit" class="register-btn form-control mb-3">Create account</button>
-                                <p class="text-center">Have an account? <a href="" class="link"><b>Log in</b></a></p>
+                            <div class="input-control">
+                              <!-- Password -->
+                              <label for="password" class="form-label">Create Password :</label>
+                              <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+                              <!-- <div class="error" id="pswErr"></div> -->
+                            </div>
+
+                            <div class="input-control">
+                              <!-- Confirm Password -->
+                              <label for="confirm" class="form-label">Confirm Password :</label>
+                              <input type="password" name="confirm" id="confirm" placeholder="Confirm Password" class="form-control" required>
+                              <!-- <div class="error" id="confirmErr"></div> -->
+                            </div>
+                              <br>
+                            <button type="submit" class="register-btn form-control mb-3">Create account</button>
+                            <p class="text-center">Have an account? <a href="" class="link"><b>Log in</b></a></p>
+                        
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
         <!-- <script>
             const form = document.querySelector("form");
             const email = document.getElementById("mail");

@@ -32,10 +32,6 @@ div.form-box {
   border: 2px solid #3366CC;
 }
 
-.input-group-text {
-  border-radius: 0px 10px 10px 0px;
-}
-
 .register-btn {
   background-color: #3366CC;
   border: none;
@@ -73,55 +69,35 @@ div.form-box {
   background-color:rgb(250, 235, 215, 1);
 }
 
-/* This is our style for the invalid fields */
-input.invalid {
-  border-color: #900;
-  background-color: #fdd;
-}
-
-input.invalid:focus {
-  outline: none;
-}
-
-/* This is the style of our error messages */
 .error {
-  width: 100%;
-  padding: 0;
-
-  font-size: 80%;
-  color: white;
-  background-color: #900;
-  border-radius: 0 0 5px 5px;
-
-  box-sizing: border-box;
+  color: red;
+  font-size: 90%;
 }
 
-.error.active {
-  padding: 0.3em;
+/* input[type=text] {
+  outline: none;
+} */
+
+.input-control input:focus {
+  outline: 0;
 }
 
-input[type="email"], input[type="password"] {
-  /* appearance: none; */
-  width: 100%;
-  border: none;
-  /* margin-top: 20px; */
-  /* font-family: inherit; */
-  /* font-size: 90%; */
-  /* box-sizing: border-box; */
-  padding: 6px
+/* This is our style for the invalid fields */
+.input-control.success input {
+  border-color: #09c372;
 }
 
-/* Style for the email input field when it's invalid */
-input[type="email"].invalid, input[type="password"].invalid {
-  border-color: #900; /* Red border color for invalid input */
-  background-color: #fdd; /* Light red background for invalid input */
+.input-control.error input {
+  border-color: #ff3860;
 }
 
-/* Style for the email input field when focused */
-input[type="email"]:focus, input[type="password"].invalid {
-  outline: none; /* Remove the default focus outline */
-  border-color: #3366CC; /* Border color when focused */
+.input-control .error {
+  color : #ff3860;
+  font-size: 9px;
+  height: 13px;
 }
+
+
 
 /* .red
 {
