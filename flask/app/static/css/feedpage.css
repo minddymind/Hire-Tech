@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: center; /* จัดวางศูนย์กลางในแนวนอน */
+    align-items: center; /* จัดวางศูนย์กลางในแนวตั้ง */
+    height: 100vh; /* ทำให้คอนเทนเนอร์ตรงกลางของหน้าจอ */
+}
+
+form {
+    /* ตั้งความกว้างของฟอร์ม */
+    width: 300px;
+    /* เพิ่ม padding เพื่อให้มีพื้นที่รอบขอบ */
+    padding: 20px;
+    /* เพิ่ม border เพื่อให้มีขอบ */
+    border: 1px solid #ccc;
+    /* ปรับขอบเขตให้มีมุมโค้ง */
+    border-radius: 10px;
+}
