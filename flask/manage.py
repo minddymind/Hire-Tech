@@ -2,7 +2,7 @@ from flask.cli import FlaskGroup
 from werkzeug.security import generate_password_hash
 from app import app, db
 from app.models.authuser import AuthUser
-from app.models.userinfo import UserInfo
+# from app.models.userinfo import UserInfo
 cli = FlaskGroup(app)
 
 #create DB
@@ -21,9 +21,6 @@ def seed_db():
         password=generate_password_hash('1234',
                                 method='sha256'))
     )
-    # db.session.add(
-    #     UserInfo(firstname='สมชาย', lastname='ทรงแบด', email='081-111-1111')
-    #     )
     
     db.session.commit()
 

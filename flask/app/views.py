@@ -26,8 +26,36 @@ def db_connection():
     except Exception as e:
         return '<h1>db is broken.</h1>' + str(e)
 
-@app.route('/')
-def firstpage():
+# @app.route('/')
+# def firstpage():
+#     return app.send_static_file("firstpage.html")
+
+@app.route('/', methods=("GET", "POST"))
+def login():
+    if request.method == 'POST':    
+        # remember = bool(request.form.get('remember'))
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        #check is the input email is in databse?
+        user = AuthUser.query.filter_by(email=email).first()
+        
+        #if email not exist in Database or Password Incorrect 
+        if not user or not check_password_hash(user.password, password):
+            #redirect to give user try again
+            return redirect(url_for('login'))
+        
+        #if user has the right credentials do below
+        login_user(user)
+        next_page = request.args.get('next')
+        #The 'next' parameter is commonly used to redirect users to the page 
+        # they were trying to access before being prompted to log in.
+
+        #if user has not expect to go anypage we will set nextpage to homepage
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for("homepage")
+        return redirect(next_page)
+
     return app.send_static_file("firstpage.html")
 
 @app.route('/signup', methods=("GET", "POST"))
@@ -82,33 +110,7 @@ def signup():
         return redirect(url_for('login'))
     return app.send_static_file("signup.html")
 
-@app.route('/login', methods=("GET", "POST"))
-def login():
-    if request.method == 'POST':    
-        # remember = bool(request.form.get('remember'))
-        email = request.form.get('email')
-        password = request.form.get('password')
 
-        #check is the input email is in databse?
-        user = AuthUser.query.filter_by(email=email).first()
-        
-        #if email not exist in Database or Password Incorrect 
-        if not user or not check_password_hash(user.password, password):
-            #redirect to give user try again
-            return redirect(url_for('login'))
-        
-        #if user has the right credentials do below
-        login_user(user)
-        next_page = request.args.get('next')
-        #The 'next' parameter is commonly used to redirect users to the page 
-        # they were trying to access before being prompted to log in.
-
-        #if user has not expect to go anypage we will set nextpage to homepage
-        if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for("homepage.html")
-        return redirect(next_page)
-
-    return app.send_static_file("login.html")
 
 @app.route('/logout')
 def logout():
