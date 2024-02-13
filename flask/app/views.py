@@ -5,7 +5,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.urls import url_parse
 
 from sqlalchemy.sql import text
-from flask_login import login_user
+from flask_login import login_user, login_required, logout_user
 
 from app import app
 from app import db
@@ -110,6 +110,11 @@ def login():
 
     return app.send_static_file("login.html")
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('firstpage'))
+    
 
 @app.route('/homepage')
 def homepage():
