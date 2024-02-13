@@ -26,11 +26,11 @@ header {
 	backdrop-filter: blur(50px); */
 }
 
-/* header .logo {
+header .logo {
   position: relative;
   letter-spacing: 2px;
   transition: 0.6s;
-} */
+}
 
 header.sticky {
   padding: 5px 100px;
@@ -91,7 +91,7 @@ header.sticky {
 	justify-content: center;
 }
 
-header.sticky .logo,
+header.sticky,
 header.sticky ul li a {
   color: #000;
 
