@@ -115,10 +115,10 @@ def logout():
     logout_user()
     return redirect(url_for('firstpage'))
     
-
 @app.route('/homepage')
 def homepage():
     return app.send_static_file("homepage.html")
+
 @app.route('/feedpage')
 def feedpage():
     return app.send_static_file("feedpage.html")
