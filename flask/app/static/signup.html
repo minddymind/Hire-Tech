@@ -16,7 +16,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- Style sheet-->
-        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/signup.css">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +32,25 @@
         <title>HireThec - Signup</title>
     </head>
     <body>
+        <header>
+          <div class="navbar">
+            <div class="logo"><a href="#">HireTech</a></div>
+            <ul class="links">
+              <li><a href="Home">Home</a></li>
+              <li><a href="Login">Log in</a></li>
+              <li><a href="Signup">Sign up</a></li>
+            </ul>
+            <div class="toggle_btn">
+              <i class="fa-solid fa-bars"></i>
+            </div>
+          </div>
+
+          <div class="dropdown_menu open">
+            <li><a href="Home">Home</a></li>
+            <li><a href="Login">Log in</a></li>
+            <li><a href="Signup">Sign up</a></li>
+          </div>
+        </header>
         <div class="main">
             <div class="container">
                 <div class="row">
@@ -43,7 +62,7 @@
                     </div>
                     <div class="col-lg-5 col-md-10 col-sm-12">
                         <div class="form-box px-5 py-3">
-                          <form id="form">
+                          <form id="form" method="POST">
                             <h2 class="text-center">Join HireTech!</h2>
                             <div class="input-control">
                               <!-- Gmail -->
@@ -82,6 +101,19 @@
                 </div>
             </div>
         </div>
+
+        <script>
+          const toggleBtn = document.querySelector('.toggle_btn')
+          const toggleBtnIcon = document.querySelector('.toggle_btn i')
+          const dropDownMenu = document.querySelector('.dropdown_menu')
+
+          toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open')
+            const isOpen = dropDownMenu.classList.contains('open')
+
+            toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'
+          }
+        </script>
         
         <!-- <script>
             const form = document.querySelector("form");
