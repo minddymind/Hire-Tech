@@ -1,8 +1,9 @@
 body {
-	background: linear-gradient(-45deg, #3366CC,#7058f8, #00114f);
+	background: linear-gradient(-45deg, #3366CC,#2e1f82, #00114f);
 	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
+	animation: gradient 10s ease infinite;
 	height: 100vh;
+	font-family: 'IBMPlexMono', sans-serif;
 }
 
 @keyframes gradient {
@@ -17,21 +18,223 @@ body {
 	}
 }
 
-nav {
-	background-color: #3366CC;
+.main {
+  /* background-image: url(/static/img/career-job.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%; */
+  /* background-size: cover; */
+  padding: 70px 0px;
+  font-family: 'IBMPlexMono', sans-serif;
+}
+
+div.form-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: none;
+}
+
+/* .desc-form {
+  margin-bottom: 8.5px;
+} */
+
+.form-box input {
+  border-radius: 10px;
+}
+
+.form-box input:focus {
+  box-shadow: 0 0 0;
+  border: 2px solid #3366CC;
+}
+
+.register-btn {
+  background-color: #3366CC;
+  border: none;
+  border-radius: 10px;
+  color: white;
+}
+
+.register-btn:hover{
+  color: black
+}
+
+.link {
+  text-decoration: none;
+  color: #3366CC;
+}
+
+.link:hover {
+  color: rgba(51, 102, 204, 0.7)
+}
+
+.header {
+  font-size: 3rem;
+  color: white;
+  margin-top: 0px;
+}
+
+.txt {
+  font-size: 1.2rem;
+  color: white;
+  font-family: 'Kanit', sans-serif;
+}
+
+.mark {
+  border-radius: 15px;
+  background-color:rgb(250, 235, 215, 1);
+}
+
+.error {
+  color: red;
+  font-size: 90%;
+}
+
+/* input[type=text] {
+  outline: none;
+} */
+
+.input-control input:focus {
+  outline: 0;
+}
+
+/* This is our style for the invalid fields */
+.input-control.success input {
+  border-color: #09c372;
+}
+
+.input-control.error input {
+  border-color: #ff3860;
+}
+
+.input-control .error {
+  color : #ff3860;
+  font-size: 9px;
+  height: 13px;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #fff;
+	font-size: 1rem;
+}
+
+a:hover {
+	color:#3366CC;
+}
+
+header {
+	position: relative;
+	padding: 0 2rem;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	background-color: rgb(255, 255, 255, 0.1);
+	backdrop-filter: blur(50px);
+}
+
+.navbar {
 	width: 100%;
-	height: 50px;
+	height: 60px;
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	/* background-color: #3366CC; */
+	/* border-bottom: #fff */
 }
 
-nav > p {
-	flex-direction: row;
+.navbar .logo a {
+	font-size: 1.5rem;
+	font-weight: bold;
 }
 
-.get-start-btn {
+.navbar .links {
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+}
+
+.navbar .toggle_btn {
+	color: #fff;
+	font-size: 1.5rem;
+	cursor: pointer;
+	display: none;
+}
+
+.dropdown_menu {
+	display: none;
+	position: absolute;
+	right: 2rem;
+	top: 60px;
+	width: 300px;
+	height: 0;
+	background-color: rgb(255, 255, 255, 0.1);
+	backdrop-filter: blur(15px);
+	overflow: hidden;
+	transition: height .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropdown_menu.open {
+	height: 240px;
+}
+
+.dropdown_menu li {
+	padding: 0.7rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@media(max-width: 992px){
+	.navbar .links {
+		display: none;
+	}
+
+	.navbar .toggle_btn {
+		display: block;
+	}
+
+	.dropdown_menu {
+		display: block;
+	}
+}
+
+@media(max-width: 576px){
+	.dropdown_menu {
+		left: 2rem;
+		width: unset;
+	}
+}
+
+/* .action-btn {
+	background-color: azure;
+	color:rgba(51, 102, 204, 1);
+	padding: 0.5rem 1rem;
 	border: none;
-	border-radius: 10px;
-}
+	outline: none;
+	border-radius: 20px;
+	font-size
+} */
 
-.get-start-btn:focus {
-	box-shadow: 0 0 0;
+
+
+
+
+/* .red
+{
+     margin-top: 5px;
+     color: red;
+     font-weight: bold;
 }
+    
+.green
+{
+     margin-top: 5px;
+     color: green;
+     font-weight: bold;
+} */
+
+
