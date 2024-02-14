@@ -27,8 +27,6 @@
 
         <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
 
-        <script defer src="static/js/validation.js"></script>
-
         <title>HireThec - Signup</title>
     </head>
     <body>
@@ -63,6 +61,8 @@
                     <div class="col-lg-5 col-md-10 col-sm-12">
                         <div class="form-box px-5 py-3">
                           <form id="form" method="POST">
+                            <!-- this tag input tell validate.js which is log in or sign up  -->
+                            <input type="text" value="signup" name="type" hidden>
                             <h2 class="text-center">Join HireTech!</h2>
                             <div class="input-control">
                               <!-- Gmail -->
@@ -101,8 +101,9 @@
                 </div>
             </div>
         </div>
-
+        <script defer src="static/js/validation.js"></script>
         <script>
+
           const toggleBtn = document.querySelector('.toggle_btn')
           const toggleBtnIcon = document.querySelector('.toggle_btn i')
           const dropDownMenu = document.querySelector('.dropdown_menu')
