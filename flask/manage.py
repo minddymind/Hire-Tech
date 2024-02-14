@@ -18,7 +18,7 @@ def seed_db():
     db.session.add(
         AuthUser(email="komson@gmail.com",
         name="KK", 
-        password=generate_password_hash('1234',
+        password=generate_password_hash('12345678',
                                 method='sha256'))
     )
     

@@ -34,8 +34,9 @@ def db_connection():
 def login():
     if request.method == 'POST':    
         # remember = bool(request.form.get('remember'))
-        email = request.form.get('email')
-        password = request.form.get('password')
+        body = request.get_json()
+        email = body['email']
+        password = body['password']
 
         #check is the input email is in databse?
         user = AuthUser.query.filter_by(email=email).first()
@@ -43,7 +44,7 @@ def login():
         #if email not exist in Database or Password Incorrect 
         if not user or not check_password_hash(user.password, password):
             #redirect to give user try again
-            return redirect(url_for('login'))
+            return jsonify({'path':url_for('login')})
         
         #if user has the right credentials do below
         login_user(user)
@@ -54,19 +55,19 @@ def login():
         #if user has not expect to go anypage we will set nextpage to homepage
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for("homepage")
-        return redirect(next_page)
+        return jsonify({'path':next_page})
 
     return app.send_static_file("firstpage.html")
 
 @app.route('/signup', methods=("GET", "POST"))
 def signup():
     if request.method == 'POST':
-        result = request.form.to_dict()
+        result = request.get_json()
         app.logger.debug(str(result))
 
         validated = True
         validated_dict = {}
-        valid_keys = ['email', 'name', 'password']
+        valid_keys = ['email', 'name', 'password', 'cfpassword']
 
         #section 1 validate the input
         for key in result:
@@ -89,16 +90,15 @@ def signup():
             email = validated_dict['email']
             name = validated_dict['name']
             password = validated_dict['password']
-
+            cfpassword = validated_dict['cfpassword']
             #check is email was exists in Database
             user = AuthUser.query.filter_by(email=email).first()
             if user:
                 # if email was exists. send user to sign up again
 
                 flash('Email address already exists')
-                return redirect(url_for('signup'))
-        elif not validated:
-            return redirect(url_for("signup"))
+                return jsonify({'path':url_for('signup')})
+
         #Section 3 add new user after validated all
         app.logger.debug("preparing to add")
         new_user = AuthUser(email=email, name=name,
@@ -108,7 +108,7 @@ def signup():
         #add new_user to database
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for("login"))
+        return jsonify({'path':url_for("login")})
     return app.send_static_file("signup.html")
 
 
