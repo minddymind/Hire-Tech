@@ -97,7 +97,8 @@ def signup():
 
                 flash('Email address already exists')
                 return redirect(url_for('signup'))
-        
+        elif not validated:
+            return redirect(url_for("signup"))
         #Section 3 add new user after validated all
         app.logger.debug("preparing to add")
         new_user = AuthUser(email=email, name=name,
@@ -107,12 +108,13 @@ def signup():
         #add new_user to database
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for('login'))
+        return redirect(url_for("login"))
     return app.send_static_file("signup.html")
 
 
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('firstpage'))
@@ -122,5 +124,6 @@ def homepage():
     return app.send_static_file("homepage.html")
 
 @app.route('/feedpage')
+@login_required
 def feedpage():
     return app.send_static_file("feedpage.html")

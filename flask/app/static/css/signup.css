@@ -74,10 +74,6 @@ div.form-box {
   font-size: 90%;
 }
 
-/* input[type=text] {
-  outline: none;
-} */
-
 .input-control input:focus {
   outline: 0;
 }
@@ -93,7 +89,7 @@ div.form-box {
 
 .input-control .error {
   color : #ff3860;
-  font-size: 9px;
+  font-size: 90%;
   height: 13px;
 }
 

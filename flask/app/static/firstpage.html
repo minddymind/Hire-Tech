@@ -27,7 +27,7 @@
 
         <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
 
-        <!-- <script defer src="static/js/validation.js"></script> -->
+        <script defer src="static/js/validation.js"></script>
 
         <title>HireThec</title>
     </head>
@@ -67,17 +67,20 @@
                             <div class="input-control">
                               <!-- Gmail -->
                               <label for="email" class="form-label">Email :</label>
-                              <input type="email" name="email" id="email" class="form-control mb-3" placeholder="@example.com" required>
+                              <input type="email" name="email" id="email" class="form-control" placeholder="@example.com">
+                              <span id="emailErr" class="error"></span>
                               <!-- <div class="error" id="emailErr"></div> -->
                               <!-- <span class="error" aria-live="polite"></span> -->
                             </div>
+                            <br>
                             <div class="input-control">
                               <!-- Name -->
                               <label for="password" class="form-label">Password :</label>
-                              <input type="password" name="password" id="password" class="form-control mb-3" placeholder="Password" required>
+                              <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                              <span id="pswErr" class="error"></span>
                               <!-- <div class="error" id="nameErr"></div> -->
                             </div>
-
+                            <br>
                             <div class="text-center mb-3">or continous with</div>
                             <div class="flex-container mb-3" style="display: flex; justify-content: center;">
                                 <input type="image" alt="facebookico" src="/static/icon/google.svg" style="width: 40px; margin-right: 50px;">
