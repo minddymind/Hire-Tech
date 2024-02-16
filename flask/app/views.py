@@ -26,9 +26,6 @@ def db_connection():
     except Exception as e:
         return '<h1>db is broken.</h1>' + str(e)
 
-# @app.route('/')
-# def firstpage():
-#     return app.send_static_file("firstpage.html")
 
 @app.route('/', methods=("GET", "POST"))
 def login():
@@ -52,12 +49,12 @@ def login():
         #The 'next' parameter is commonly used to redirect users to the page 
         # they were trying to access before being prompted to log in.
 
-        #if user has not expect to go anypage we will set nextpage to homepage
+        #if user has not expect to go anypage we will set nextpage to home
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for("homepage")
+            next_page = url_for("home")
         return jsonify({'path':next_page})
 
-    return app.send_static_file("firstpage.html")
+    return app.send_static_file("login.html")
 
 @app.route('/signup', methods=("GET", "POST"))
 def signup():
@@ -117,13 +114,13 @@ def signup():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('firstpage'))
+    return redirect(url_for('login'))
     
-@app.route('/homepage')
-def homepage():
-    return app.send_static_file("homepage.html")
+@app.route('/home')
+def home():
+    return app.send_static_file("home.html")
 
-@app.route('/feedpage')
+@app.route('/board')
 @login_required
-def feedpage():
-    return app.send_static_file("feedpage.html")
+def board():
+    return app.send_static_file("board.html")
