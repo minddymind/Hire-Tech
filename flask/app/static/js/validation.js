@@ -60,6 +60,7 @@ const username = document.getElementById('name');
 const password = document.getElementById('password');
 const confirmpsw = document.getElementById('confirm');
 
+
 const emailErr = document.getElementById('emailErr');
 const nameErr = document.getElementById('nameErr');
 const pswErr = document.getElementById('pswErr');
