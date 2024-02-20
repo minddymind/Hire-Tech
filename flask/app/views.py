@@ -1,3 +1,4 @@
+# Komson 
 from flask import (jsonify, render_template,
                    request, url_for, flash, redirect)
 
@@ -27,7 +28,7 @@ def db_connection():
         return '<h1>db is broken.</h1>' + str(e)
 
 
-@app.route('/', methods=("GET", "POST"))
+@app.route('/login', methods=("GET", "POST"))
 def login():
     if request.method == 'POST':    
         # remember = bool(request.form.get('remember'))
@@ -116,7 +117,7 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
     
-@app.route('/home')
+@app.route('/')
 def home():
     return app.send_static_file("home.html")
 
