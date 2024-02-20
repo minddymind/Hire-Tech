@@ -124,3 +124,4 @@ def home():
 @login_required
 def board():
     return app.send_static_file("board.html")
+
