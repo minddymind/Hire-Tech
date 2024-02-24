@@ -27,7 +27,7 @@
 
         <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
 
-        <script defer src="static/js/validation.js"></script>
+        
 
         <title>HireThec</title>
     </head>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="col-lg-5 col-md-10 col-sm-12">
                         <div class="form-box px-5 py-3">
-                          <form id="form" method="POST">
+                          <form id="form" method="POST" >
                             <!-- this tag input tell validate.js which is log in or sign up  -->
                             <input type="text" value="login" name="type" hidden>
                             <h2 class="text-center mb-4">Log in</h2>
@@ -83,10 +83,10 @@
                               <!-- <div class="error" id="nameErr"></div> -->
                             </div>
                             <br>
-                            <button type="submit" class="register-btn form-control mb-3">Log in</button>
+                            <button id="submitLogin" type="submit" class="register-btn form-control mb-3">Log in</button>
                             <div class="text-center mb-3">or continous with</div>
                             <div class="flex-container mb-3" style="display: flex; justify-content: center;">
-                                <input type="image" alt="facebookico" src="/static/icon/google.svg" style="width: 40px; margin-right: 50px;">
+                                <a href="/google/"><img alt="facebookico" src="/static/icon/google.svg" style="width: 40px; margin-right: 50px;" ></a>
                                 <input type="image" alt="googleico" src="/static/icon/facebook.svg" style="width: 40px; margin-left: 50px;">
                             </div>
                             <p class="text-center">No have an account? <a href="/signup" class="link"><b>Sign up</b></a></p>
@@ -97,8 +97,13 @@
                 </div>
             </div>
         </div>
-
+        
         <script>
+          //return google path
+          function googlesso(){
+            let url = (window.location.origin) + "/google/"
+            window.location.href = url;
+          }
           const toggleBtn = document.querySelector('.toggle_btn')
           const toggleBtnIcon = document.querySelector('.toggle_btn i')
           const dropDownMenu = document.querySelector('.dropdown_menu')
