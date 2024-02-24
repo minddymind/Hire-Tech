@@ -1,3 +1,4 @@
+# Komson 
 # Change directory to specified directory before loading apps.
 chdir = 'app'
 # The number of worker processes for handling requests.

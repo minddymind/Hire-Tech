@@ -1,6 +1,7 @@
 import json
 import secrets
 import string
+
 from flask import (jsonify, render_template,
                    request, url_for, flash, redirect)
 
@@ -174,3 +175,4 @@ def home():
 @login_required
 def board():
     return app.send_static_file("board.html")
+
