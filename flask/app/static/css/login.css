@@ -106,11 +106,12 @@ div.form-box {
   border-color: #ff3860;
 }
 
-.input-control .error {
+/* comment this because will conflict with j */
+/* .input-control .error {
   color : #ff3860;
   font-size: 90%;
   height: 13px;
-}
+} */
 
 li {
 	list-style: none;

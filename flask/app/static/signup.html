@@ -26,7 +26,8 @@
         <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
 
         <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
-        
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
         <title>HireThec - Signup</title>
     </head>
     <body>
@@ -60,7 +61,7 @@
                     </div>
                     <div class="col-lg-5 col-md-10 col-sm-12">
                         <div class="form-box px-5 py-3">
-                          <form id="form" method="POST">
+                          <form id="signup-form" method="POST">
                             <!-- this tag input tell validate.js which is log in or sign up  -->
                             <input type="text" value="signup" name="type" hidden>
                             <h2 class="text-center">Join HireTech!</h2>
@@ -88,26 +89,28 @@
                             <div class="input-control">
                               <!-- Confirm Password -->
                               <label for="confirm" class="form-label">Confirm Password :</label>
-                              <input type="password" name="confirm" id="confirm" placeholder="Confirm Password" class="form-control">
+                              <input type="password" name="cfpassword" id="cfpassword" placeholder="Confirm Password" class="form-control">
                               <div class="error" id="cfErr"></div>
                             </div>
                               <br>
-                            <button type="submit" class="register-btn form-control mb-3">Create account</button>
+                            <button type="submit" value="submit" class="register-btn form-control mb-3">Create account</button>
+                          </form>
                             <div class="text-center mb-3">or continous with</div>
                             <div class="flex-container mb-3" style="display: flex; justify-content: center;">
                                 <input type="image" alt="facebookico" src="/static/icon/google.svg" style="width: 40px; margin-right: 50px;">
                                 <input type="image" alt="googleico" src="/static/icon/facebook.svg" style="width: 40px; margin-left: 50px;">
                             </div>
-                            <p class="text-center">Have an account? <a href="/" class="link"><b>Log in</b></a></p>
-                            </form>
+                          <p class="text-center">Have an account? <a href="/login" class="link"><b>Log in</b></a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script defer src="static/js/validation.js"></script>
-        <script>
+        
 
+        <script defer src="static/js/validateV2.js"></script>
+        <script>
+          
           const toggleBtn = document.querySelector('.toggle_btn')
           const toggleBtnIcon = document.querySelector('.toggle_btn i')
           const dropDownMenu = document.querySelector('.dropdown_menu')

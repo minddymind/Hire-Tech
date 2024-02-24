@@ -87,11 +87,11 @@ div.form-box {
   border-color: #ff3860;
 }
 
-.input-control .error {
+/* .input-control .error {
   color : #ff3860;
   font-size: 90%;
   height: 13px;
-}
+} */
 
 li {
 	list-style: none;
