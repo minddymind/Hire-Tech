@@ -3,8 +3,8 @@ from sqlalchemy_serializer import SerializerMixin
 from app import db
 
 #user that already in Database (Member)
-class AuthUser(db.Model, UserMixin):
-    __tablename__ = "auth_users"
+class Member(db.Model, UserMixin):
+    __tablename__ = "members"
     # primary keys are required by SQLAlchemy
 
     id = db.Column(db.Integer, primary_key=True)
@@ -16,4 +16,4 @@ class AuthUser(db.Model, UserMixin):
         self.email = email
         self.name = name
         self.password = password
-
+        

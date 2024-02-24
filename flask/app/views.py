@@ -14,12 +14,12 @@ from app import app
 from app import db
 from app import login_manager
 from app import oauth
-from app.models.authuser import AuthUser
+from app.models.member import Member
 
 @login_manager.user_loader
 def load_user(user_id):
-    return AuthUser.query.get(int(user_id))
-
+    return Member.query.get(int(user_id))
+    
 @app.route('/db')
 def db_connection():
 # check db connection
@@ -31,7 +31,7 @@ def db_connection():
         return '<h1>db is broken.</h1>' + str(e)
 
 
-@app.route('/', methods=("GET", "POST"))
+@app.route('/login', methods=("GET", "POST"))
 def login():
     if request.method == 'POST':    
         # remember = bool(request.form.get('remember'))
@@ -40,7 +40,7 @@ def login():
         password = body['password']
 
         #check is the input email is in databse?
-        user = AuthUser.query.filter_by(email=email).first()
+        user = Member.query.filter_by(email=email).first()
         
         #if email not exist in Database or Password Incorrect 
         if not user or not check_password_hash(user.password, password):
@@ -93,7 +93,7 @@ def signup():
             password = validated_dict['password']
             cfpassword = validated_dict['cfpassword']
             #check is email was exists in Database
-            user = AuthUser.query.filter_by(email=email).first()
+            user = Member.query.filter_by(email=email).first()
             if user:
                 # if email was exists. send user to sign up again
 
@@ -102,7 +102,7 @@ def signup():
 
         #Section 3 add new user after validated all
         app.logger.debug("preparing to add")
-        new_user = AuthUser(email=email, name=name,
+        new_user = Member(email=email, name=name,
                                 password=generate_password_hash(
                                     password, method='sha256')
                             )
@@ -115,11 +115,6 @@ def signup():
 
 def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
-
-
-@app.route('/googleapi')
-def get_google_provider_cfg():
-    return requests.get(app.config['GOOGLE_DISCOVERY_URL']).json()
 
 
 
@@ -147,7 +142,7 @@ def google_auth():
     userinfo = token['userinfo']
     app.logger.debug(" Google User " + str(userinfo))
     email = userinfo['email']
-    user = AuthUser.query.filter_by(email=email).first()
+    user = Member.query.filter_by(email=email).first()
 
     if not user:
         name = userinfo.get('given_name','') + " " + userinfo.get('family_name','')
@@ -155,13 +150,13 @@ def google_auth():
         password = ''.join(secrets.choice(string.ascii_uppercase + string.digits)
                           for i in range(random_pass_len))
         picture = userinfo['picture']
-        new_user = AuthUser(email=email, name=name,
+        new_user = Member(email=email, name=name,
                            password=generate_password_hash(
                                password, method='sha256')
                            )
         db.session.add(new_user)
         db.session.commit()
-        user = AuthUser.query.filter_by(email=email).first()
+        user = Member.query.filter_by(email=email).first()
     login_user(user)
     return redirect('/home')
 
@@ -171,7 +166,7 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
     
-@app.route('/home')
+@app.route('/')
 def home():
     return app.send_static_file("home.html")
 
