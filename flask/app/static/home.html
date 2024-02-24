@@ -34,11 +34,12 @@
         <title>HireThec - Home</title>
     </head>
     <body>
-        <header>
+        <nav>
             <div class="navbar">
             <div class="logo"><a href='/'>HireThec</a></div>
             <ul class="links">
                 <li><a href="/">Home</a></li>
+                <li><a href="/board">Board</a></li>
                 <li><a href="/login">Log in</a></li>
                 <li><a href="/signup">Sign up</a></li>
             </ul>
@@ -49,10 +50,11 @@
 
             <div class="dropdown_menu open">
               <li><a href="/">Home</a></li>
+              <li style="background-color: white; border-radius: 10px;"><a href="/board">Board</a></li>
               <li><a href="/login">Log in</a></li>
               <li><a href="/signup">Sign up</a></li>
             </div>
-        </header>
+          </nav>
 
         <div class="text-box-container">
             <h1 class="writer"><b>Welcome to HireTech!</b></h1>
@@ -180,8 +182,8 @@
 
         <script type="text/javascript">
             window.addEventListener("scroll", function(){
-                var header = document.querySelector("header");
-                header.classList.toggle("sticky", window.scrollY > 0);
+                var nav = document.querySelector("nav");
+                nav.classList.toggle("sticky", window.scrollY > 0);
             });
         </script>
 

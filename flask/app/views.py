@@ -17,6 +17,7 @@ from app.models.authuser import AuthUser
 def load_user(user_id):
     return AuthUser.query.get(int(user_id))
 
+
 @app.route('/db')
 def db_connection():
 # check db connection
@@ -117,12 +118,14 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
     
+
 @app.route('/')
 def home():
     return app.send_static_file("home.html")
 
+
 @app.route('/board')
-@login_required
+# @login_required
 def board():
     return app.send_static_file("board.html")
 

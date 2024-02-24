@@ -31,7 +31,7 @@ a:hover {
 	color:rgb(255, 213, 0);
 }
 
-header {
+nav {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -50,13 +50,13 @@ header {
 	backdrop-filter: blur(50px); */
 }
 
-header .logo {
+nav .logo {
   position: relative;
   letter-spacing: 2px;
   transition: 0.6s;
 }
 
-header.sticky {
+nav.sticky {
   /* padding: 5px 100px; */
 	background-color: none;
 	backdrop-filter: blur(10px);

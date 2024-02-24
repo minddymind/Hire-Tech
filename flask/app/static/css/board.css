@@ -1,0 +1,141 @@
+/* .container {
+    display: flex;
+    justify-content: center; 
+
+    height: 100vh; 
+}
+
+form {
+  
+    width: 300px;
+   
+    padding: 20px;
+  
+    border: 1px solid #ccc;
+    
+    border-radius: 10px;
+} */
+
+body {
+    background-color: #e7ecf0;
+}
+  
+nav {
+    background-color: #ffffff;
+    border-bottom: 1px solid #adb1b4;
+    margin-bottom: 10px;
+}
+
+.container {
+    padding-top: 90px;
+}
+
+.btn-submit, .btn-post {
+    float: right; /* Float the button to the right */
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 5px 20px;
+    /* background: rgb(0,17,79); */
+    border: none;
+    background:  rgba(51,102,204,1);
+}
+
+.btn-submit:hover,
+.btn-post:hover {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add initial shadow */
+    transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
+}
+
+.btn-submit:active,
+.btn-post:active {
+    box-shadow: none; /* Remove shadow when button is clicked */
+    transform: translateY(1px); /* Add slight downward movement */
+}
+
+.content-box {
+    background-color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.new-tweet-row {
+    background-color: #eaf5fe;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.tweet {
+    background-color: #ffffff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #edf1f4;
+}
+
+.tweet-username {
+    font-weight: bold;
+}
+
+.tweet-arrow {
+    padding-right: 25px;
+}
+
+.tweet-text,
+.tweet-media {
+    padding-right: 10px;
+}
+
+.tweet-edit {
+    font-size: 0.7rem;
+}
+
+.fa-ellipsis {
+    font-size: 1rem; /* Adjust the size of the icon */
+    color: #333; /* Adjust the color of the icon */
+    cursor: pointer; /* Make the icon clickable */
+    position: absolute;
+    top: 0;
+    right: 5%;
+}
+
+.dropdown-menu {
+    background-color: #f9f9f9; /* Light grey background color */
+    border: none; /* Remove border */
+}
+
+.dropdown-item:hover {
+    background-color:#adb1b4;
+}
+
+/* Custom styles for SweetAlert2 popup */
+.custom-popup {
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Custom styles for SweetAlert2 buttons */
+.custom-btn {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+/* Custom styles for SweetAlert2 input fields */
+.custom-input {
+    /* border-radius: 5px; */
+    border: none;
+    /* outline: none; */
+    padding: 10px;
+    margin-bottom: 10px;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Custom styles for SweetAlert2 title */
+.custom-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+  
+  
+  
+  
