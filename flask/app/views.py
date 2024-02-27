@@ -16,6 +16,7 @@ import requests
 from app import app
 from app import db
 from app import login_manager
+import authlib.integrations.base_client
 from app import oauth
 from app.models.member import Member
 
@@ -149,7 +150,10 @@ def google():
 
 @app.route('/google/auth/')
 def google_auth():
-    token = oauth.google.authorize_access_token()
+    try:
+        token = oauth.google.authorize_access_token()
+    except authlib.integrations.base_client.errors.OAuthError:
+        return redirect(url_for('login'))
     app.logger.debug(str(token))
     
     userinfo = token['userinfo']
@@ -194,8 +198,10 @@ def github_login():
 
 @app.route('/github/auth')
 def github_auth():
-
-    token = github.authorize_access_token()
+    try :
+        token = github.authorize_access_token()
+    except authlib.integrations.base_client.errors.OAuthError:
+        return redirect(url_for('login'))
     gh_resp = github.get('user').json()
     print("**resp", gh_resp)
 
@@ -244,7 +250,10 @@ def facebook_login():
 
 @app.route('/facebook/auth')
 def facebook_auth():
-    token = oauth.facebook.authorize_access_token()
+    try:
+        token = oauth.facebook.authorize_access_token()
+    except authlib.integrations.base_client.errors.OAuthError:
+        return redirect(url_for('login'))
     resp = oauth.facebook.get(
     'https://graph.facebook.com/me?fields=id,name,email,picture{url}')
     
