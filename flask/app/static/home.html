@@ -21,11 +21,6 @@
         <link rel="stylesheet" href="/static/css/home.css">
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@
-        0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700
-        &family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
         <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
 
         <!-- Favicon -->
@@ -60,287 +55,418 @@
             <h1 class="writer"><b>Welcome to HireTech!</b></h1>
             <h6>click get start to find job or find employer now</h6>
             <a href="/board"><button type="button" class="btn btn-warning btn"><span>Get Start</span></button></a>
-        </div>
-        
-        <div class="card-container">
-        <section>
-          <div class="swiper mySwiper container">
-            <link rel="stylesheet" href="/static/css/swiper.css">
-            <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-          
-            <div class="swiper-wrapper content">
-      
-              <div class="swiper-slide card">
-                <div class="card-content">
-                  <div class="image">
-                    <img src= "/static/img/Data_Engineer.png">
-                  </div>
-      
-                  <div class="name-profession">
-                    <span class="name">Data Engineer</span>
-                  </div>
-      
-                  <div class="button">
-                    <a href="https://www.coursera.org/articles/what-does-a-data-engineer-do-and-how-do-i-become-one"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
-                  </div>
-                </div>
+        </div>          
+
+        <div class="slide">
+          <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                  <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
               </div>
-              <div class="swiper-slide card">
-                <div class="card-content">
-                  <div class="image">
-                    <img src= "/static/img/Software_Engineer.png">
+              
+              <div class="carousel-inner">
+                  <div class="carousel-item active c-item">
+                      <img src="/static/img/poster1.jpg" class="d-block w-100 c-img" alt="Slide 1">
                   </div>
-      
-                  <div class="name-profession">
-                    <span class="name">Software Engineer</span>
+                  <div class="carousel-item c-item">
+                      <img src="/static/img/poster5.jpg" class="d-block w-100 c-img" alt="Slide 2">
                   </div>
-      
-                  <div class="button">
-                    <a href="https://www.coursera.org/articles/software-engineer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                  <div class="carousel-item c-item">
+                      <img src="/static/img/poster3.jpg" class="d-block w-100 c-img" alt="Slide 3">
                   </div>
-                </div>
+                  <div class="carousel-item c-item">
+                      <img src="/static/img/poster4.jpg" class="d-block w-100 c-img" alt="Slide 4">
+                  </div>
+                  <div class="carousel-item c-item">
+                      <img src="/static/img/poster2.jpg" class="d-block w-100 c-img" alt="Slide 5">
+                  </div>
               </div>
-              <div class="swiper-slide card">
-                <div class="card-content">
-                  <div class="image">
-                 <img src= "/static/img/IT_support.jpg">
-                  </div>
-      
-                  <div class="name-profession">
-                    <span class="name">Computer Scientist</span>
-                  </div>
-      
-                  <div class="button">
-                    <a href="https://www.coursera.org/articles/computer-scientist"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide card">
-                <div class="card-content">
-                  <div class="image">
-                  <img src= "/static/img/Iot_Engineer.jpg">
-                  </div>
-      
-                  <div class="name-profession">
-                    <span class="name">IoT Engineer</span>
-                  </div>
-      
-                  <div class="button">
-                    <a href="https://hiring.monster.com/resources/job-descriptions/computer/iot-engineer-job-description-template/"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide card">
-                <div class="card-content">
-                  <div class="image">
-                    <img src= "/static/img/Mobile_App_Developer.jpg">
-                  </div>
-      
-                  <div class="name-profession">
-                    <span class="name">Mobile App Developer</span>
-                  </div>
-      
-                  <div class="button">
-                    <a href="https://www.coursera.org/articles/android-app-developer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide card">
-                <div class="card-content">
-                  <div class="image">
-                  <img src= "/static/img/Web_Developer.jpg">
-                  </div>
-      
-                  <div class="name-profession">
-                    <span class="name">Web Developer</span>
-                  </div>
-      
-                  <div class="button">
-                    <a href="https://www.coursera.org/articles/web-developer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide card">
-                <div class="card-content">
-                  <div class="image">
-                   <img src= "/static/img/Game_Designer_Developer.jpg">
-                  </div>
-      
-                  <div class="name-profession">
-                    <span class="name">Game Designer Developer</span>
-                  </div>
-      
-                  <div class="button">
-                    <a href="https://www.coursera.org/articles/video-game-designer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide card">
-                <div class="card-content">
-                  <div class="image">
-                 <img src= "/static/img/UX_UI_ Designer.jpg">
-                  </div>
-      
-                  <div class="name-profession">
-                    <span class="name">UX/UI Designer</span>
-                  </div>
-      
-                  <div class="button">
-                    <a href="https://www.coursera.org/in/articles/what-does-a-ux-designer-do"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide card">
-                <div class="card-content">
-                  <div class="image">
-                  <img src= "/static/img/DevOps_Engineer.jpg">
-                  </div>
-      
-                  <div class="name-profession">
-                    <span class="name">DevOps engineer</span>
-                  </div>
-      
-                  <div class="button">
-                    <a href="https://www.coursera.org/articles/what-is-devops"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
-                  </div>
-                </div>
-              </div>
-      
-            </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+              </button>
           </div>
-      
+
+
+          <div class="text-box">
+            <h4>Example 10 Jobs for Tech in Thailand</h4>
+            <!-- <h4>in Thailand</h4> -->
+            <h6>1. Software Developer</h6>
+            <h6>2. UX/UI Designer</h6>
+            <h6>3. Data Analyst</h6>
+            <h6>4. Data Scientist</h6>
+            <h6>5. Cyber Security</h6>
+            <h6>6. Software Engineer</h6>
+            <h6>7. Product Manager</h6>
+            <h6>8. Software Tester</h6>
+            <h6>9. IT Support</h6>
+            <h6>10. DevOps</h6>
+          </div>
+        </div>
+
+        <div class="description">
+          งานที่เหมาะกับคนที่ชอบเขียน code
+        </div>
+
+        <div class="card-container">
+          <section>
+            <div class="swiper mySwiper container">
+              <link rel="stylesheet" href="/static/css/swiper.css">
+              <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+            
+              <div class="swiper-wrapper content">
+        
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                      <img src= "/static/img/Data_Engineer.png">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">Data Engineer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/what-does-a-data-engineer-do-and-how-do-i-become-one"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                      <img src= "/static/img/Software_Engineer.png">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">Software Engineer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/software-engineer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                  <img src= "/static/img/IT_support.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">Computer Scientist</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/computer-scientist"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                    <img src= "/static/img/Iot_Engineer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">IoT Engineer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://hiring.monster.com/resources/job-descriptions/computer/iot-engineer-job-description-template/"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                      <img src= "/static/img/Mobile_App_Developer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">Mobile App Developer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/android-app-developer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                    <img src= "/static/img/Web_Developer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">Web Developer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/web-developer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                    <img src= "/static/img/Game_Designer_Developer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">Game Designer Developer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/video-game-designer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                  <img src= "/static/img/UX_UI_ Designer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">UX/UI Designer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/in/articles/what-does-a-ux-designer-do"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                    <img src= "/static/img/DevOps_Engineer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">DevOps engineer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/what-is-devops"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="swiper-button-next "></div>
             <div class="swiper-button-prev "></div>
-            <!-- <div class="swiper-pagination"></div> -->
-        </section>
-      
-        <!-- Swiper JS -->
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-      
-        <!-- Initialize Swiper -->
-        <script>
-          var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 3,
-            spaceBetween: 30,
-            slidesPerGroup: 3,
-            loop: true,
-            loopFillGroupWithBlank: true,
-            pagination: {
-              el: ".swiper-pagination",
-              clickable: true,
-            },
-            navigation: {
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            },
-          });
-        </script>
-        </div>
-
+              <!-- <div class="swiper-pagination"></div> -->
+          </section>
+        
+          <!-- Swiper JS -->
+          <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        
+          <!-- Initialize Swiper -->
+          <script>
+            var swiper = new Swiper(".mySwiper", {
+              slidesPerView: 3,
+              spaceBetween: 30,
+              slidesPerGroup: 3,
+              loop: true,
+              loopFillGroupWithBlank: true,
+              pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+              },
+              navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              },
+            });
+          </script>
+        </div>  
 
         
-        <div class="slide">
-            <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
-            </div>
+        <div class="description">
+          งานที่เหมาะกับคนที่ชอบพูดคุย
         </div>
-          
-          <!-- <Ttrying to do 1st squre set about job roles> -->          
-
-          <div class="slide">
-            <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                    <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                </div>
-                
-                <div class="carousel-inner">
-                    <div class="carousel-item active c-item">
-                        <img src="/static/img/poster1.jpg" class="d-block w-100 c-img" alt="Slide 1">
+        <div class="card-container">
+          <section>
+            <div class="swiper mySwiper container">
+              <link rel="stylesheet" href="/static/css/swiper.css">
+              <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+            
+              <div class="swiper-wrapper content">
+        
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                      <img src= "/static/img/Data_Engineer.png">
                     </div>
-                    <div class="carousel-item c-item">
-                        <img src="/static/img/poster5.jpg" class="d-block w-100 c-img" alt="Slide 2">
+        
+                    <div class="name-profession">
+                      <span class="name">Data Engineer</span>
                     </div>
-                    <div class="carousel-item c-item">
-                        <img src="/static/img/poster3.jpg" class="d-block w-100 c-img" alt="Slide 3">
-                    </div>
-                    <div class="carousel-item c-item">
-                        <img src="/static/img/poster4.jpg" class="d-block w-100 c-img" alt="Slide 4">
-                    </div>
-                    <div class="carousel-item c-item">
-                        <img src="/static/img/poster2.jpg" class="d-block w-100 c-img" alt="Slide 5">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-
-
-            <div class="text-box">
-              <h4>Top 10 Job for Tech in Thailand</h4>
-              <!-- <h4>in Thailand</h4> -->
-              <h6>1. Software Developer</h6>
-              <h6>2. UX/UI Designer</h6>
-              <h6>3. Data Analyst</h6>
-              <h6>4. Data Scientist</h6>
-              <h6>5. Cyber Security</h6>
-              <h6>6. E-commerce</h6>
-              <h6>7. Financial Manager</h6>
-              <h6>8. Marketing Manager</h6>
-              <h6>9. Medical</h6>
-              <h6>10. Engineer</h6>
-            </div>
-        </div>
-           
-          <!-- <div class="_bg-blue-gradient">
-
-            < first trying to สร้างสี่เหลี่ยมแบบ fastwork แต่ยังไม่เห็นผล>
-
-            <div class="container">
-              <div class="row justify-content-between">
-                <div class="col-md-4">
-                  <div style="background:white;box-shadow:0 10px 40px -4px rgba(19, 55, 109, 0.08), 0 8px 22px -6px rgba(19, 55, 109, 0.1);border-radius:8px" class="_dp-f _fdrt-cl">
-                    <div class="_pd-24px _f-1">
-                      <div style="height:10px"></div>
-                      <div class="_mgt-32px _dp-f _jtfct-ct">
-                        <img src="/static/img/poster1.jpg" alt="poster1" decoding="async" loading="lazy">
-                      </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/what-does-a-data-engineer-do-and-how-do-i-become-one"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <div style="background:white;box-shadow:0 10px 40px -4px rgba(19, 55, 109, 0.08), 0 8px 22px -6px rgba(19, 55, 109, 0.1);border-radius:8px" class="_dp-f _fdrt-cl">
-                    <div class="_pd-24px _f-1">
-                      <div style="height: 10px"></div>
-                      <div class="_mgt-32px _dp-f _jtfct-ct">
-                        <img src="/static/img/poster2.jpg" alt="poster1" decoding="async" loading="lazy">
-                      </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                      <img src= "/static/img/Software_Engineer.png">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">Software Engineer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/software-engineer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <div style="background:white;box-shadow:0 10px 40px -4px rgba(19, 55, 109, 0.08), 0 8px 22px -6px rgba(19, 55, 109, 0.1);border-radius:8px" class="_dp-f _fdrt-cl">
-                    <div class="_pd-24px _f-1">
-                      <div style="height:10px"></div>
-                      <div class="_mgt-32px _dp-f _jtfct-ct">
-                        <img src="/static/img/poster3.jpg" alt="poster1" decoding="async" loading="lazy">
-                      </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                  <img src= "/static/img/IT_support.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">Computer Scientist</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/computer-scientist"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                    <img src= "/static/img/Iot_Engineer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">IoT Engineer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://hiring.monster.com/resources/job-descriptions/computer/iot-engineer-job-description-template/"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                      <img src= "/static/img/Mobile_App_Developer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">Mobile App Developer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/android-app-developer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                    <img src= "/static/img/Web_Developer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">Web Developer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/web-developer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                    <img src= "/static/img/Game_Designer_Developer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">Game Designer Developer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/video-game-designer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                  <img src= "/static/img/UX_UI_ Designer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">UX/UI Designer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/in/articles/what-does-a-ux-designer-do"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                    <img src= "/static/img/DevOps_Engineer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">DevOps engineer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/what-is-devops"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div> -->
-          
+            <div class="swiper-button-next "></div>
+            <div class="swiper-button-prev "></div>
+              <!-- <div class="swiper-pagination"></div> -->
+          </section>
+        
+          <!-- Swiper JS -->
+          <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        
+          <!-- Initialize Swiper -->
+          <script>
+            var swiper = new Swiper(".mySwiper", {
+              slidesPerView: 3,
+              spaceBetween: 30,
+              slidesPerGroup: 3,
+              loop: true,
+              loopFillGroupWithBlank: true,
+              pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+              },
+              navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              },
+            });
+          </script>
+        </div>  
+           
         <div class="footer"></div>
         <script defer src="static/js/navbar.js"></script>
     </body>
