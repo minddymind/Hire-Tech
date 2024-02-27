@@ -1,18 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+
 body {
     background-color: #f1f2f5;
+    font-family: 'Poppins', sans-serif;
 }
 
-*, ::after, ::before {
+/* *, ::after, ::before {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
-/* html{
+html{
 	scroll-behavior: smooth;
 	scroll-padding-top: 6rem;
 	overflow-x: hidden;
-} */
+}
 
 li {
 	list-style: none;
@@ -28,23 +32,9 @@ a {
 	font-size: 1rem;
 }
 
-a:hover {
+li a:hover, .logo a:hover {
 	color:rgb(255, 213, 0);
 }
-
-/* nav {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	padding: 0 2rem;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	z-index: 1000;
-	background: rgb(0,17,79);
-  background: linear-gradient(90deg, rgba(0,17,79,1) 0%, rgba(51,102,204,1) 100%);
-} */
 
 nav .logo {
   position: relative;
@@ -83,6 +73,7 @@ nav.sticky {
   box-shadow: 0 5px 8px -9px rgba(0, 0, 0, 0.75);
   background: linear-gradient(90deg, rgba(0,17,79,1) 0%, rgba(51,102,204,1) 100%);
 }
+
 
 .nav-left {
   display: flex;
@@ -137,8 +128,9 @@ ul.links {
   flex-direction: column;
   padding: 25px 10px;
   flex: 0.33;
-  float: left;
+  /* float: left; */
 }
+
 
 .sidebar-row {
   display: flex;
@@ -200,10 +192,10 @@ ul.links {
 }
 
 .feed {
-  /* position: relative; */
+  position: relative;
   /* flex: 1; */
-  padding: 30px 100px;
-  display: flex;
+  padding: 30px 0px;
+  display: inline-flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -268,10 +260,6 @@ ul.links {
   flex: 1;
 }
 
-.create {
-
-}
-
 .navbar .logo a {
 	font-size: 1.5rem;
 	font-weight: bold;
@@ -297,7 +285,7 @@ ul.links {
 	top: 60px;
 	width: 300px;
 	height: 0;
-	background-color: rgb(255, 255, 255, 0.1);
+	background-color: rgb(255, 255, 255);
 	backdrop-filter: blur(15px);
 	overflow: hidden;
 	transition: height .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -342,7 +330,6 @@ ul.links {
   margin-bottom: 10px;
 }
 
-
 .fa-ellipsis {
   font-size: 1rem; /* Adjust the size of the icon */
   color: #333; /* Adjust the color of the icon */
@@ -373,19 +360,6 @@ ul.links {
 
 a:hover {
   color: white;
-}
-
-.pic {
-  position: relative;
-  /* max-width: 100px; */
-  /* top: 0; */
-  align-items: center;
-  /* left: 5%; */
-}
-
-.company-pic {
-  width: 90%;
-  max-width: 400px;
 }
 
 .bg-modal {
