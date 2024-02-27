@@ -99,6 +99,12 @@ li {
 	list-style: none;
 }
 
+ul.links {
+  display: block;
+  padding: 0 0 0 0;
+  margin: 0 0 0;
+}
+
 a {
 	text-decoration: none;
 	color: #fff;
