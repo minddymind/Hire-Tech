@@ -17,9 +17,9 @@ def create_db():
 @cli.command("seed_db")
 def seed_db():
     db.session.add(
-        Member(email="komson@gmail.com",
-        name="KK", 
-        password=generate_password_hash('12345678',
+        Member(email="admin@1234",
+        name="admin", 
+        password=generate_password_hash('1234',
                                 method='sha256'))
     )
     

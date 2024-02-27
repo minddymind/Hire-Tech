@@ -23,13 +23,18 @@ app.config['JSON_AS_ASCII'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", "sqlite://")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-#Google sso
+#Google oauth
 app.config['GOOGLE_CLIENT_ID'] = os.getenv("GOOGLE_CLIENT_ID", None)
 app.config['GOOGLE_CLIENT_SECRET'] = os.getenv("GOOGLE_CLIENT_SECRET", None)
 app.config['GOOGLE_DISCOVERY_URL'] = os.getenv("GOOGLE_DISCOVERY_URL", None)
-#Facebook sso
+#Facebook oauth
 app.config['FACEBOOK_CLIENT_ID'] = os.getenv('FACEBOOK_CLIENT_ID', None)
 app.config['FACEBOOK_CLIENT_SECRET'] = os.getenv('FACEBOOK_CLIENT_SECRET', None)
+
+#Github oatuh
+app.config['GITHUB_CLIENT_ID']=os.getenv('GITHUB_CLIENT_ID', None)
+app.config['GITHUB_CLIENT_SECRET']=os.getenv('GITHUB_CLIENT_SECRET', None)
+app.config['REDIRECT_URI'] = os.getenv('GITHUB_REDIRECT', None)
 
 if app.debug:
     app.wsgi_app = DebuggedApplication(app.wsgi_app, evalex=True)

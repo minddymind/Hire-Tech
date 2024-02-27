@@ -1,6 +1,8 @@
+import os
 import json
 import secrets
 import string
+from urllib.parse import parse_qs
 # Komson 
 from flask import (jsonify, render_template,
                    request, url_for, flash, redirect)
@@ -123,7 +125,11 @@ def signup():
         db.session.commit()
         return redirect(url_for('login'))
     return app.send_static_file("signup.html")
-
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 
 @app.route('/google/')
 def google():
@@ -167,16 +173,65 @@ def google_auth():
     login_user(user)
     return redirect('/board')
 
+
+
+github = oauth.register(
+    name='github',
+    client_id=app.config['GITHUB_CLIENT_ID'],
+    client_secret=app.config['GITHUB_CLIENT_SECRET'],
+    access_token_url="https://github.com/login/oauth/access_token",
+    access_token_params=None,
+    authorize_url="https://github.com/login/oauth/authorize",
+    authorize_params=None,
+    api_base_url="https://api.github.com/",
+    client_kwargs={
+        'scope': 'user:email'}
+)
+@app.route('/github/')
+def github_login():
+    redirect_uri = url_for('github_auth', _external=True)
+    return github.authorize_redirect(redirect_uri)
+
+@app.route('/github/auth')
+def github_auth():
+
+    token = github.authorize_access_token()
+    gh_resp = github.get('user').json()
+    print("**resp", gh_resp)
+
+    app.logger.debug(" Github User " , gh_resp)
+    email = gh_resp['email']
+    name = gh_resp['login']
+    if email == None:
+        email = name
+    print(email)
+
+    user = Member.query.filter_by(email=email).first()
+
+    if not user:
+        random_pass_len = 8
+        password = ''.join(secrets.choice(string.ascii_uppercase + string.digits)
+        for i in range(random_pass_len))
+        # picture = userinfo['picture']
+        new_user = Member(email=email, name=name,
+                           password=generate_password_hash(
+                               password, method='sha256')
+                           )
+        db.session.add(new_user)
+        db.session.commit()
+        user = Member.query.filter_by(email=email).first()
+    login_user(user)
+    return redirect('/board')
+
+
+
+    # base_url = "https://www.facebook.com/v13.0/dialog/oauth"
 @app.route('/facebook/')
-def facebook():
-   
-    # Facebook Oauth Config
-    FACEBOOK_CLIENT_ID = app.config['FACEBOOK_CLIENT_ID']
-    FACEBOOK_CLIENT_SECRET = app.config['FACEBOOK_CLIENT_SECRET']
-    oauth.register(
+def facebook_login():
+    facebook = oauth.register(
         name='facebook',
-        client_id=FACEBOOK_CLIENT_ID,
-        client_secret=FACEBOOK_CLIENT_SECRET,
+        client_id=app.config['FACEBOOK_CLIENT_ID'],
+        client_secret=app.config['FACEBOOK_CLIENT_SECRET'],
         access_token_url='https://graph.facebook.com/oauth/access_token',
         access_token_params=None,
         authorize_url='https://www.facebook.com/dialog/oauth',
@@ -186,21 +241,32 @@ def facebook():
     )
     redirect_uri = url_for('facebook_auth', _external=True)
     return oauth.facebook.authorize_redirect(redirect_uri)
- 
-@app.route('/facebook/auth/')
+
+@app.route('/facebook/auth')
 def facebook_auth():
     token = oauth.facebook.authorize_access_token()
     resp = oauth.facebook.get(
-        'https://graph.facebook.com/me?fields=id,name,email,picture{url}')
-    profile = resp.json()
-    print("Facebook User ", profile)
-    return redirect('/home')
-
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('login'))
+    'https://graph.facebook.com/me?fields=id,name,email,picture{url}')
     
+    fb_profile = resp.json()
+    print("Facebook User ", fb_profile)
+    
+    app.logger.debug(" Facebook User " , fb_profile)
+    email = fb_profile['email']
+    user = Member.query.filter_by(email=email).first()
 
-
+    if not user:
+        name = fb_profile['name']
+        random_pass_len = 8
+        password = ''.join(secrets.choice(string.ascii_uppercase + string.digits)
+        for i in range(random_pass_len))
+        # picture = userinfo['picture']
+        new_user = Member(email=email, name=name,
+                           password=generate_password_hash(
+                               password, method='sha256')
+                           )
+        db.session.add(new_user)
+        db.session.commit()
+        user = Member.query.filter_by(email=email).first()
+    login_user(user)
+    return redirect('/board')

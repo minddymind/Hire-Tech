@@ -18,3 +18,7 @@ class Member(db.Model, UserMixin):
         self.name = name
         self.password = password
         
+    def update(self, update_email, update_name, update_password):
+        self.email = update_email
+        self.name = update_name
+        self.password = update_password       
