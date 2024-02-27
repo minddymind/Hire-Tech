@@ -236,7 +236,7 @@ h6 {
 
 
 .c-item {
-  height: 400px;
+  height: auto;
 }
 
 .c-img {
@@ -287,10 +287,6 @@ h6 {
 
 	.slide {
 		width: auto;
-	}
-
-	.c-item {
-		height: auto;
 	}
 
 }
