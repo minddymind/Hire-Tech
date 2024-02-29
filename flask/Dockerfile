@@ -16,7 +16,7 @@ WORKDIR /flask_app
 
 # update the system and add git
 RUN apk update
-RUN apk add git
+RUN apk add git gcc libc-dev libffi-dev
 
 
 # install dependencies

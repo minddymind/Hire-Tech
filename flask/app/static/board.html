@@ -16,7 +16,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
       
         <!-- Style sheet-->
-        <link rel="stylesheet" href="/static/css/feedpage.css">
+        <link rel="stylesheet" href="/static/css/board.css">
+        <link rel="stylesheet" href="/static/css/home.css">
       
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,27 +27,129 @@
         <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
       
         <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
+        
       
-        <title>HireThec - Feed Page</title>
-      </head>
+        <title>HireThec - Board</title>
+    </head>
       
-      <body>
-        <div class="main">
-          <div class="container">
-              <div class="row">
-                  <div class="col-lg-7 col-md-12">
-                      <h1 class="header"><b>HireThec</b></h1>
-                      <div class="col-lg-25 col-md-20 col-sm-15">
-                        <div class="form-box px-5 py-4">
-                            <form>
-                                <h2 class="text-right mb-5" width="104" height="142"></h2>
-                                <form class="form-inline">
-                                  <link rel="stylesheet" href="feedpage.css">
-                                  <input class="form-control" id="nav-search" type="search" placeholder="ประกาศหาเพื่อนร่วมงานตรงนี้"> &nbsp;
-                                  <img class="tw-user-small rounded-circle" src="static/icon/"> &nbsp;
-                                  <button class="btn"  type="submit">Post</button>
-                                </form>
-                            </form>
-                        </div>
-      </body>
+    <body>
+      <nav>
+        <div class="navbar">
+          <div class="logo"><a href='/'>HireThec</a></div>
+          <ul class="links">
+              <li><a href="/">Home</a></li>
+              <li><a href="/board">Board</a></li>
+              <li><a href="/logout">Log out</a></li>
+          </ul>
+          <div class="toggle_btn">
+              <i class="fa-solid fa-bars"></i>
+          </div>
+        </div>
+
+        <div class="dropdown_menu open">
+          <li><a href="/">Home</a></li>
+          <li><a href="/board">Board</a></li>
+          <li><a href="/logout">Log out</a></li>
+        </div>
+      </nav>
+
+      <section class="container">
+        <div class="row">
+          <div id="left_3" class="col-md-3">
+            <div class="content-box">Account details</div>
+            <div class="content-box">Trends</div>
+          </div>
+          <div id="center_6" class="col-md-6">
+            <div class="content-box">
+              <div class="new-tweet-row">
+                <div class="row">
+                  <div class="col-md-2">
+                    <img src="static/img/tweeterUserSmall.png" class="tw-user-small rounded-circle mx-auto d-block">
+                  </div>
+                  <div class="col-md-9">
+                    <a type="button" id="show-input" class="show-input">ตามหาเพื่อร่วมงานที่นี่....</a>
+                    <!-- <button id="post-button" type="submit" class="btn btn-primary btn-post">Post</button> -->
+                  </div>
+                </div>
+              </div>
+              <div class="tweet">
+                <div class="row">
+                  <div class="col-md-2 text-center">
+                    <img class="tw-user-medium rounded-circle" src="static/img/tweeterUserSmall.png">
+                  </div>
+                  <div class="col-md-10">
+                    <div class="dropdown" id="dropdown" style="position: relative;">
+                      <i class="fa-solid fa-ellipsis" id="dropdownMenuButton" data-toggle="dropdown" onclick="toggleDropdown()" aria-haspopup="true" aria-expanded="false"></i>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        <a class="dropdown-item" href="#">Delete</a>
+                      </div>
+                    </div>
+                    <div class="row tweet-info">
+                      <div class="col-md-auto"> <!--info text goes here-->
+                        <span class="tweet-username">Name</span>
+                        <span class="tweet-usertag text-muted">Email</span> -
+                        <span class="text-muted">date</span>
+                      </div>
+                    </div>
+                    <div class="tag">
+                      <span class="tag salary">20,000-30,000</span>
+                      <span class="tag province">เชียงใหม่</span>
+                      <span class="tag jobType">Full-time</span>
+                    </div>
+                    <div class="tweet-text">  <!--tweet text goes here-->
+                      content
+                    </div>
+                    <div class="tweet-age">
+                      <span class="text-muted">time</span>
+                    </div>
+                    <div class="tweet-edit">
+                      <span class="tweet-edit text-muted">not edit</span>
+                    </div>
+                    <br>
+                    <div class="pic">
+                      <img class="company-pic" src="/static/img/company.jpg">
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-success send"><a href="maito">send resume</a></button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="bg-modal">
+          <div class="modal-content">
+            <div class="close">+</div>
+            <form action="">
+              <label for="company">ชื่อบริษัท</label>
+              <span><input type="text" id="company"></span>
+              <br>
+              <label for="place">สถานที่ตั้ง</label>
+              <span><input type="text" id="place"></span>
+              <br>
+              <label for="่job">ตำแหน่งงาน</label>
+              <span><input type="text" id="jobName"></span>
+              <br>
+              <label for="่salary">เงินเดือน</label>
+              <span><input type="int" id="salary"></span>
+              <br>
+              <label for="่jobType">ลักษณะการทำงาน</label>
+              <span><select>
+                <option id="fullTime">Full time</option>
+                <option id="partTime">Part time</option>
+                <option id="hybrid">Hybrid</option>
+              </select></span>
+              <br>
+              <label for="่salary">อธิบายเพิ่มเติมให้คนรู้จักบริษัทของคุณสิ!</label>
+              <textarea id="content"></textarea>
+            </form>
+            <button class="btn-submit" style="color: #FFF;">Post</button>
+          </div> 
+      </div>
+      <script src="/static/js/popup.js"></script>
+      <script defer src="static/js/navbar.js"></script>
+    </body>
 </html>

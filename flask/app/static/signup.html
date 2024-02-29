@@ -26,11 +26,12 @@
         <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
 
         <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
-
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
         <title>HireThec - Signup</title>
     </head>
     <body>
-        <header>
+        <nav>
           <div class="navbar">
             <div class="logo"><a href="#">HireTech</a></div>
             <ul class="links">
@@ -48,7 +49,7 @@
             <li><a href="/login">Log in</a></li>
             <li><a href="/signup">Sign up</a></li>
           </div>
-        </header>
+        </nav>
         <div class="main">
             <div class="container">
                 <div class="row">
@@ -60,7 +61,7 @@
                     </div>
                     <div class="col-lg-5 col-md-10 col-sm-12">
                         <div class="form-box px-5 py-3">
-                          <form id="form" method="POST">
+                          <form id="signup-form" method="POST">
                             <!-- this tag input tell validate.js which is log in or sign up  -->
                             <input type="text" value="signup" name="type" hidden>
                             <h2 class="text-center">Join HireTech!</h2>
@@ -88,87 +89,27 @@
                             <div class="input-control">
                               <!-- Confirm Password -->
                               <label for="confirm" class="form-label">Confirm Password :</label>
-                              <input type="password" name="confirm" id="confirm" placeholder="Confirm Password" class="form-control">
+                              <input type="password" name="cfpassword" id="cfpassword" placeholder="Confirm Password" class="form-control">
                               <div class="error" id="cfErr"></div>
                             </div>
                               <br>
-                            <button type="submit" class="register-btn form-control mb-3">Create account</button>
+                            <button type="submit" value="submit" class="register-btn form-control mb-3">Create account</button>
+                          </form>
                             <div class="text-center mb-3">or continous with</div>
                             <div class="flex-container mb-3" style="display: flex; justify-content: center;">
                                 <input type="image" alt="facebookico" src="/static/icon/google.svg" style="width: 40px; margin-right: 50px;">
                                 <input type="image" alt="googleico" src="/static/icon/facebook.svg" style="width: 40px; margin-left: 50px;">
                             </div>
-                            <p class="text-center">Have an account? <a href="/" class="link"><b>Log in</b></a></p>
-                            </form>
+                          <p class="text-center">Have an account? <a href="/login" class="link"><b>Log in</b></a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script defer src="static/js/validation.js"></script>
-        <script>
-
-          const toggleBtn = document.querySelector('.toggle_btn')
-          const toggleBtnIcon = document.querySelector('.toggle_btn i')
-          const dropDownMenu = document.querySelector('.dropdown_menu')
-
-          toggleBtn.onclick = function () {
-            dropDownMenu.classList.toggle('open')
-            const isOpen = dropDownMenu.classList.contains('open')
-
-            toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'
-          }
-        </script>
         
-        <!-- <script>
-            const form = document.querySelector("form");
-            const email = document.getElementById("mail");
-            const error = email.nextElementSibling;
-        
-            // As per the HTML Specification
-            const emailRegExp =
-              /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-          
-            // Now we can rebuild our validation constraint
-            // Because we do not rely on CSS pseudo-class, we have to
-            // explicitly set the valid/invalid class on our email field
-            window.addEventListener("load", () => {
-              // Here, we test if the field is empty (remember, the field is not required)
-              // If it is not, we check if its content is a well-formed email address.
-              const isValid = email.value.length === 0 || emailRegExp.test(email.value);
-              email.className = isValid ? "valid" : "invalid";
-            });
-          
-            // This defines what happens when the user types in the field
-            email.addEventListener("input", () => {
-              const isValid = email.value.length === 0 || emailRegExp.test(email.value);
-              if (isValid) {
-                email.className = "valid";
-                error.textContent = "";
-                error.className = "error";
-              } else {
-                email.className = "invalid";
-              }
-            });
-          
-            // This defines what happens when the user tries to submit the data
-            form.addEventListener("submit", (event) => {
-              event.preventDefault();
-          
-              const isValid = email.value.length === 0 || emailRegExp.test(email.value);
-              if (!isValid) {
-                email.className = "invalid";
-                error.textContent = "I expect an email";
-                error.className = "error active";
-              } else {
-                email.className = "valid";
-                error.textContent = "";
-                error.className = "error";
-                form.submit();
-              }
-            });
 
-        </script>  -->
+        <script defer src="static/js/validateV2.js"></script>
+        <script defer src="static/js/navbar.js"></script>
     </body>
 
 </html>
