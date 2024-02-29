@@ -4,7 +4,7 @@ services:
   flask:
     build: flask
     ports:
-      - "56733:8000"
+      - "30000:5000"
     volumes:
       - ./flask:/flask_app
     env_file:
