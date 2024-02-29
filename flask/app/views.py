@@ -2,7 +2,6 @@ import os
 import json
 import secrets
 import string
-from urllib.parse import parse_qs
 # Komson 
 from flask import (jsonify, render_template,
                    request, url_for, flash, redirect)
@@ -19,7 +18,7 @@ from app import login_manager
 import authlib.integrations.base_client
 from app import oauth
 from app.models.member import Member
-
+from app.models.postcontent import PostContent
 @login_manager.user_loader
 def load_user(user_id):
     return Member.query.get(int(user_id))
@@ -31,7 +30,7 @@ def home():
 @app.route('/board')
 @login_required
 def board():
-    return app.send_static_file("board.html")
+    return render_template("board.html")
 
 @app.route('/db')
 def db_connection():
@@ -275,3 +274,4 @@ def facebook_auth():
         user = Member.query.filter_by(email=email).first()
     login_user(user)
     return redirect('/board')
+
