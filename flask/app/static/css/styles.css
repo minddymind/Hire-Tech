@@ -30,7 +30,6 @@ body{
 .card{
     border-radius: 25px;
     background-color: #FFF;
-
 }
 .image-content,
 .card-content{
@@ -62,7 +61,6 @@ body{
     height: 40px;
     width: 40px;
     background-color: #FFF;
-
 }
 
 .overlay::after{

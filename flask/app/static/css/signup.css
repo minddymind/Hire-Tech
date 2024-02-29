@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 body {
   background: rgb(0,17,79);
   background: linear-gradient(90deg, rgba(0,17,79,1) 0%, rgba(51,102,204,1) 100%);
+	font-family: 'Poppins', sans-serif;
 }
 
 .main {
@@ -9,7 +12,6 @@ body {
   background-size: 100%; */
   /* background-size: cover; */
   padding: 70px 0px;
-  font-family: 'IBMPlexMono', sans-serif;
 }
 
 div.form-box {
@@ -97,6 +99,12 @@ li {
 	list-style: none;
 }
 
+ul.links {
+  display: block;
+  padding: 0 0 0 0;
+  margin: 0 0 0;
+}
+
 a {
 	text-decoration: none;
 	color: #fff;
@@ -104,7 +112,7 @@ a {
 }
 
 a:hover {
-	color:#3366CC;
+	color:rgb(255, 213, 0);
 }
 
 nav {
@@ -189,20 +197,5 @@ nav {
 		width: unset;
 	}
 }
-
-
-/* .red
-{
-     margin-top: 5px;
-     color: red;
-     font-weight: bold;
-}
-    
-.green
-{
-     margin-top: 5px;
-     color: green;
-     font-weight: bold;
-} */
 
 

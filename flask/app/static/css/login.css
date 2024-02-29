@@ -1,11 +1,11 @@
-body {
-	background: linear-gradient(-45deg, #3366CC,#2e1f82, #00114f);
-	background-size: 400% 400%;
-	animation: gradient 10s ease infinite;
-	height: 100vh;
-	font-family: 'IBMPlexMono', sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
+body {
+	background: rgb(0,17,79);
+	background: linear-gradient(90deg, rgba(0,17,79,1) 0%, rgba(51,102,204,1) 100%);
+	font-family: 'Poppins', sans-serif;
+  }
+  
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
@@ -24,7 +24,6 @@ body {
   background-size: 100%; */
   /* background-size: cover; */
   padding: 70px 0px;
-  font-family: 'IBMPlexMono', sans-serif;
 }
 
 div.form-box {
@@ -117,6 +116,12 @@ li {
 	list-style: none;
 }
 
+ul.links {
+  display: block;
+  padding: 0 0 0 0;
+  margin: 0 0 0;
+}
+
 a {
 	text-decoration: none;
 	color: #fff;
@@ -124,7 +129,7 @@ a {
 }
 
 a:hover {
-	color:#3366CC;
+	color:rgb(255, 213, 0);
 }
 
 nav {

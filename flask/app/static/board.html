@@ -17,34 +17,46 @@
       
         <!-- Style sheet-->
         <link rel="stylesheet" href="/static/css/board.css">
-        <link rel="stylesheet" href="/static/css/home.css">
-      
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@
-        0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700
-        &family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="/static/css/home.css"> -->
+
+        <!-- Font -->
         <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
-      
+
+        <!-- icon -->
         <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
+
+        <script defer src="static/js/navbar.js"></script>
         
-      
         <title>HireThec - Board</title>
     </head>
       
     <body>
       <nav>
         <div class="navbar">
-          <div class="logo"><a href='/'>HireThec</a></div>
-          <ul class="links">
+          <div class="nav-left">
+            <div class="logo"><a href='/'>HireThec</a></div>
+            <div class="nav-search">
+              <span class="material-icons"><i class="fa-solid fa-magnifying-glass"></i></span>
+              <input type="text" placeholder="Search"/>
+            </div>
+          </div>
+
+          <div class="nav-right">
+            <div class="nav-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Accout">
+              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile">
+              <span id="name">Wira Junngamdee</span>
+            </div>
+            <ul class="links">
               <li><a href="/">Home</a></li>
               <li><a href="/board">Board</a></li>
               <li><a href="/logout">Log out</a></li>
-          </ul>
-          <div class="toggle_btn">
+            </ul>
+            <div class="toggle_btn">
               <i class="fa-solid fa-bars"></i>
+            </div>
           </div>
         </div>
+
 
         <div class="dropdown_menu open">
           <li><a href="/">Home</a></li>
@@ -52,74 +64,125 @@
           <li><a href="/logout">Log out</a></li>
         </div>
       </nav>
+      <!-- nav end-->
 
-      <section class="container">
-        <div class="row">
-          <div id="left_3" class="col-md-3">
-            <div class="content-box">Account details</div>
-            <div class="content-box">Trends</div>
-          </div>
-          <div id="center_6" class="col-md-6">
-            <div class="content-box">
-              <div class="new-tweet-row">
-                <div class="row">
-                  <div class="col-md-2">
-                    <img src="static/img/tweeterUserSmall.png" class="tw-user-small rounded-circle mx-auto d-block">
-                  </div>
-                  <div class="col-md-9">
-                    <a type="button" id="show-input" class="show-input">ตามหาเพื่อร่วมงานที่นี่....</a>
-                    <!-- <button id="post-button" type="submit" class="btn btn-primary btn-post">Post</button> -->
-                  </div>
-                </div>
-              </div>
-              <div class="tweet">
-                <div class="row">
-                  <div class="col-md-2 text-center">
-                    <img class="tw-user-medium rounded-circle" src="static/img/tweeterUserSmall.png">
-                  </div>
-                  <div class="col-md-10">
-                    <div class="dropdown" id="dropdown" style="position: relative;">
-                      <i class="fa-solid fa-ellipsis" id="dropdownMenuButton" data-toggle="dropdown" onclick="toggleDropdown()" aria-haspopup="true" aria-expanded="false"></i>
-                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Edit</a>
-                        <a class="dropdown-item" href="#">Delete</a>
-                      </div>
-                    </div>
-                    <div class="row tweet-info">
-                      <div class="col-md-auto"> <!--info text goes here-->
-                        <span class="tweet-username">Name</span>
-                        <span class="tweet-usertag text-muted">Email</span> -
-                        <span class="text-muted">date</span>
-                      </div>
-                    </div>
-                    <div class="tag">
-                      <span class="tag salary">20,000-30,000</span>
-                      <span class="tag province">เชียงใหม่</span>
-                      <span class="tag jobType">Full-time</span>
-                    </div>
-                    <div class="tweet-text">  <!--tweet text goes here-->
-                      content
-                    </div>
-                    <div class="tweet-age">
-                      <span class="text-muted">time</span>
-                    </div>
-                    <div class="tweet-edit">
-                      <span class="tweet-edit text-muted">not edit</span>
-                    </div>
-                    <br>
-                    <div class="pic">
-                      <img class="company-pic" src="/static/img/company.jpg">
-                    </div>
-                    <br>
-                    <button type="button" class="btn btn-success send"><a href="maito">send resume</a></button>
-                  </div>
-                </div>
-
-              </div>
+      <!-- main-body start -->
+      <div class="main-body">
+        <!-- sidebar start -->
+        <div class="sidebar">
+          <div class="sidebar-row">
+            <div class="nav-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account">
+              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile-info">
+              <h4>Wira Junngamdee</h4>
             </div>
           </div>
         </div>
-      </section>
+        <!-- sidebar end -->
+        <!-- feed start -->
+        <div class="feed">
+          <!-- message-box satrt -->
+          <div class="message-box">
+            <div class="message-box-top">
+              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile" name="avatar" id="avatar">
+              <button id="btn-post">Start a post to find your partner</button>
+            </div>
+          </div>
+          <!-- message-box end -->
+          <!-- post start -->
+          <div class="post">
+            <div class="post-top">
+              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile post-avatar">
+              <div class="post-top-info">
+                <h3>Wira Junngamdee</h3>
+                <p class="created">27 July at 16:56</p>  <!-- Create at -->
+                <p class="edit">not edit</p>
+              </div>
+            </div>
+            <div class="tag">
+              <span class="tag salary">20,000-30,000</span>
+              <span class="tag province">เชียงใหม่</span>
+              <span class="tag jobType">Full-time</span>
+            </div>
+            <div class="post-bottom">
+              <p>Content in form</p>
+            </div>
+            <div class="post-options">
+              <div class="post-option">
+                <button type="button" class="btn btn-success">send resume</button>
+              </div>
+            </div>
+          </div>
+          <!-- post end -->
+          <!-- post start -->
+          <div class="post">
+            <div class="post-top">
+              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile post-avatar">
+              <div class="post-top-info">
+                <h3>Wira Junngamdee</h3>
+                <p class="created">27 July at 16:56</p>  <!-- Create at -->
+                <p class="edit">not edit</p>
+              </div>
+            </div>
+            <div class="tag">
+              <span class="tag salary">20,000-30,000</span>
+              <span class="tag province">เชียงใหม่</span>
+              <span class="tag jobType">Full-time</span>
+            </div>
+            <div class="post-bottom">
+              <p>Content in form</p>
+            </div>
+            <div class="post-image">
+              <img src="/static/img/company.jpg" alt="">
+            </div>
+            <div class="post-options">
+              <div class="post-option">
+                <button type="button" class="btn btn-success">send resume</button>
+              </div>
+            </div>
+          </div>
+          <!-- post end -->
+        </div>
+        <!-- feed end -->
+        <!-- sidebar start -->
+        <div class="sidebar right">
+          <div class="sidebar-row">
+            <h4>Top 5 jobs with the most job openings</h4>
+          </div>
+          <div class="sidebar-row">
+            <div class="nav-info">
+              <h4>Software Developer</h4>
+              <span>count</span>
+            </div>
+          </div>
+          <div class="sidebar-row">
+            <div class="nav-info">
+              <h4>UX/UI Designer</h4>
+              <span>count</span>
+            </div>
+          </div>
+          <div class="sidebar-row">
+            <div class="nav-info">
+              <h4>Data Analyst</h4>
+              <span>count</span>
+            </div>
+          </div>
+          <div class="sidebar-row">
+            <div class="nav-info">
+              <h4>Data Scientist</h4>
+              <span>count</span>
+            </div>
+          </div>
+          <div class="sidebar-row">
+            <div class="nav-info">
+              <h4>Cyber Security</h4>
+              <span>count</span>
+            </div>
+          </div>
+        </div>
+        <!-- sidebar end -->
+      </div>
+      <!-- main-body end -->
+      
       <div class="bg-modal">
           <div class="modal-content">
             <div class="close">+</div>
@@ -143,13 +206,13 @@
                 <option id="hybrid">Hybrid</option>
               </select></span>
               <br>
-              <label for="่salary">อธิบายเพิ่มเติมให้คนรู้จักบริษัทของคุณสิ!</label>
+              <label for="่salary">More Description</label>
               <textarea id="content"></textarea>
             </form>
             <button class="btn-submit" style="color: #FFF;">Post</button>
           </div> 
       </div>
       <script src="/static/js/popup.js"></script>
-      <script defer src="static/js/navbar.js"></script>
+
     </body>
 </html>
