@@ -177,8 +177,6 @@ def google_auth():
     login_user(user)
     return redirect('/board')
 
-
-
 github = oauth.register(
     name='github',
     client_id=app.config['GITHUB_CLIENT_ID'],
@@ -204,7 +202,7 @@ def github_auth():
         return redirect(url_for('login'))
     gh_resp = github.get('user').json()
     print("**resp", gh_resp)
-
+    
     app.logger.debug(" Github User " , gh_resp)
     email = gh_resp['email']
     name = gh_resp['login']
@@ -229,9 +227,6 @@ def github_auth():
     login_user(user)
     return redirect('/board')
 
-
-
-    # base_url = "https://www.facebook.com/v13.0/dialog/oauth"
 @app.route('/facebook/')
 def facebook_login():
     facebook = oauth.register(
@@ -241,6 +236,7 @@ def facebook_login():
         access_token_url='https://graph.facebook.com/oauth/access_token',
         access_token_params=None,
         authorize_url='https://www.facebook.com/dialog/oauth',
+# base_url = "https://www.facebook.com/v13.0/dialog/oauth"
         authorize_params=None,
         api_base_url='https://graph.facebook.com/',
         client_kwargs={'scope': 'email'},

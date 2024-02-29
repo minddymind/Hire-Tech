@@ -5,7 +5,6 @@ jQuery('#login-form').validate({
         },
         password: {
             required: true,
-            minlength: 8, // This checks for minimum length
             
           }
     },
@@ -45,3 +44,4 @@ jQuery('#signup-form').validate({
         }
     }
 })
+
