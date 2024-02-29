@@ -104,7 +104,7 @@
                       aria-expanded="false"></i>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" id="edit" name="edited_at">Edit</a>
-                    <a class="dropdown-item" id="hired" name="hired_at">Hired</a>
+                    <a class="dropdown-item" id="hire" name="hired_at">Hired</a>
                     <a class="dropdown-item" id="delete" name="deleted_at">Delete</a>
                     <a class="dropdown-item" id="hide" style="color: red;">Hide</a>
                   </div>
@@ -121,9 +121,9 @@
             </div>
             <div class="post-options">
               <div class="post-option">
-                <button type="button" class="btn btn-success">send resume</button>
+                <button type="button" class="btn btn-success" id="no-hired">send resume</button>
                 <!-- hired start -->
-                <button type="button" class="btn btn-success hired" disabled>hired</button>
+                <button type="button" class="btn btn-success hired" id="hired" disabled>hired</button>
                 <!-- hired end -->
               </div>
             </div>
@@ -134,14 +134,16 @@
           <div class="undo-hide">
             <p class="close-back">+</p>
             <p class="undo-text">undo</p>
+            <p class="undo-text hid" style="text-decoration: none;">Hid</p>
           </div>
           <!-- undo hide end-->
 
           <!-- undo delete start-->
-          <!-- <div class="undo-delete">
+          <div class="undo-delete">
             <p class="close-back">+</p>
             <p class="undo-text delete">undo</p>
-          </div> -->
+            <p class="undo-text deleted" style="text-decoration: none;">Deleted</p>
+          </div>
           <!-- undo deleted end-->
 
           <!-- post start -->
@@ -266,17 +268,27 @@
           $(".dropdown-item").click(function() {
             if ($(this).text().trim() === "Hide") {
               $(this).closest(".post").hide();
+              $('.undo-hide').show();
             }
-            $('.undo-hide').show();
+            if ($(this).text().trim() === "Delete") {
+              $(this).closest(".post").hide();
+              $('.undo-delete').show();
+            }
+            if ($(this).text().trim() === "Hired") {
+              $('#no-hired').hide();
+              $('#hired').show();
+            }
           });
 
           $(".undo-text").click(function() {
             $(".post").show();
             $(".undo-hide").hide();
+            $(".undo-delete").hide();
           });
 
           $(".close-back").click(function() {
             $(".undo-hide").hide();
+            $(".undo-delete").hide();
           });
         });
 
