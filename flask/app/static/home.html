@@ -117,7 +117,7 @@
 
         <div class="card-container">
           <section>
-            <div class="swiper mySwiper container">
+            <div class="swiper mySwiper1 container">
               <link rel="stylesheet" href="/static/css/swiper.css">
               <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
@@ -261,8 +261,8 @@
                 </div>
               </div>
             </div>
-            <div class="swiper-button-next "></div>
-            <div class="swiper-button-prev "></div>
+            <div class="swiper-button-next swiper-button-next-1"></div>
+            <div class="swiper-button-prev swiper-button-prev-1"></div>
               <!-- <div class="swiper-pagination"></div> -->
           </section>
         
@@ -271,7 +271,8 @@
         
           <!-- Initialize Swiper -->
           <script>
-            var swiper = new Swiper(".mySwiper", {
+            var swiper1 = new Swiper(".mySwiper1", { 
+  // ตั้งชื่อเป็น swiper1 เพื่อแยกจาก swiper2
               slidesPerView: 3,
               spaceBetween: 30,
               slidesPerGroup: 3,
@@ -282,8 +283,8 @@
                 clickable: true,
               },
               navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-button-next-1", // เปลี่ยนชื่อ nextEl เป็น .swiper-button-next-1
+                prevEl: ".swiper-button-prev-1", // เปลี่ยนชื่อ prevEl เป็น .swiper-button-prev-1
               },
             });
           </script>
@@ -295,7 +296,7 @@
         </div>
         <div class="card-container">
           <section>
-            <div class="swiper mySwiper container">
+            <div class="swiper mySwiper2-class container">
               <link rel="stylesheet" href="/static/css/swiper.css">
               <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
@@ -439,8 +440,8 @@
                 </div>
               </div>
             </div>
-            <div class="swiper-button-next "></div>
-            <div class="swiper-button-prev "></div>
+            <div class="swiper-button-next swiper-button-next-2"></div>
+            <div class="swiper-button-prev swiper-button-prev-2"></div>
               <!-- <div class="swiper-pagination"></div> -->
           </section>
         
@@ -449,21 +450,22 @@
         
           <!-- Initialize Swiper -->
           <script>
-            var swiper = new Swiper(".mySwiper", {
-              slidesPerView: 3,
-              spaceBetween: 30,
-              slidesPerGroup: 3,
-              loop: true,
-              loopFillGroupWithBlank: true,
-              pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-              },
-              navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-              },
-            });
+            var swiper2 = new Swiper(".mySwiper2-class", { 
+            // ตั้งชื่อเป็น swiper2 เพื่อแยกจาก swiper1
+            slidesPerView: 3,
+            spaceBetween: 30,
+            slidesPerGroup: 3,
+            loop: true,
+            loopFillGroupWithBlank: true,
+            pagination: {
+              el: ".swiper-pagination",
+              clickable: true,
+            },
+            navigation: {
+              nextEl: ".swiper-button-next-2", // เปลี่ยนชื่อ nextEl เป็น .swiper-button-next-2
+              prevEl: ".swiper-button-prev-2", // เปลี่ยนชื่อ prevEl เป็น .swiper-button-prev-2
+            },
+          });
           </script>
         </div>  
            
