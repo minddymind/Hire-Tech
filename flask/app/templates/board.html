@@ -9,6 +9,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
         rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
         crossorigin="anonymous">
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-vZ5Aa19V9H+h73E9+Gti7GvDLxufM0oy2ltQ6pAgS5PZXpvaNbTFSuZjLegxhjGj" crossorigin="anonymous"></script> -->
       
         <!-- Font awsome Libary-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
@@ -24,8 +26,10 @@
 
         <!-- icon -->
         <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
+
         <!-- Jquery Thailand autocomplete -->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
         <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/JQL.min.js"></script>
         <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
         <link rel="stylesheet" href="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.css">
@@ -43,7 +47,8 @@
             <div class="logo"><a href='/'>HireThec</a></div>
             <div class="nav-search">
               <span class="material-icons"><i class="fa-solid fa-magnifying-glass"></i></span>
-              <input type="text" placeholder="Search"/>
+              <input type="text" id="input-box" placeholder="Search" autocomplete="off">
+              <!-- <button>search</button> -->
             </div>
           </div>
 
@@ -103,6 +108,18 @@
                 <p class="created">27 July at 16:56</p>  <!-- Create at -->
                 <p class="edit">not edit</p>
               </div>
+              <div class="dropdown-menu-container">
+                <div class="dropdown" style="position: relative;"> <!-- Added dropdown-right class -->
+                  <i class="fa-solid fa-ellipsis" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                      aria-expanded="false"></i>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" id="edit" name="edited_at">Edit</a>
+                    <a class="dropdown-item" id="hire" name="hired_at">Hired</a>
+                    <a class="dropdown-item" id="delete" name="deleted_at">Delete</a>
+                    <a class="dropdown-item" id="hide" style="color: red;">Hide</a>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="tag">
               <span class="tag salary">20,000-30,000</span>
@@ -114,11 +131,31 @@
             </div>
             <div class="post-options">
               <div class="post-option">
-                <button type="button" class="btn btn-success">send resume</button>
+                <button type="button" class="btn btn-success" id="no-hired">send resume</button>
+                <!-- hired start -->
+                <button type="button" class="btn btn-success hired" id="hired" disabled>hired</button>
+                <!-- hired end -->
               </div>
             </div>
           </div>
           <!-- post end -->
+
+          <!-- undo hide start-->
+          <div class="undo-hide">
+            <p class="close-back">+</p>
+            <p class="undo-text">undo</p>
+            <p class="undo-text hid" style="text-decoration: none;">Hid</p>
+          </div>
+          <!-- undo hide end-->
+
+          <!-- undo delete start-->
+          <div class="undo-delete">
+            <p class="close-back">+</p>
+            <p class="undo-text delete">undo</p>
+            <p class="undo-text deleted" style="text-decoration: none;">Deleted</p>
+          </div>
+          <!-- undo deleted end-->
+
           <!-- post start -->
           <div class="post">
             <div class="post-top">
@@ -149,6 +186,9 @@
           <!-- post end -->
         </div>
         <!-- feed end -->
+
+        <!-- Undo -->
+        
         <!-- sidebar start -->
         <div class="sidebar right">
           <div class="sidebar-row">
@@ -192,7 +232,7 @@
       <div class="bg-modal">
           <div class="modal-content">
             <div class="close">+</div>
-            <form action="">
+            <form id='' action="">
               <label for="company">ชื่อบริษัท</label>
               <span><input type="text" id="company"></span>
               <br>
@@ -203,33 +243,76 @@
               <input type="text" id="district" placeholder="ตำบล">
               <input type="text" id="zipcode" placeholder="zipcode">
               <br>
-              <label for="job">ตำแหน่งงาน</label>
+              <label for="่job">ตำแหน่งงาน</label>
               <span><input type="text" id="jobName"></span>
               <br>
-              <label for="salary">เงินเดือน</label>
+              <label for="่salary">เงินเดือน</label>
               <span><input type="int" id="salary"></span>
               <br>
-              <label for="jobType">ลักษณะการทำงาน</label>
+              <label for="่jobType">ลักษณะการทำงาน</label>
               <span><select>
                 <option id="fullTime">Full time</option>
                 <option id="partTime">Part time</option>
                 <option id="hybrid">Hybrid</option>
               </select></span>
               <br>
-              <label for="salary">More Description</label>
+              <label for="่salary">More Description</label>
               <textarea id="content"></textarea>
             </form>
             <button class="btn-submit" style="color: #FFF;">Post</button>
           </div> 
       </div>
+     
+      <script>
+        $(document).ready(function() {
+          $(".dropdown").click(function() {
+            $(this).find(".dropdown-menu").toggleClass("show");
+          });
+
+          // Close the dropdown menu when clicking outside of it
+          $(document).click(function(e) {
+            if (!$(e.target).closest('.dropdown').length) {
+              $(".dropdown-menu").removeClass("show");
+            }
+          });
+
+          $(".dropdown-item").click(function() {
+            if ($(this).text().trim() === "Hide") {
+              $(this).closest(".post").hide();
+              $('.undo-hide').show();
+            }
+            if ($(this).text().trim() === "Delete") {
+              $(this).closest(".post").hide();
+              $('.undo-delete').show();
+            }
+            if ($(this).text().trim() === "Hired") {
+              $('#no-hired').hide();
+              $('#hired').show();
+            }
+          });
+
+          $(".undo-text").click(function() {
+            $(".post").show();
+            $(".undo-hide").hide();
+            $(".undo-delete").hide();
+          });
+
+          $(".close-back").click(function() {
+            $(".undo-hide").hide();
+            $(".undo-delete").hide();
+          });
+        });
+      </script>
+      
       <script src="/static/js/popup.js"></script>
+
+      <script>
+        $.Thailand({
+          $district: $('#district'), // input ของตำบล
+          $amphoe: $('#amphoe'), // input ของอำเภอ
+          $province: $('#province'), // input ของจังหวัด
+          $zipcode: $('#zipcode'), // input ของรหัสไปรษณีย์
+      });
+      </script>
     </body>
-    <script>
-      $.Thailand({
-        $district: $('#district'), // input ของตำบล
-        $amphoe: $('#amphoe'), // input ของอำเภอ
-        $province: $('#province'), // input ของจังหวัด
-        $zipcode: $('#zipcode'), // input ของรหัสไปรษณีย์
-    });
-    </script>
 </html>
