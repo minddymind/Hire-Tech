@@ -47,7 +47,7 @@
             <div class="logo"><a href='/'>HireThec</a></div>
             <div class="nav-search">
               <span class="material-icons"><i class="fa-solid fa-magnifying-glass"></i></span>
-              <input type="text" id="input-box" placeholder="Search" autocomplete="off">
+              <input name="searchbar" type="text" id="input-box" placeholder="Search" autocomplete="off">
               <!-- <button>search</button> -->
             </div>
           </div>
@@ -232,34 +232,37 @@
       <div class="bg-modal">
           <div class="modal-content">
             <div class="close">+</div>
-            <form id='' action="">
+            <form id='post-form' method="post">
               <label for="company">ชื่อบริษัท</label>
-              <span><input type="text" id="company"></span>
+              <span><input name="company" type="text" id="company"></span>
               <br>
               <label for="place">สถานที่ตั้ง</label>
-              <span><input type="text" id="place"></span>
-              <input type="text" id="province" placeholder=จังหวัด>
-              <input type="text" id="amphoe" placeholder="อำเภอ">
-              <input type="text" id="district" placeholder="ตำบล">
-              <input type="text" id="zipcode" placeholder="zipcode">
+              <span><input name="location" type="text" id="location"></span>
+              <input name="province" type="text" id="province" placeholder=จังหวัด>
+              <input name="amphoe" type="text" id="amphoe" placeholder="อำเภอ">
+              <input name="district" type="text" id="district" placeholder="ตำบล">
+              <input name="zipcode" type="text" id="zipcode" placeholder="รหัสไปรษณีย์">
               <br>
-              <label for="่job">ตำแหน่งงาน</label>
-              <span><input type="text" id="jobName"></span>
+              <label for="job">ตำแหน่งงาน</label>
+              <span><input name="job_name" type="text" id="jobname"></span>
               <br>
-              <label for="่salary">เงินเดือน</label>
-              <span><input type="int" id="salary"></span>
+              <label for="salary">เงินเดือน</label>
+              <span><input name="salary" type="int" id="salary"></span>
               <br>
-              <label for="่jobType">ลักษณะการทำงาน</label>
-              <span><select>
+              <label for="jobType">ลักษณะการทำงาน</label>
+              <span><select name="job_time" >
                 <option id="fullTime">Full time</option>
                 <option id="partTime">Part time</option>
                 <option id="hybrid">Hybrid</option>
               </select></span>
               <br>
-              <label for="่salary">More Description</label>
-              <textarea id="content"></textarea>
+              <label for="message">More Description</label>
+              <textarea id="message"></textarea>
+              <input type="hidden" id="entryid" name="id" value="">
+              <input hidden name="owner_email" value="{{current_user.email}}">
+              <input hidden name="owner_id" value="{{current_user.id}}">
+              <button type="submit" class="btn-submit" style="color: #FFF;" >Post</button>
             </form>
-            <button class="btn-submit" style="color: #FFF;">Post</button>
           </div> 
       </div>
      
@@ -305,8 +308,9 @@
       </script>
       
       <script src="/static/js/popup.js"></script>
-
+      
       <script>
+        //jQuery thailand
         $.Thailand({
           $district: $('#district'), // input ของตำบล
           $amphoe: $('#amphoe'), // input ของอำเภอ
@@ -314,5 +318,30 @@
           $zipcode: $('#zipcode'), // input ของรหัสไปรษณีย์
       });
       </script>
+      <script>
+        //handle post methot to backend
+        $('#post-form').submit(function(event){
+          event.preventDefault();
+          //handle selected jobType
+          function handleSelection(selectedValue) {
+            return selectedValue;
+          }
+          let formData = {};
+          $(":input").each(function () {
+            var key = $(this).attr('name');
+            var val = $(this).val();
+            if (key != 'submit' && key != 'searchbar') {
+              formData[key] = val;
+            }
+          })
+          console.log(formData)
+          let url = $('#post-form').attr('action')
+          $.post(url, formData, function (callbackData) {
+            //window.location.reload()  
+          });
+        })
+      </script>
+
     </body>
 </html>
+

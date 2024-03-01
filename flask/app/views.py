@@ -10,7 +10,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.urls import url_parse
 
 from sqlalchemy.sql import text
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 import requests
 from app import app
 from app import db
@@ -33,8 +33,47 @@ def board():
     if request.method == 'POST':
         data = request.form.to_dict()
         app.logger.debug(str(data))
-        
-        return 
+        id_post = data.get('id', '')
+        # this keys are column in database
+        valid_keys = ['owner_id','message', 'job_name', 'job_time', 'province',
+        'district', 'amphoe', 'zipcode', 'location', 'salary']
+        validate_pass = True
+        validated_result = {}
+        for key in data:
+            # screen out an undefined key
+            app.logger.debug(str(key) + ": " + str(data[key]))
+            if key not in valid_keys:
+                continue
+            value = data[key].strip() #remove whitespace
+            #if caught unexpected value stop validate
+            # if not value or value == 'undefined':
+            #     validate_pass = False
+            #     break
+            validated_result[key] = value
+        if validate_pass == False:
+            app.logger.debug("===== Validation Fail ;-; =====")
+
+        if validate_pass:
+            app.logger.debug("===== validation Complete 100% =====")
+            app.logger.debug("===== Trying to add data into database =====")
+            app.logger.debug("validated result: " + str(validated_result))
+            owner_id = validated_result['owner_id']
+            # user = Member.query.filter_by(owner_email=owner_email).first()
+            if not id_post:
+                # this post was created for first time
+                validated_result['owner_id'] = current_user.id
+                new_post = PostContent(**validated_result)
+                app.logger.debug(str(new_post))
+                db.session.add(new_post)
+            else:
+                #this post already created then update this post
+                #prevent edited in backend level
+                owner_post = PostContent.query.get(id_post)
+                if owner_post.owner_id == current_user.id:
+                    PostContent.update(**validated_result)
+
+            db.session.commit()
+
     return render_template("board.html")
 
 @app.route('/profile')
