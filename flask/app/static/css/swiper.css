@@ -30,6 +30,11 @@
   margin: auto;
   margin-top: -3%;
 }
+.mySwiper2-class { /* เปลี่ยน mySwiper2 เป็น mySwiper2-class */
+  width: auto;
+  margin: auto;
+  margin-top: -3%;
+}
 
 .card{
   position: relative;
