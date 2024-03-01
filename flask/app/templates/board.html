@@ -53,9 +53,9 @@
           </div>
 
           <div class="nav-right">
-            <div class="nav-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Accout">
-              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile">
-              <span id="name">Wira Junngamdee</span>
+            <div class="nav-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account">
+              <a href="/profile"><img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile">
+              <span id="name">Wira Junngamdee</span></a>
             </div>
             <ul class="links">
               <li><a href="/">Home</a></li>
@@ -83,8 +83,8 @@
         <div class="sidebar">
           <div class="sidebar-row">
             <div class="nav-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account">
-              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile-info">
-              <h4>Wira Junngamdee</h4>
+              <a href="/profile"><img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile-info" id="profile">
+              <h4 id="profile">Wira Junngamdee</h4></a>
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@
           <!-- message-box satrt -->
           <div class="message-box">
             <div class="message-box-top">
-              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile" name="avatar" id="avatar">
+              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile" name="avatar" id="avatar" id="profile">
               <button id="btn-post">Start a post to find your partner</button>
             </div>
           </div>
@@ -102,9 +102,9 @@
           <!-- post start -->
           <div class="post">
             <div class="post-top">
-              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile post-avatar">
+              <a href="/profile"><img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile post-avatar" id="profile"></a>
               <div class="post-top-info">
-                <h3>Wira Junngamdee</h3>
+                <a href="/profile"><h3 id="profile">Wira Junngamdee</h3></a>
                 <p class="created">27 July at 16:56</p>  <!-- Create at -->
                 <p class="edit">not edit</p>
               </div>
@@ -159,9 +159,9 @@
           <!-- post start -->
           <div class="post">
             <div class="post-top">
-              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile post-avatar">
+              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile post-avatar" id="profile">
               <div class="post-top-info">
-                <h3>Wira Junngamdee</h3>
+                <h3 id="profile">Wira Junngamdee</h3>
                 <p class="created">27 July at 16:56</p>  <!-- Create at -->
                 <p class="edit">not edit</p>
               </div>
@@ -233,33 +233,35 @@
           <div class="modal-content">
             <div class="close">+</div>
             <form id='' action="">
-              <label for="company">ชื่อบริษัท</label>
-              <span><input type="text" id="company"></span>
-              <br>
               <label for="place">สถานที่ตั้ง</label>
-              <span><input type="text" id="place"></span>
-              <input type="text" id="province" placeholder=จังหวัด>
-              <input type="text" id="amphoe" placeholder="อำเภอ">
-              <input type="text" id="district" placeholder="ตำบล">
-              <input type="text" id="zipcode" placeholder="zipcode">
-              <br>
+              <div style="display: grid; grid-template-columns: auto auto;">
+                <input type="text" id="place" placeholder="ที่อยู่">
+                <input type="text" id="district" placeholder="ตำบล">
+                <input type="text" id="amphoe" placeholder="อำเภอ">
+                <input type="text" id="province" placeholder=จังหวัด>
+                <input type="text" id="zipcode" placeholder="รหัสไปรษณีย์">
+              </div>
+              <!-- <div class="input-group"> -->
               <label for="่job">ตำแหน่งงาน</label>
-              <span><input type="text" id="jobName"></span>
-              <br>
-              <label for="่salary">เงินเดือน</label>
-              <span><input type="int" id="salary"></span>
-              <br>
-              <label for="่jobType">ลักษณะการทำงาน</label>
-              <span><select>
-                <option id="fullTime">Full time</option>
-                <option id="partTime">Part time</option>
-                <option id="hybrid">Hybrid</option>
-              </select></span>
-              <br>
-              <label for="่salary">More Description</label>
-              <textarea id="content"></textarea>
+              <input type="text" id="jobName">
+              <!-- </div> -->
+              <div style="display: grid; grid-template-columns: auto auto; margin-bottom: 10px;">
+                <div class="input-group">
+                  <label for="่salary">เงินเดือน</label>
+                  <span><input type="int" id="salary"></span>
+                </div>
+                <div class="input-group">
+                  <label for="่jobType" style="align-items: center;">ลักษณะการทำงาน</label>
+                  <span><select>
+                    <option id="fullTime">Full time</option>
+                    <option id="partTime">Part time</option>
+                    <option id="hybrid">Hybrid</option>
+                  </select></span>
+                </div>
+              </div>
+              <textarea id="content" placeholder="Type More Description..."></textarea>
+              <button class="btn-submit" style="color: #FFF;">Post</button>
             </form>
-            <button class="btn-submit" style="color: #FFF;">Post</button>
           </div> 
       </div>
      
@@ -314,5 +316,26 @@
           $zipcode: $('#zipcode'), // input ของรหัสไปรษณีย์
       });
       </script>
+
+       <!-- AJAX -->
+       <script>
+        $(document).ready(function () {
+          (function () {
+            $('#profile').click(function(event){
+              event.preventDefault();
+              // $('#login-box').html('http://localhost:30000/signup')
+              $.ajax ({
+                url : '/profile',
+                method: 'GET',
+                success: function(data){
+                  const parsedHTML = $.parseHTML(data);
+                  const selected = $(parsedHTML).find('.body');
+                  $('.main-body').html(selected.html());
+                }
+              });
+            });
+          })();
+        });
+      </script>  
     </body>
 </html>
