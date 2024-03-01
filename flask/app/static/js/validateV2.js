@@ -4,7 +4,8 @@ jQuery('#login-form').validate({
             required: true,
         },
         password: {
-            required: true,
+            required: true
+            // minlength: 8, // This checks for minimum length
             
           }
     },

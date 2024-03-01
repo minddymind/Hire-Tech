@@ -104,7 +104,6 @@ nav.sticky {
 
 .nav-right {
   display: flex;
-  /* justify-content: space-around; */
   align-items: center;
 }
 
@@ -122,8 +121,7 @@ nav.sticky {
 ul.links {
   display: block;
   padding: 0 0 0 0;
-  margin-bottom: 0;
-  margin-right: 16px;
+  margin: 0 0 0;
 }
 
 .main-body {
@@ -219,34 +217,6 @@ ul.links {
   transition: transform 100ms ease-in;
 }
 
-.post-top {
-  position: relative;
-}
-
-.dropdown-menu-container {
-  position: absolute;
-  top: 10%; 
-  right: 5%; 
-}
-
-.dropdown-menu {
-  background-color: #f9f9f9; /* Light grey background color */
-  border: none; /* Remove border */
-  display: none;
-  position: relative;
-  /* backdrop-filter: blur(100px); */
-}
-
-.show {
-  display: block;
-}
-
-.dropdown-item:hover {
-  background-color: rgba(51,102,204,1);
-  color: white;
-  cursor: pointer;
-}
-
 .post-image img{
   width: 100%;
 }
@@ -294,56 +264,6 @@ ul.links {
   justify-content: right;
   padding: 5px;
   flex: 1;
-}
-
-.undo-hide {
-  background-color: rgb(141, 179, 255);
-  color: rgb(7, 53, 147);
-  width: 100%;
-  border: 1px solid rgba(51,102,204,1);
-  padding: 10px;
-  border-radius: 10px;
-  display: none;
-}
-
-.undo-text, .undo-text.delete{
-  float: right;
-  text-decoration: underline;
-}
-
-.undo-text:hover {
-  cursor: pointer;
-}
-
-.undo-text.deleted, .undo-text.hid {
-  float: left;
-}
-
-.undo-delete {
-  background-color: rgb(248, 133, 156);
-  color: black;
-  width: 100%;
-  border: 1px solid rgb(220,20,60);
-  padding: 10px;
-  border-radius: 10px;
-  display: none;
-}
-
-.close-back {
-  float: right;
-  transform: rotate(45deg);
-  cursor: pointer;
-  margin-left: 2%;
-}
-
-#hired {
-  background-color:rgb(138, 138, 138);
-  border: none;
-  display: none;
-}
-
-#hired:hover {
-  cursor: default;
 }
 
 .navbar .logo a {
@@ -423,6 +343,20 @@ ul.links {
   position: absolute;
   top: 0;
   right: 5%;
+}
+
+.dropdown-menu {
+    background-color: #f9f9f9; /* Light grey background color */
+    border: none; /* Remove border */
+    display: none;
+}
+
+.show {
+  display: block;
+}
+
+.dropdown-item:hover {
+    background-color:#adb1b4;
 }
 
 .send {
