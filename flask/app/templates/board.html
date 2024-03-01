@@ -9,6 +9,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
         rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
         crossorigin="anonymous">
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-vZ5Aa19V9H+h73E9+Gti7GvDLxufM0oy2ltQ6pAgS5PZXpvaNbTFSuZjLegxhjGj" crossorigin="anonymous"></script> -->
       
         <!-- Font awsome Libary-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
@@ -24,6 +26,14 @@
 
         <!-- icon -->
         <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
+
+        <!-- Jquery Thailand autocomplete -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+        <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/JQL.min.js"></script>
+        <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
+        <link rel="stylesheet" href="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.css">
+        <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
 
         <script defer src="static/js/navbar.js"></script>
         
@@ -228,6 +238,10 @@
               <br>
               <label for="place">สถานที่ตั้ง</label>
               <span><input type="text" id="place"></span>
+              <input type="text" id="province" placeholder=จังหวัด>
+              <input type="text" id="amphoe" placeholder="อำเภอ">
+              <input type="text" id="district" placeholder="ตำบล">
+              <input type="text" id="zipcode" placeholder="zipcode">
               <br>
               <label for="่job">ตำแหน่งงาน</label>
               <span><input type="text" id="jobName"></span>
@@ -248,10 +262,7 @@
             <button class="btn-submit" style="color: #FFF;">Post</button>
           </div> 
       </div>
-      <script src="/static/js/popup.js"></script>
-
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-vZ5Aa19V9H+h73E9+Gti7GvDLxufM0oy2ltQ6pAgS5PZXpvaNbTFSuZjLegxhjGj" crossorigin="anonymous"></script>
+     
       <script>
         $(document).ready(function() {
           $(".dropdown").click(function() {
@@ -291,10 +302,17 @@
             $(".undo-delete").hide();
           });
         });
-
-
-
       </script>
+      
+      <script src="/static/js/popup.js"></script>
 
+      <script>
+        $.Thailand({
+          $district: $('#district'), // input ของตำบล
+          $amphoe: $('#amphoe'), // input ของอำเภอ
+          $province: $('#province'), // input ของจังหวัด
+          $zipcode: $('#zipcode'), // input ของรหัสไปรษณีย์
+      });
+      </script>
     </body>
 </html>

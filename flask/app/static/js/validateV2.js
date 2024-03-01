@@ -45,3 +45,4 @@ jQuery('#signup-form').validate({
         }
     }
 })
+

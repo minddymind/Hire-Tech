@@ -2,7 +2,6 @@ import os
 import json
 import secrets
 import string
-from urllib.parse import parse_qs
 # Komson 
 from flask import (jsonify, render_template,
                    request, url_for, flash, redirect)
@@ -19,7 +18,7 @@ from app import login_manager
 import authlib.integrations.base_client
 from app import oauth
 from app.models.member import Member
-
+from app.models.postcontent import PostContent
 @login_manager.user_loader
 def load_user(user_id):
     return Member.query.get(int(user_id))
@@ -31,7 +30,7 @@ def home():
 @app.route('/board')
 @login_required
 def board():
-    return app.send_static_file("board.html")
+    return render_template("board.html")
 
 @app.route('/db')
 def db_connection():
@@ -177,8 +176,6 @@ def google_auth():
     login_user(user)
     return redirect('/board')
 
-
-
 github = oauth.register(
     name='github',
     client_id=app.config['GITHUB_CLIENT_ID'],
@@ -204,7 +201,7 @@ def github_auth():
         return redirect(url_for('login'))
     gh_resp = github.get('user').json()
     print("**resp", gh_resp)
-
+    
     app.logger.debug(" Github User " , gh_resp)
     email = gh_resp['email']
     name = gh_resp['login']
@@ -229,9 +226,6 @@ def github_auth():
     login_user(user)
     return redirect('/board')
 
-
-
-    # base_url = "https://www.facebook.com/v13.0/dialog/oauth"
 @app.route('/facebook/')
 def facebook_login():
     facebook = oauth.register(
@@ -241,6 +235,7 @@ def facebook_login():
         access_token_url='https://graph.facebook.com/oauth/access_token',
         access_token_params=None,
         authorize_url='https://www.facebook.com/dialog/oauth',
+# base_url = "https://www.facebook.com/v13.0/dialog/oauth"
         authorize_params=None,
         api_base_url='https://graph.facebook.com/',
         client_kwargs={'scope': 'email'},
@@ -279,3 +274,4 @@ def facebook_auth():
         user = Member.query.filter_by(email=email).first()
     login_user(user)
     return redirect('/board')
+
