@@ -27,9 +27,14 @@ def load_user(user_id):
 def home():
     return app.send_static_file("home.html")
 
-@app.route('/board')
+@app.route('/board', methods=("GET", "POST"))
 @login_required
 def board():
+    if request.method == 'POST':
+        data = request.form.to_dict()
+        app.logger.debug(str(data))
+        
+        return 
     return render_template("board.html")
 
 @app.route('/profile')
