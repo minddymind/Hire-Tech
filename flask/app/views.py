@@ -32,6 +32,10 @@ def home():
 def board():
     return render_template("board.html")
 
+@app.route('/profile')
+def profile():
+    return render_template("profile.html")
+
 @app.route('/db')
 def db_connection():
 # check db connection
