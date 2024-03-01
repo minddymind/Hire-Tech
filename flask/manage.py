@@ -20,8 +20,10 @@ def seed_db():
         Member(email="admin@1234",
         name="admin", 
         password=generate_password_hash('1234',
-                                method='sha256'))
-    )
+                                method='sha256'),
+        avatar_url='https://ui-avatars.com/api/?name=\
+        Admin&background=83ee03&color=98ABEE'))
+    
     db.session.commit()
     db.session.add(
         PostContent(message='ประกาศรับสมัครงานจากแอดมินจ้า',
@@ -35,7 +37,7 @@ def seed_db():
         )
     )
     db.session.commit()
-    test_delete()
+    test_update()
     
 def test_update():
     post = PostContent.query.get(1)

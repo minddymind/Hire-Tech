@@ -5,3 +5,7 @@ document.getElementById('btn-post').addEventListener('click', function(){
 document.querySelector('.close').addEventListener('click', function(){
   document.querySelector('.bg-modal').style.display = 'none';
 });
+
+$('#edit').click(function(){
+  $('.bg-modal').show()
+})

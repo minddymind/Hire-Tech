@@ -19,9 +19,54 @@ import authlib.integrations.base_client
 from app import oauth
 from app.models.member import Member
 from app.models.postcontent import PostContent
+
 @login_manager.user_loader
 def load_user(user_id):
     return Member.query.get(int(user_id))
+
+@app.route('/api')
+def board_api():
+    # contain all post that didn't hired or deleted
+    post_query = PostContent.query.all()
+    post = []
+    for this_post in post_query:
+        if this_post.is_deleted:
+            pass
+        elif this_post.is_hired:
+            pass
+        else:
+            post.append(this_post.to_dict())
+
+    app.logger.debug("board_api: " + str(post))
+
+    json_form = jsonify(post)
+    return json_form
+
+@app.route('/api/hired')
+def board_hired():
+    post_query = PostContent.query.all()
+    post_hired = []
+    for this_post in post_query:
+        if this_post.is_hired:
+            post_hired.append(this_post.to_dict())
+
+    app.logger.debug("board_api_hired: " + str(post_hired))
+
+    json_form = jsonify(post_hired)
+    return json_form
+
+@app.route('/api/deleted')
+def board_deleted():
+    post_query = PostContent.query.all()
+    post_deleted = []
+    for this_post in post_query:
+        if this_post.is_deleted:
+            post_deleted.append(this_post.to_dict())
+
+    app.logger.debug("board_api_deleted: " + str(post_deleted))
+
+    json_form = jsonify(post_deleted)
+    return json_form
 
 @app.route('/')
 def home():
@@ -33,6 +78,8 @@ def board():
     if request.method == 'POST':
         data = request.form.to_dict()
         app.logger.debug(str(data))
+        #the id_post was from html in tag input id=entryid
+        #to get which post id in html was we are doing
         id_post = data.get('id', '')
         # this keys are column in database
         valid_keys = ['owner_id','message', 'job_name', 'job_time', 'province',
@@ -60,7 +107,9 @@ def board():
             owner_id = validated_result['owner_id']
             # user = Member.query.filter_by(owner_email=owner_email).first()
             if not id_post:
+                
                 # this post was created for first time
+                # print("IDPOST", id_post)
                 validated_result['owner_id'] = current_user.id
                 new_post = PostContent(**validated_result)
                 app.logger.debug(str(new_post))
@@ -71,14 +120,15 @@ def board():
                 owner_post = PostContent.query.get(id_post)
                 if owner_post.owner_id == current_user.id:
                     PostContent.update(**validated_result)
-
             db.session.commit()
-
-    return render_template("board.html")
+    post = board_api().json
+    post = list(reversed(post))
+    return render_template("board.html",allpost=post)
 
 @app.route('/profile')
 def profile():
     return render_template("profile.html")
+
 @app.route('/db')
 def db_connection():
 # check db connection
@@ -135,7 +185,7 @@ def signup():
             # screen of unrelated inputs
             if key not in valid_keys:
                 continue
-
+            
             value = result[key].strip()
             if not value or value == 'undefined':
                 validated = False
@@ -163,9 +213,11 @@ def signup():
                 return redirect(url_for('signup'))
         #Section 3 add new user after validated all
         app.logger.debug("preparing to add")
+        avatar_url = gen_avatar_url(email, name)
         new_user = Member(email=email, name=name,
                                 password=generate_password_hash(
-                                    password, method='sha256')
+                                    password, method='sha256'),
+                                avatar_url=avatar_url
                             )
         #add new_user to database
         db.session.add(new_user)
@@ -213,9 +265,11 @@ def google_auth():
         password = ''.join(secrets.choice(string.ascii_uppercase + string.digits)
                           for i in range(random_pass_len))
         picture = userinfo['picture']
+        avatar_url= gen_avatar_url(email, name)
         new_user = Member(email=email, name=name,
                            password=generate_password_hash(
-                               password, method='sha256')
+                               password, method='sha256'),
+                            avatar_url=avatar_url
                            )
         db.session.add(new_user)
         db.session.commit()
@@ -263,9 +317,11 @@ def github_auth():
         password = ''.join(secrets.choice(string.ascii_uppercase + string.digits)
         for i in range(random_pass_len))
         # picture = userinfo['picture']
+        avatar_url= gen_avatar_url(email, name)
         new_user = Member(email=email, name=name,
                            password=generate_password_hash(
-                               password, method='sha256')
+                               password, method='sha256'),
+                            avatar_url=avatar_url
                            )
         db.session.add(new_user)
         db.session.commit()
@@ -312,9 +368,11 @@ def facebook_auth():
         password = ''.join(secrets.choice(string.ascii_uppercase + string.digits)
         for i in range(random_pass_len))
         # picture = userinfo['picture']
+        avatar_url= gen_avatar_url(email, name)
         new_user = Member(email=email, name=name,
                            password=generate_password_hash(
-                               password, method='sha256')
+                               password, method='sha256'),
+                            avatar_url=avatar_url
                            )
         db.session.add(new_user)
         db.session.commit()
@@ -322,3 +380,23 @@ def facebook_auth():
     login_user(user)
     return redirect('/board')
 
+def gen_avatar_url(email, name):
+    bgcolor = generate_password_hash(email, method="sha256")[-6:]
+    color = hex(int("0xffffff", 0) - int("0x" + bgcolor, 0)).replace("0x", "")
+    lname = ""
+    temp = name.split()
+    fname = temp[0][0]
+    if len(temp) > 1:
+        lname = temp[1][0]
+
+    avatar_url = (
+        "https://ui-avatars.com/api/?name="
+        + fname
+        + "+"
+        + lname
+        + "&background="
+        + bgcolor
+        + "&color="
+        + color
+    )
+    return avatar_url

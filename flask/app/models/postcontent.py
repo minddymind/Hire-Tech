@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from .member import Member
 from app import db
 
-class PostContent(db.Model):
+class PostContent(db.Model, SerializerMixin):
     __tablename__ = "post_content"
     #init in this class
     post_id = db.Column(db.Integer, primary_key=True)
@@ -18,11 +18,12 @@ class PostContent(db.Model):
     amphoe = db.Column(db.String(100), default=None)
     zipcode = db.Column(db.String(100), default=None)
     location = db.Column(db.String(100), default=None) 
-    salary = db.Column(db.Integer, default=None)
+    salary = db.Column(db.String, default=None)
     #FK of member
     owner_id = db.Column(db.Integer, db.ForeignKey("members.id"))  
     owner_name = db.Column(db.String(1000))
     owner_email = db.Column(db.String(100))
+    owner_avatar = db.Column(db.String(100))
     #time server
     created_at = db.Column(db.DateTime())
     edited_at = db.Column(db.DateTime())
@@ -32,8 +33,8 @@ class PostContent(db.Model):
     is_deleted = db.Column(db.Boolean, default=False)
     is_hired = db.Column(db.Boolean, default=False)
 
-    def __init__(self, owner_id, job_time,
-    job_name, message,province, salary, district=None, amphoe=None, zipcode=None, 
+    def __init__(self, owner_id, job_time=None,
+    job_name=None, message=None,province=None, salary=None, district=None, amphoe=None, zipcode=None, 
     location=None):
         # print("OWERNID",owner_id)   
         # print("OWNERID", self.owner_id)
@@ -46,9 +47,11 @@ class PostContent(db.Model):
         if owner:
             owner_email = owner.email 
             owner_name = owner.name
+            owner_avatar = owner.avatar_url
         else:
             owner_email = None
             owner_name = None
+            owner_avatar = None
 
         self.owner_name = owner_name
         self.owner_email = owner_email
@@ -62,6 +65,7 @@ class PostContent(db.Model):
         self.location = location
         self.salary = salary
 
+        self.owner_avatar = owner_avatar
         self.created_at = datetime.now(timezone.utc)
         
     def update(self, owner_id, job_time,

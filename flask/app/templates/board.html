@@ -36,7 +36,7 @@
         <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
 
         <script defer src="static/js/navbar.js"></script>
-        
+        <script defer src="static/js/utility.js"></script>
         <title>HireThec - Board</title>
     </head>
       
@@ -53,9 +53,9 @@
           </div>
 
           <div class="nav-right">
-            <div class="nav-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Accout">
-              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile">
-              <span id="name">Wira Junngamdee</span>
+            <div class="nav-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account">
+              <a href="/profile"><img src="{{current_user.avatar_url}}" alt="user-profile" class="user-profile">
+              <span id="name">{{current_user.name}}</span></a>
             </div>
             <ul class="links">
               <li><a href="/">Home</a></li>
@@ -83,8 +83,8 @@
         <div class="sidebar">
           <div class="sidebar-row">
             <div class="nav-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account">
-              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile-info">
-              <h4>Wira Junngamdee</h4>
+              <a href="/profile"><img src="{{current_user.avatar_url}}" alt="user-profile" class="user-profile-info" id="profile">
+              <h4 id="profile">{{current_user.name}}</h4></a>
             </div>
           </div>
         </div>
@@ -94,40 +94,62 @@
           <!-- message-box satrt -->
           <div class="message-box">
             <div class="message-box-top">
-              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile" name="avatar" id="avatar">
+              <img src="{{current_user.avatar_url}}" alt="user-profile" class="user-profile" name="avatar" id="avatar" id="profile">
               <button id="btn-post">Start a post to find your partner</button>
             </div>
           </div>
           <!-- message-box end -->
+          {% for post in allpost %}
           <!-- post start -->
           <div class="post">
             <div class="post-top">
-              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile post-avatar">
+              <a href="/profile"><img src="{{post.owner_avatar}}" alt="user-profile" class="user-profile post-avatar" id="profile"></a>
               <div class="post-top-info">
-                <h3>Wira Junngamdee</h3>
-                <p class="created">27 July at 16:56</p>  <!-- Create at -->
+                <a href="/profile"><h3 id="profile">{{post.owner_name}}</h3></a>
+                <!-- Create at -->
+                <p class="created">{{post.created_at[:10]}} <span id="postC-at-{{ post['post_id'] }}" ></span></p>
+                {% if post.edited_at != None %}
+                <p class="edit">edited:{{post.edited_at[:10]}} <span id="postU-at-{{ post['post_id'] }}"></span></p>
+                {% else %}
                 <p class="edit">not edit</p>
+                {% endif %}
               </div>
+              {% if current_user.id == post.owner_id or current_user.id == 1 %}
               <div class="dropdown-menu-container">
                 <div class="dropdown" style="position: relative;"> <!-- Added dropdown-right class -->
                   <i class="fa-solid fa-ellipsis" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false"></i>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    {% if current_user.id == post.owner_id %}
                     <a class="dropdown-item" id="edit" name="edited_at">Edit</a>
-                    <a class="dropdown-item" id="hire" name="hired_at">Hired</a>
+                    {% endif %}
+                    <!-- only owner and admin can delete -->
+                    {% if current_user.id == post.owner_id or current_user.id == 1 %}
                     <a class="dropdown-item" id="delete" name="deleted_at">Delete</a>
+                    {% endif %}
+                    <a class="dropdown-item" id="hire" name="hired_at">Hired</a>
+                    <!-- only admin can hide post -->
+                    {% if current_user.id == 1 %} 
                     <a class="dropdown-item" id="hide" style="color: red;">Hide</a>
+                    {% endif %}
                   </div>
                 </div>
               </div>
+              {% endif %}
             </div>
             <div class="tag">
-              <span class="tag salary">20,000-30,000</span>
-              <span class="tag province">เชียงใหม่</span>
-              <span class="tag jobType">Full-time</span>
+              {% if post.salary != "" %}
+                <span class="tag salary">{{post.salary}}</span>
+              {% endif %}
+              {% if post.province != "" %}
+                <span class="tag province">{{post.province}}</span>
+              {% endif %}
+              {% if post.job_time != "" %}
+              <span class="tag jobType">{{post.job_time}}</span>
+              {% endif %}
             </div>
             <div class="post-bottom">
-              <p>Content in form</p>
+              <p>{{post.message}}</p>
             </div>
             <div class="post-options">
               <div class="post-option">
@@ -139,7 +161,7 @@
             </div>
           </div>
           <!-- post end -->
-
+          {% endfor %}
           <!-- undo hide start-->
           <div class="undo-hide">
             <p class="close-back">+</p>
@@ -159,9 +181,9 @@
           <!-- post start -->
           <div class="post">
             <div class="post-top">
-              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile post-avatar">
+              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile post-avatar" id="profile">
               <div class="post-top-info">
-                <h3>Wira Junngamdee</h3>
+                <h3 id="profile">Wira Junngamdee</h3>
                 <p class="created">27 July at 16:56</p>  <!-- Create at -->
                 <p class="edit">not edit</p>
               </div>
@@ -232,40 +254,42 @@
       <div class="bg-modal">
           <div class="modal-content">
             <div class="close">+</div>
-            <form id='post-form' method="post">
-              <label for="company">ชื่อบริษัท</label>
-              <span><input name="company" type="text" id="company"></span>
-              <br>
+            <form id='post-form' action="">
               <label for="place">สถานที่ตั้ง</label>
-              <span><input name="location" type="text" id="location"></span>
-              <input name="province" type="text" id="province" placeholder=จังหวัด>
-              <input name="amphoe" type="text" id="amphoe" placeholder="อำเภอ">
-              <input name="district" type="text" id="district" placeholder="ตำบล">
-              <input name="zipcode" type="text" id="zipcode" placeholder="รหัสไปรษณีย์">
-              <br>
+              <div style="display: grid; grid-template-columns: auto auto;">
+                <input name="location" type="text" id="place" placeholder="ที่อยู่">
+                <input name="district"  type="text" id="district" placeholder="ตำบล">
+                <input name="amphoe" type="text" id="amphoe" placeholder="อำเภอ">
+                <input name="province" type="text" id="province" placeholder=จังหวัด>
+                <input name="zipcode" type="text" id="zipcode" placeholder="รหัสไปรษณีย์">
+              </div>
+              <!-- <div class="input-group"> -->
               <label for="job">ตำแหน่งงาน</label>
-              <span><input name="job_name" type="text" id="jobname"></span>
-              <br>
-              <label for="salary">เงินเดือน</label>
-              <span><input name="salary" type="int" id="salary"></span>
-              <br>
-              <label for="jobType">ลักษณะการทำงาน</label>
-              <span><select name="job_time" >
-                <option id="fullTime">Full time</option>
-                <option id="partTime">Part time</option>
-                <option id="hybrid">Hybrid</option>
-              </select></span>
-              <br>
-              <label for="message">More Description</label>
-              <textarea id="message"></textarea>
-              <input type="hidden" id="entryid" name="id" value="">
+              <input name="job_name" type="text" id="jobName">
+              <!-- </div> -->
+              <div style="display: grid; grid-template-columns: auto auto; margin-bottom: 10px;">
+                <div class="input-group">
+                  <label for="salary">เงินเดือน</label>
+                  <span><input name="salary" type="int" id="salary"></span>
+                </div>
+                <div class="input-group">
+                  <label for="jobType" style="align-items: center;">ลักษณะการทำงาน</label>
+                  <span><select name="job_time">
+                    <option id="fullTime">Full time</option>
+                    <option id="partTime">Part time</option>
+                    <option id="hybrid">Hybrid</option>
+                  </select></span>
+                </div>
+              </div>
+              <textarea name="message" id="content" placeholder="Type More Description..."></textarea>
+              <input hidden id="entryid" name="id" value="">
               <input hidden name="owner_email" value="{{current_user.email}}">
               <input hidden name="owner_id" value="{{current_user.id}}">
-              <button type="submit" class="btn-submit" style="color: #FFF;" >Post</button>
+              <button class="btn-submit" style="color: #FFF;">Post</button>
             </form>
           </div> 
       </div>
-     
+      <script src="/static/js/popup.js"></script>
       <script>
         $(document).ready(function() {
           $(".dropdown").click(function() {
@@ -278,7 +302,6 @@
               $(".dropdown-menu").removeClass("show");
             }
           });
-
           $(".dropdown-item").click(function() {
             if ($(this).text().trim() === "Hide") {
               $(this).closest(".post").hide();
@@ -293,21 +316,17 @@
               $('#hired').show();
             }
           });
-
           $(".undo-text").click(function() {
             $(".post").show();
             $(".undo-hide").hide();
             $(".undo-delete").hide();
           });
-
           $(".close-back").click(function() {
             $(".undo-hide").hide();
             $(".undo-delete").hide();
           });
         });
       </script>
-      
-      <script src="/static/js/popup.js"></script>
       
       <script>
         //jQuery thailand
@@ -318,14 +337,12 @@
           $zipcode: $('#zipcode'), // input ของรหัสไปรษณีย์
       });
       </script>
+
       <script>
-        //handle post methot to backend
+        //handle post method to backend
         $('#post-form').submit(function(event){
           event.preventDefault();
           //handle selected jobType
-          function handleSelection(selectedValue) {
-            return selectedValue;
-          }
           let formData = {};
           $(":input").each(function () {
             var key = $(this).attr('name');
@@ -342,6 +359,26 @@
         })
       </script>
 
+       <!-- AJAX -->
+       <script>
+        $(document).ready(function () {
+          (function () {
+            $('#profile').click(function(event){
+              event.preventDefault();
+              // $('#login-box').html('http://localhost:30000/signup')
+              $.ajax ({
+                url : '/profile',
+                method: 'GET',
+                success: function(data){
+                  const parsedHTML = $.parseHTML(data);
+                  const selected = $(parsedHTML).find('.body');
+                  $('.main-body').html(selected.html());
+                }
+              });
+            });
+          })();
+        });
+      </script>  
     </body>
 </html>
 
