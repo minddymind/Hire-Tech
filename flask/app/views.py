@@ -350,7 +350,6 @@ def google_auth():
         db.session.add(new_user)
         db.session.commit()
         user = Member.query.filter_by(email=email).first()
-    if user:
 
     login_user(user)
     return redirect('/board')
