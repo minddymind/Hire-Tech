@@ -53,9 +53,12 @@
           </div>
 
           <div class="nav-right">
-            <div class="nav-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account">
-              <a href="/profile"><img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile">
+            <div class="nav-info right" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account">
+              <a href="/profile"><img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile right">
               <span id="name">Wira Junngamdee</span></a>
+            </div>
+            <div class="nav-info hide">
+              <a href="/profile"><img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile right">
             </div>
             <ul class="links">
               <li><a href="/">Home</a></li>
@@ -63,17 +66,17 @@
               <li><a href="/logout">Log out</a></li>
             </ul>
             <div class="toggle_btn">
-              <i class="fa-solid fa-bars"></i>
+              <i class="fas fa-bars"></i>
             </div>
+          </div>
+          <div class="dropdown_menu open">
+            <li><a href="/">Home</a></li>
+            <li><a href="/board">Board</a></li>
+            <li><a href="/logout">Log out</a></li>
           </div>
         </div>
 
 
-        <div class="dropdown_menu open">
-          <li><a href="/">Home</a></li>
-          <li><a href="/board">Board</a></li>
-          <li><a href="/logout">Log out</a></li>
-        </div>
       </nav>
       <!-- nav end-->
 
@@ -267,6 +270,27 @@
      
       <script>
         $(document).ready(function() {
+          $('.toggle_btn').click(function() {
+        // Toggle the 'active' class on the toggle button to change the icon
+            $(this).toggleClass('active');
+            
+              // Check if the toggle button has the 'active' class
+              if ($(this).hasClass('active')) {
+                  // If it has the 'active' class, change the icon to 'fa-xmark'
+                  $(this).find('i').removeClass('fa-bars').addClass('fa-xmark');
+              } else {
+                  // If it doesn't have the 'active' class, change the icon to 'fa-bars'
+                  $(this).find('i').removeClass('fa-xmark').addClass('fa-bars');
+              }
+          });
+
+          $(document).click(function(e) {
+            if (!$(e.target).closest('.toggle_btn').length && !$(e.target).closest('.dropdown_menu').length) {
+                $('.dropdown_menu').removeClass('open');
+                $('.toggle_btn i').removeClass('fa-xmark').addClass('fa-bars');
+            }
+          });
+          
           $(".dropdown").click(function() {
             $(this).find(".dropdown-menu").toggleClass("show");
           });
@@ -323,7 +347,6 @@
           (function () {
             $('#profile').click(function(event){
               event.preventDefault();
-              // $('#login-box').html('http://localhost:30000/signup')
               $.ajax ({
                 url : '/profile',
                 method: 'GET',
@@ -336,6 +359,6 @@
             });
           })();
         });
-      </script>  
+      </script> 
     </body>
 </html>

@@ -8,11 +8,5 @@ toggleBtn.onclick = function () {
 
   toggleBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'
 }
-
-function toggleDropdown() {
-  // Get the dropdown menu element
-  var dropdownMenu = document.getElementById("dropdownMenuButton");
-  // Toggle the 'show' class on the dropdown menu
-  dropdownMenu.classList.toggle("show");
-}
+  
       
