@@ -1,3 +1,5 @@
+
+
 //for dropdown menu
 function dropdownFunction(){
     $(".dropdown").click(function() {
@@ -43,3 +45,63 @@ function dropdownFunction(){
     });
 }
 
+function deletePost(post_id){
+  var url = "board/delete"
+  var formData = { 'id': post_id };
+    $.post(url, formData, function (callbackData) {
+      //refresh #feed-box to new data
+      const parsedHTMLData = $.parseHTML(callbackData);
+      //console.log(parsedHTMLData)
+      const feedbox = $(parsedHTMLData).find('#feed-box')
+      $('#feed-box').html(feedbox.html())
+      calculateTime(); //from utility.js
+      dropdownFunction(); //from board.js
+      popupFunction();//from popup.js
+      editPost();//from popup.js
+  });
+  function undelete(post_id){
+  
+  }
+}
+
+function hirePost(post_id){
+  var url = "board/hired"
+  var formData = { 'id': post_id };
+    $.post(url, formData, function (callbackData) {
+      //refresh #feed-box to new data
+      const parsedHTMLData = $.parseHTML(callbackData);
+      //console.log(parsedHTMLData)
+      const feedbox = $(parsedHTMLData).find('#feed-box')
+      $('#feed-box').html(feedbox.html())
+      calculateTime(); //from utility.js
+      dropdownFunction(); //from board.js
+      popupFunction();//from popup.js
+      editPost();//from popup.js
+  });
+}
+
+
+
+$(document).ready(function() {
+  // Check if there are any hidden posts stored in localStorage
+  var hiddenPosts = localStorage.getItem('hiddenPosts');
+  if (hiddenPosts) {
+    hiddenPosts = JSON.parse(hiddenPosts);
+    // Hide each of the stored hidden posts
+    hiddenPosts.forEach(function(postId) {
+      $('#' + postId).hide();
+    });
+  }
+
+  // Event listener for hiding posts
+  $(".dropdown-item").click(function() {
+    var postId = $(this).closest('.post').attr('id');
+    if ($(this).text().trim() === "Hide") {
+      $('#' + postId).hide();
+      // Add the hidden post's ID to the list of hidden posts in localStorage
+      if (!hiddenPosts) hiddenPosts = [];
+      hiddenPosts.push(postId);
+      localStorage.setItem('hiddenPosts', JSON.stringify(hiddenPosts));
+    }
+  });
+});

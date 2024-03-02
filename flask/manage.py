@@ -22,7 +22,8 @@ def seed_db():
         password=generate_password_hash('1234',
                                 method='sha256'),
         avatar_url='https://ui-avatars.com/api/?name=\
-        Admin&background=83ee03&color=98ABEE'))
+        Admin&background=83ee03&color=98ABEE',
+        login_type='hirethec'))
     
     db.session.commit()
     db.session.add(

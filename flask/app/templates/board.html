@@ -103,7 +103,7 @@
           <!-- message-box end -->
           {% for post in allpost %}
           <!-- post start -->
-          <div class="post">
+          <div class="post" id="postid{{post.id}}">
             <div class="post-top">
               <a href="/profile"><img src="{{post.owner_avatar}}" alt="user-profile" class="user-profile post-avatar" id="profile"></a>
               <div class="post-top-info">
@@ -131,7 +131,8 @@
                     {% endif %}
                     <!-- only owner and admin can delete -->
                     {% if current_user.id == post.owner_id or current_user.id == 1 %}
-                    <a class="dropdown-item" id="delete" name="deleted_at">Delete</a>
+                    <a class="dropdown-item" id="delete" name="deleted_at"
+                    onclick="deletePost('{{post.id}}')">Delete</a>
                     {% endif %}
                     <a class="dropdown-item" id="hire" name="hired_at">Hired</a>
                     <!-- only admin can hide post -->
@@ -339,8 +340,6 @@
         });
       })
     </script>
-
-
 
     <script>
 

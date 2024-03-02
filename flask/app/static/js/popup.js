@@ -33,3 +33,5 @@ function editPost(location, district, amphoe, province, zipcode, job_name,
   $('#owner_id').val(owner_id);
 
 }
+
+;
