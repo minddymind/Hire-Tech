@@ -14,7 +14,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 import requests
 from app import app
 from app import db
-from app import login_manager
+from app import login_manager   
 import authlib.integrations.base_client
 from app import oauth
 from app.models.member import Member
@@ -38,7 +38,10 @@ def board_api():
             post.append(this_post.to_dict())
 
     app.logger.debug("board_api: " + str(post))
-
+    hired_post = board_hired().json
+    if hired_post != []:
+        post = post.extend(hired_post)
+    # print("POST", post)
     json_form = jsonify(post)
     return json_form
 
@@ -129,6 +132,51 @@ def board():
     post = board_api().json
     post = list(reversed(post))
     return render_template("board.html",allpost=post)
+
+@app.route('/board/delete', methods=('GET', 'POST'))
+def board_delete():
+    app.logger.debug("===== DELETE FUNCTION =====")
+    if request.method == 'POST':
+        result = request.form.to_dict()
+        id_ = result.get('id', '')
+        try:
+            #if now user is owner of this post
+            post = PostContent.query.get(id_)
+            if post.owner_id == current_user.id:
+                post.is_deleted = True
+                db.session.commit()
+
+            if  post.is_deleted:
+                print("Post has been successfully marked as deleted.")
+            else:
+                print("Failed to mark post as deleted.")
+        except Exception as ex:
+           app.logger.error(f"Error removing post with id {id_}: {ex}")
+           raise
+    return board_api()
+
+@app.route('/board/hired', methods=('GET', 'POST'))
+def board_hire():
+    app.logger.debug("===== HIRED FUNCTION =====")
+    if request.method == 'POST':
+        result = request.form.to_dict()
+        id_ = result.get('id', '')
+        try:
+            #if now user is owner of this post
+            post = PostContent.query.get(id_)
+            if post.owner_id == current_user.id:
+                post.is_hired = True
+                db.session.commit()
+
+            if  post.is_deleted:
+                print("Post has been successfully marked as hired.")
+            else:
+                print("Failed to mark Post as hired.")
+        except Exception as ex:
+           app.logger.error(f"Error mark post as hried with id {id_}: {ex}")
+           raise
+    return board_api()
+
 
 @app.route('/profile')
 def profile():
@@ -222,7 +270,8 @@ def signup():
         new_user = Member(email=email, name=name,
                                 password=generate_password_hash(
                                     password, method='sha256'),
-                                avatar_url=avatar_url
+                                avatar_url=avatar_url,
+                                login_type='hirethec'
                             )
         #add new_user to database
         db.session.add(new_user)
@@ -232,9 +281,29 @@ def signup():
 @app.route('/logout')
 @login_required
 def logout():
+    user = Member.query.get(current_user.id)
+    type_login = user.login_type
+    tk = user.user_token['access_token']
+    # print("ACTK", user.user_token)
+    # print("TK",tk)
+    # print("TYPELOGIN", type_login)
+
+    # revoke for unbond account from google
+    if type_login == 'google':
+        google_revoke(tk)
+    
     logout_user()
     return redirect(url_for('home'))
 
+@app.route('/google/revoke', methods=['POST'])
+def google_revoke(token):
+    response = requests.post('https://oauth2.googleapis.com/revoke',
+    params={'token': token},
+    headers = {'content-type': 'application/x-www-form-urlencoded'})
+    if response.status_code == 200:
+        print("Token successfully revoked")
+    else:
+        print("Failed to revoke token")
 @app.route('/google/')
 def google():
     oauth.register(
@@ -246,7 +315,6 @@ def google():
             'scope': 'openid email profile'
         }
     )
-    
    # Redirect to google_auth function
     redirect_uri = url_for('google_auth', _external=True)
     return oauth.google.authorize_redirect(redirect_uri)
@@ -255,6 +323,7 @@ def google():
 def google_auth():
     try:
         token = oauth.google.authorize_access_token()
+
     except authlib.integrations.base_client.errors.OAuthError:
         return redirect(url_for('login'))
     app.logger.debug(str(token))
@@ -274,11 +343,15 @@ def google_auth():
         new_user = Member(email=email, name=name,
                            password=generate_password_hash(
                                password, method='sha256'),
-                            avatar_url=avatar_url
+                            avatar_url=avatar_url,
+                            login_type='google',
+                            user_token=token
                            )
         db.session.add(new_user)
         db.session.commit()
         user = Member.query.filter_by(email=email).first()
+    if user:
+
     login_user(user)
     return redirect('/board')
 
@@ -326,7 +399,9 @@ def github_auth():
         new_user = Member(email=email, name=name,
                            password=generate_password_hash(
                                password, method='sha256'),
-                            avatar_url=avatar_url
+                            avatar_url=avatar_url,
+                            login_type='github',
+                            user_token='github'
                            )
         db.session.add(new_user)
         db.session.commit()
