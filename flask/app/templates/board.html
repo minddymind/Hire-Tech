@@ -37,6 +37,8 @@
 
         <script defer src="static/js/navbar.js"></script>
         <script defer src="static/js/utility.js"></script>
+        <script src="/static/js/popup.js"></script>
+        <script src="/static/js/board.js"></script>
         <title>HireThec - Board</title>
     </head>
       
@@ -90,7 +92,7 @@
         </div>
         <!-- sidebar end -->
         <!-- feed start -->
-        <div class="feed">
+        <div class="feed" id="feed-box">
           <!-- message-box satrt -->
           <div class="message-box">
             <div class="message-box-top">
@@ -107,9 +109,9 @@
               <div class="post-top-info">
                 <a href="/profile"><h3 id="profile">{{post.owner_name}}</h3></a>
                 <!-- Create at -->
-                <p class="created">{{post.created_at[:10]}} <span id="postC-at-{{ post['post_id'] }}" ></span></p>
+                <p class="created">{{post.created_at[:10]}} <span id="postC-at-{{ post['id'] }}" ></span></p>
                 {% if post.edited_at != None %}
-                <p class="edit">edited:{{post.edited_at[:10]}} <span id="postU-at-{{ post['post_id'] }}"></span></p>
+                <p class="edit">edited:{{post.edited_at[:10]}} <span id="postU-at-{{ post['id'] }}"></span></p>
                 {% else %}
                 <p class="edit">not edit</p>
                 {% endif %}
@@ -121,7 +123,11 @@
                       aria-expanded="false"></i>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                     {% if current_user.id == post.owner_id %}
-                    <a class="dropdown-item" id="edit" name="edited_at">Edit</a>
+                    <a class="dropdown-item" id="edit" name="edited_at" 
+                     onclick="editPost('{{post.location}}','{{post.district}}', '{{post.amphoe}}',
+                    '{{post.province}}', '{{post.zipcode}}','{{post.job_name}}', '{{post.salary}}',
+                    '{{post.job_time}}', '{{post.message}}','{{post.id}}', 
+                    '{{post.owner_email}}', '{{post.owner_id}}')">Edit</a>
                     {% endif %}
                     <!-- only owner and admin can delete -->
                     {% if current_user.id == post.owner_id or current_user.id == 1 %}
@@ -149,7 +155,13 @@
               {% endif %}
             </div>
             <div class="post-bottom">
-              <p>{{post.message}}</p>
+              <div class="address">
+                <p>ที่อยู่: {{post.location}}</p>
+                <p>อำเภอ: {{post.amphoe}}</p>
+                <p>ตำบล: {{post.district}}</p>
+                <br>
+              </div>
+              <p><b>{{post.message}}</b></p>
             </div>
             <div class="post-options">
               <div class="post-option">
@@ -206,6 +218,7 @@
             </div>
           </div>
           <!-- post end -->
+          <!-- เอา script ของหน้า feed ทั้งหมดมาใส่ตรงนี้ -->
         </div>
         <!-- feed end -->
 
@@ -255,17 +268,17 @@
           <div class="modal-content">
             <div class="close">+</div>
             <form id='post-form' action="">
-              <label for="place">สถานที่ตั้ง</label>
+              <label for="location">สถานที่ตั้ง</label>
               <div style="display: grid; grid-template-columns: auto auto;">
-                <input name="location" type="text" id="place" placeholder="ที่อยู่">
+                <input name="location" type="text" id="location" placeholder="ที่อยู่">
                 <input name="district"  type="text" id="district" placeholder="ตำบล">
                 <input name="amphoe" type="text" id="amphoe" placeholder="อำเภอ">
                 <input name="province" type="text" id="province" placeholder=จังหวัด>
                 <input name="zipcode" type="text" id="zipcode" placeholder="รหัสไปรษณีย์">
               </div>
               <!-- <div class="input-group"> -->
-              <label for="job">ตำแหน่งงาน</label>
-              <input name="job_name" type="text" id="jobName">
+              <label for="job_name">ตำแหน่งงาน</label>
+              <input name="job_name" type="text" id="job_name">
               <!-- </div> -->
               <div style="display: grid; grid-template-columns: auto auto; margin-bottom: 10px;">
                 <div class="input-group">
@@ -274,111 +287,83 @@
                 </div>
                 <div class="input-group">
                   <label for="jobType" style="align-items: center;">ลักษณะการทำงาน</label>
-                  <span><select name="job_time">
-                    <option id="fullTime">Full time</option>
-                    <option id="partTime">Part time</option>
-                    <option id="hybrid">Hybrid</option>
+                  <span><select name="job_time" id="job_time">
+                    <option id="fullTime" value="Full-time">Full-time</option>
+                    <option id="partTime" value="Part-time">Part-time</option>
+                    <option id="hybrid" value="Hybrid">Hybrid</option>
                   </select></span>
                 </div>
               </div>
-              <textarea name="message" id="content" placeholder="Type More Description..."></textarea>
-              <input hidden id="entryid" name="id" value="">
-              <input hidden name="owner_email" value="{{current_user.email}}">
-              <input hidden name="owner_id" value="{{current_user.id}}">
-              <button class="btn-submit" style="color: #FFF;">Post</button>
+              <textarea name="message" id="message" value="" placeholder="Type More Description..."></textarea>
+              <input type="hidden" id="entryid" name="id" value="">
+              <input hidden name="owner_email" id="owner_email" value="{{current_user.email}}">
+              <input hidden name="owner_id" id="owner_id"  value="{{current_user.id}}">
+              <button id="post-btn" class="btn-submit" style="color: #FFF;">Post</button>
             </form>
           </div> 
       </div>
-      <script src="/static/js/popup.js"></script>
-      <script>
-        $(document).ready(function() {
-          $(".dropdown").click(function() {
-            $(this).find(".dropdown-menu").toggleClass("show");
-          });
 
-          // Close the dropdown menu when clicking outside of it
-          $(document).click(function(e) {
-            if (!$(e.target).closest('.dropdown').length) {
-              $(".dropdown-menu").removeClass("show");
-            }
-          });
-          $(".dropdown-item").click(function() {
-            if ($(this).text().trim() === "Hide") {
-              $(this).closest(".post").hide();
-              $('.undo-hide').show();
-            }
-            if ($(this).text().trim() === "Delete") {
-              $(this).closest(".post").hide();
-              $('.undo-delete').show();
-            }
-            if ($(this).text().trim() === "Hired") {
-              $('#no-hired').hide();
-              $('#hired').show();
-            }
-          });
-          $(".undo-text").click(function() {
-            $(".post").show();
-            $(".undo-hide").hide();
-            $(".undo-delete").hide();
-          });
-          $(".close-back").click(function() {
-            $(".undo-hide").hide();
-            $(".undo-delete").hide();
-          });
-        });
-      </script>
-      
-      <script>
-        //jQuery thailand
-        $.Thailand({
-          $district: $('#district'), // input ของตำบล
-          $amphoe: $('#amphoe'), // input ของอำเภอ
-          $province: $('#province'), // input ของจังหวัด
-          $zipcode: $('#zipcode'), // input ของรหัสไปรษณีย์
-      });
-      </script>
-
-      <script>
-        //handle post method to backend
-        $('#post-form').submit(function(event){
-          event.preventDefault();
-          //handle selected jobType
-          let formData = {};
-          $(":input").each(function () {
-            var key = $(this).attr('name');
-            var val = $(this).val();
-            if (key != 'submit' && key != 'searchbar') {
-              formData[key] = val;
-            }
-          })
-          console.log(formData)
-          let url = $('#post-form').attr('action')
-          $.post(url, formData, function (callbackData) {
-            //window.location.reload()  
-          });
-        })
-      </script>
-
-       <!-- AJAX -->
-       <script>
-        $(document).ready(function () {
-          (function () {
-            $('#profile').click(function(event){
-              event.preventDefault();
-              // $('#login-box').html('http://localhost:30000/signup')
-              $.ajax ({
-                url : '/profile',
-                method: 'GET',
-                success: function(data){
-                  const parsedHTML = $.parseHTML(data);
-                  const selected = $(parsedHTML).find('.body');
-                  $('.main-body').html(selected.html());
-                }
-              });
-            });
-          })();
-        });
-      </script>  
     </body>
+    <script>
+      dropdownFunction(); //from board.js
+      popupFunction();//from popup.js
+      editPost();//from popup.js
+      //handle post method to backend
+      $('#post-form').submit(function(event){
+        event.preventDefault();
+        //contain all input to dictionary
+        let formData = {};
+        $(":input").each(function () {
+          var key = $(this).attr('name');
+          var val = $(this).val();
+          if (key != 'submit' && key != 'searchbar') {
+            formData[key] = val;
+          }
+        })
+        console.log(formData)
+        let url = $('#post-form').attr('action')
+        $('#post-btn').click(function(){
+          
+        })
+        $.post(url, formData, function (callbackData) {
+          //refresh #feed-box to new data
+          //callbackData = ajaxTime(callbackData)
+          const parsedHTMLData = $.parseHTML(callbackData);
+          //console.log(parsedHTMLData)
+          const feedbox = $(parsedHTMLData).find('#feed-box')
+          $('#feed-box').html(feedbox.html())
+          calculateTime(); //from utility.js
+          dropdownFunction(); //from board.js
+          popupFunction();//from popup.js
+          editPost();//from popup.js
+        });
+      })
+    </script>
+
+
+
+    <script>
+
+    </script>
+     <!-- AJAX -->
+     <script>
+      $(document).ready(function () {
+        (function () {
+          $('#profile').click(function(event){
+            event.preventDefault();
+            // $('#login-box').html('http://localhost:30000/signup')
+            $.ajax ({
+              url : '/profile',
+              method: 'GET',
+              success: function(data){
+                const parsedHTML = $.parseHTML(data);
+                const selected = $(parsedHTML).find('.body');
+                $('.main-body').html(selected.html());
+              }
+            });
+          });
+        })();
+      });
+    </script>
 </html>
 

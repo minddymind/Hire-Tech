@@ -81,6 +81,7 @@ def board():
         #the id_post was from html in tag input id=entryid
         #to get which post id in html was we are doing
         id_post = data.get('id', '')
+        print("ID-fROM-POST", id_post)
         # this keys are column in database
         valid_keys = ['owner_id','message', 'job_name', 'job_time', 'province',
         'district', 'amphoe', 'zipcode', 'location', 'salary']
@@ -107,7 +108,7 @@ def board():
             owner_id = validated_result['owner_id']
             # user = Member.query.filter_by(owner_email=owner_email).first()
             if not id_post:
-                
+                app.logger.debug("===== new post DETECTED =====")
                 # this post was created for first time
                 # print("IDPOST", id_post)
                 validated_result['owner_id'] = current_user.id
@@ -115,11 +116,15 @@ def board():
                 app.logger.debug(str(new_post))
                 db.session.add(new_post)
             else:
+                app.logger.debug("===== old post DETECTED =====")
                 #this post already created then update this post
                 #prevent edited in backend level
+                print("POST ID", id_post)
+                print("OWNER", owner_id)
                 owner_post = PostContent.query.get(id_post)
                 if owner_post.owner_id == current_user.id:
-                    PostContent.update(**validated_result)
+                    owner_post.update(**validated_result)
+                app.logger.debug("===== update COMPLETE 100% =====")
             db.session.commit()
     post = board_api().json
     post = list(reversed(post))

@@ -9,7 +9,7 @@ from app import db
 class PostContent(db.Model, SerializerMixin):
     __tablename__ = "post_content"
     #init in this class
-    post_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.String(1000))
     job_name = db.Column(db.String(100))
     job_time = db.Column(db.String(100))
