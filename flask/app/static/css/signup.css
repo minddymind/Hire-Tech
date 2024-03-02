@@ -168,7 +168,7 @@ nav {
 }
 
 .dropdown_menu.open {
-	height: 240px;
+	height: auto;
 }
 
 .dropdown_menu li {
@@ -178,7 +178,7 @@ nav {
 	justify-content: center;
 }
 
-@media(max-width: 992px){
+@media(max-width: 991.98px){
 	.navbar .links {
 		display: none;
 	}
@@ -192,7 +192,15 @@ nav {
 	}
 }
 
-@media(max-width: 576px){
+@media(max-width: 767.98px){
+	.dropdown_menu {
+		right: 2rem;
+    left: 55%;
+		width: 200px;
+	}
+}
+
+@media(max-width: 575.98px){
 	.dropdown_menu {
 		right: 2rem;
     left: 55%;

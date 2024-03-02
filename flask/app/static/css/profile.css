@@ -119,8 +119,9 @@ a {
   margin-right: 2rem;
 }
 
+
 #name {
-  margin-right: 2rem;
+  margin-right: 0;
   color: #eff2f5;
   cursor: pointer;
 }

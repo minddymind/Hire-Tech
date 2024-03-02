@@ -12,13 +12,17 @@ class Member(db.Model, UserMixin):
     email = db.Column(db.String(100), unique=True)
     name = db.Column(db.String(1000))
     password = db.Column(db.String(100))
-    
-    def __init__(self, email, name, password):
+    avatar_url = db.Column(db.String(100))
+
+    def __init__(self, email, name, password, avatar_url):
         self.email = email
         self.name = name
         self.password = password
-        
-    def update(self, update_email, update_name, update_password):
+        self.avatar_url = avatar_url
+
+    def update(self, update_email, update_name, update_password,
+    update_avatar_url):
         self.email = update_email
         self.name = update_name
         self.password = update_password       
+        self.avatar_url = update_avatar_url

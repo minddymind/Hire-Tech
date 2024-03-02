@@ -19,10 +19,6 @@ body {
 }
 
 .main {
-  /* background-image: url(/static/img/career-job.jpg);
-  background-repeat: no-repeat;
-  background-size: 100%; */
-  /* background-size: cover; */
   padding: 70px 0px;
 }
 
@@ -32,10 +28,6 @@ div.form-box {
   border-radius: 20px;
   border: none;
 }
-
-/* .desc-form {
-  margin-bottom: 8.5px;
-} */
 
 .form-box input {
   border-radius: 10px;
@@ -88,10 +80,6 @@ div.form-box {
   font-size: 90%;
 }
 
-/* input[type=text] {
-  outline: none;
-} */
-
 .input-control input:focus {
   outline: 0;
 }
@@ -104,13 +92,6 @@ div.form-box {
 .input-control.error input {
   border-color: #ff3860;
 }
-
-/* comment this because will conflict with j */
-/* .input-control .error {
-  color : #ff3860;
-  font-size: 90%;
-  height: 13px;
-} */
 
 li {
 	list-style: none;
@@ -185,7 +166,7 @@ nav {
 }
 
 .dropdown_menu.open {
-	height: 240px;
+	height: auto;
 }
 
 .dropdown_menu li {
@@ -195,7 +176,7 @@ nav {
 	justify-content: center;
 }
 
-@media(max-width: 992px){
+@media(max-width: 991.98px){
 	.navbar .links {
 		display: none;
 	}
@@ -209,7 +190,7 @@ nav {
 	}
 }
 
-@media(max-width: 576px){
+@media(max-width: 767.98px){
 	.dropdown_menu {
 		right: 2rem;
     left: 55%;
@@ -217,32 +198,12 @@ nav {
 	}
 }
 
-/* .action-btn {
-	background-color: azure;
-	color:rgba(51, 102, 204, 1);
-	padding: 0.5rem 1rem;
-	border: none;
-	outline: none;
-	border-radius: 20px;
-	font-size
-} */
-
-
-
-
-
-/* .red
-{
-     margin-top: 5px;
-     color: red;
-     font-weight: bold;
+@media(max-width: 575.98px){
+	.dropdown_menu {
+		right: 2rem;
+    left: 55%;
+		width: 200px;
+	}
 }
-    
-.green
-{
-     margin-top: 5px;
-     color: green;
-     font-weight: bold;
-} */
 
 

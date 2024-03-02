@@ -47,8 +47,7 @@ nav.sticky {
   /* padding: 5px 100px; */
 	background-color: none;
 	backdrop-filter: blur(10px);
-  /* background: linear-gradient(90deg, rgba(0,17,79,1) 0%, rgba(51,102,204,1) 100%); */
-	
+  /* background: linear-gradient(90deg, rgba(0,17,79,1) 0%, rgba(51,102,204,1) 100%); */	
 }
 
 .user-profile {
@@ -108,7 +107,7 @@ nav.sticky {
   align-items: center;
 }
 
-span#name{
+span#name {
   margin-right: 0;
 }
 
@@ -128,6 +127,7 @@ span#name{
 }
 
 .province-name {
+  font-family: 'Kanit', sans-serif;
   width: 150px;
 }
 
@@ -703,6 +703,7 @@ textarea:focus {
 
   .nav-info.hide {
     display: block;
+    margin-right: 10px;
   }
 
   .nav-search {
