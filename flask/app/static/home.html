@@ -25,7 +25,7 @@
 
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
-        <script></script>
+        <script defer src="static/js/navbar.js"></script>
         <title>HireThec - Home</title>
     </head>
     <body>
@@ -41,14 +41,15 @@
               <div class="toggle_btn">
                   <i class="fa-solid fa-bars"></i>
               </div>
+              <div class="dropdown_menu open">
+                <li><a href="/">Home</a></li>
+                <li><a href="/board">Board</a></li>
+                <li><a href="/login">Log in</a></li>
+                <li><a href="/signup">Sign up</a></li>
+              </div>
             </div>
 
-            <div class="dropdown_menu open">
-              <li><a href="/">Home</a></li>
-              <li><a href="/board">Board</a></li>
-              <li><a href="/login">Log in</a></li>
-              <li><a href="/signup">Sign up</a></li>
-            </div>
+            
         </nav>
 
         <div class="text-box-container">
@@ -470,6 +471,5 @@
         </div>  
            
         <div class="footer"></div>
-        <script defer src="static/js/navbar.js"></script>
     </body>
 </html>
