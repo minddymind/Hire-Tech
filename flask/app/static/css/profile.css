@@ -2,8 +2,13 @@
 
 
 body {
-    background-color: #f1f2f5;
-    font-family: 'Poppins', sans-serif;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  background-color: #f6f4f4;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* *, ::after, ::before {
@@ -83,24 +88,24 @@ nav.sticky {
   justify-content: space-between;
 }
 
-.nav-search {
+/* .nav-search {
   display: flex;
   align-items: center;
   background-color: #eff2f5;
   padding: 2px;
   margin-left: 10px;
   border-radius: 999px;
-}
+} */
 
-.material-icons {
+/* .material-icons {
   margin-left: 10px;
-}
+} */
 
-.nav-search input {
+/* .nav-search input {
   border: none;
   background-color: transparent;
   outline-width: 0;
-}
+} */
 
 .nav-right {
   display: flex;
@@ -284,6 +289,10 @@ ul.links {
 	display: none;
 }
 
+.fa-solid {
+  color: #fff;
+}
+
 .dropdown_menu {
 	display: none;
 	position: absolute;
@@ -291,14 +300,16 @@ ul.links {
 	top: 60px;
 	width: 300px;
 	height: 0;
-	background-color: rgb(255, 255, 255);
+	background-color: rgb(0,0,0,0.5);
 	backdrop-filter: blur(15px);
+  border-radius: 10px;
 	overflow: hidden;
 	transition: height .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .dropdown_menu.open {
-	height: 240px;
+	height: auto;
+  /* width: 80%; */
 }
 
 .dropdown_menu li {
@@ -346,9 +357,9 @@ ul.links {
 }
 
 .dropdown-menu {
-    background-color: #f9f9f9; /* Light grey background color */
-    border: none; /* Remove border */
-    display: none;
+  background-color: #f9f9f9; /* Light grey background color */
+  border: none; /* Remove border */
+  display: none;
 }
 
 .show {
@@ -357,11 +368,6 @@ ul.links {
 
 .dropdown-item:hover {
     background-color:#adb1b4;
-}
-
-.send {
-  float: right;
-  margin-right: 1rem;
 }
 
 a:hover {
@@ -441,7 +447,86 @@ input {
   padding: 15px;
 }
 
-@media(max-width: 992px){
+.header-wrapper header {
+  width: 100%;
+  background: url(/static/img/company.jpg) no-repeat 50% 20% / cover;
+  min-height: calc(100px + 15vw);
+}
+
+.header-wrapper .cols-container .left-col{
+  padding: 25px 20px;
+  text-align: center;
+  max-width: 350px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.header-wrapper .cols-container .left-col .img-container {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.header-wrapper .cols-container .left-col .img-container img{
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  box-shadow: 1px 3px 12px rgb(0,0,0,0.18)
+}
+
+/* .header-wrapper .cols-container .left-col .img-container span{
+  position: absolute;
+  background:chartreuse;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  bottom: 3px;
+  right: 11px;
+  border: 2px solid #fff;
+} */
+
+.header-wrapper .cols-container .left-col h2 {
+  margin-top: 60px;
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.header-wrapper .cols-container .left-col p {
+  font-size: 0.9rem;
+  color: #818181;
+  margin: 0;
+}
+
+.cols-container {
+  /* display: flex; */
+  justify-content: center; /* Center the content horizontally */
+}
+
+.recent {
+  display: flex;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-left: 22%;
+}
+
+.descript {
+  border: none;
+  text-align: center;
+  color: #818181;
+  background-color: #f6f4f4;
+}
+
+.descript:focus {
+  outline-color: rgb(72, 178, 228);
+  border: none;
+}
+
+
+@media(max-width: 991.98px){
 	.navbar .links {
 		display: none;
 	}
@@ -455,17 +540,43 @@ input {
 	}
 }
 
-@media(max-width: 576px){
-	.dropdown_menu {
-		left: 2rem;
-		width: unset;
+@media (max-width: 767.98px) {
+  .dropdown_menu {
+		right: 2rem;
+    left: 55%;
+		width: 200px;
 	}
-
-  .nav-search {
-    display: none;
-  }
 
   .sidebar-row {
     display: none;
   }
+}
+
+@media(max-width: 575.98px){
+	.dropdown_menu {
+		right: 2rem;
+    left: 55%;
+		width: 200px;
+	}
+
+  .sidebar-row {
+    display: none;
+  }
+
+  .feed .post {
+    width: 400px;
+  }
+
+  .recent {
+    margin-left: 10%;
+  }
+
+  /* .nav-name {
+    display: none;
+  } */
+
+  /* .main-body, .feed, .post {
+    width: 100%;
+  } */
+  
 }
