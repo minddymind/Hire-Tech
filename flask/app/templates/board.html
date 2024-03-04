@@ -106,6 +106,20 @@
             </div>
           </div>
           <!-- message-box end -->
+          <div class="undo-hide">
+            <p class="close-back">+</p>
+            <p class="undo-text">undo</p>
+            <p class="undo-text hid" style="text-decoration: none;">Hid</p>
+          </div>
+          <!-- undo hide end-->
+
+          <!-- undo delete start-->
+          <div class="undo-delete">
+            <p class="close-back"->+</p>
+            <p class="undo-text delete">undo</p>
+            <p class="undo-text deleted" style="text-decoration: none;">Deleted</p>
+          </div>
+          <!-- undo deleted end-->
           {% for post in allpost %}
           <!-- post start -->
           <div class="post" id="postid{{post.id}}">
@@ -126,7 +140,8 @@
                 <div class="dropdown" style="position: relative;"> <!-- Added dropdown-right class -->
                   <i class="fa-solid fa-ellipsis" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false"></i>
-                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" id="hire" name="hired_at" onclick="hirePost('{{post.id}}')">Hired</a>
                     {% if current_user.id == post.owner_id %}
                     <a class="dropdown-item" id="edit" name="edited_at" 
                      onclick="editPost('{{post.location}}','{{post.district}}', '{{post.amphoe}}',
@@ -137,13 +152,12 @@
                     <!-- only owner and admin can delete -->
                     {% if current_user.id == post.owner_id or current_user.id == 1 %}
                     <a class="dropdown-item" id="delete" name="deleted_at"
-                    onclick="deletePost('{{post.id}}')">Delete</a>
+                    onclick="deletePost('{{post.id}}')" style="color: red;">Delete</a>
                     {% endif %}
-                    <a class="dropdown-item" id="hire" name="hired_at">Hired</a>
                     <!-- only admin can hide post -->
-                    {% if current_user.id == 1 %} 
-                    <a class="dropdown-item" id="hide" style="color: red;">Hide</a>
-                    {% endif %}
+                    <!-- {% if current_user.id == 1 %} 
+                    <a class="dropdown-item" id="hide" style="color: red;" onclick="hidePost('{{post.id}}')">Hide</a>
+                    {% endif %} -->
                   </div>
                 </div>
               </div>
@@ -169,59 +183,25 @@
               </div>
               <p><b>{{post.message}}</b></p>
             </div>
+            
             <div class="post-options">
               <div class="post-option">
+                {% if post.is_hired == false %}
                 <button type="button" class="btn btn-success" id="no-hired">send resume</button>
                 <!-- hired start -->
-                <button type="button" class="btn btn-success hired" id="hired" disabled>hired</button>
+                {% else %}
+                <button type="button" class="btn btn-success hired" id="hired"  disabled>hired</button>
                 <!-- hired end -->
+                {% endif %}
               </div>
             </div>
           </div>
           <!-- post end -->
           {% endfor %}
-          <!-- undo hide start-->
-          <div class="undo-hide">
-            <p class="close-back">+</p>
-            <p class="undo-text">undo</p>
-            <p class="undo-text hid" style="text-decoration: none;">Hid</p>
-          </div>
-          <!-- undo hide end-->
-
-          <!-- undo delete start-->
-          <div class="undo-delete">
-            <p class="close-back">+</p>
-            <p class="undo-text delete">undo</p>
-            <p class="undo-text deleted" style="text-decoration: none;">Deleted</p>
-          </div>
-          <!-- undo deleted end-->
 
           <!-- post start -->
           <div class="post">
-            <div class="post-top">
-              <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile post-avatar" id="profile">
-              <div class="post-top-info">
-                <h3 id="profile">Wira Junngamdee</h3>
-                <p class="created">27 July at 16:56</p>  <!-- Create at -->
-                <p class="edit">not edit</p>
-              </div>
-            </div>
-            <div class="tag">
-              <span class="tag salary">20,000-30,000</span>
-              <span class="tag province">เชียงใหม่</span>
-              <span class="tag jobType">Full-time</span>
-            </div>
-            <div class="post-bottom">
-              <p>Content in form</p>
-            </div>
-            <div class="post-image">
-              <img src="/static/img/company.jpg" alt="">
-            </div>
-            <div class="post-options">
-              <div class="post-option">
-                <button type="button" class="btn btn-success">send resume</button>
-              </div>
-            </div>
+            
           </div>
           <!-- post end -->
           <!-- เอา script ของหน้า feed ทั้งหมดมาใส่ตรงนี้ -->
@@ -318,11 +298,13 @@
             </form>
           </div> 
       </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
       <script>
         dropdownFunction(); //from board.js
         popupFunction();//from popup.js
         editPost();//from popup.js
         //handle post method to backend
+        
         $('#post-form').submit(function(event){
           event.preventDefault();
           //contain all input to dictionary
@@ -337,7 +319,6 @@
           console.log(formData)
           let url = $('#post-form').attr('action')
           $('#post-btn').click(function(){
-            
           })
           $.post(url, formData, function (callbackData) {
             //refresh #feed-box to new data
@@ -352,6 +333,7 @@
             editPost();//from popup.js
           });
         })
+
       </script>
       <script>
         $(document).ready(function() {
@@ -372,7 +354,7 @@
       </script>
 
        <!-- AJAX -->
-       <script>
+       <!-- <script>
         $(document).ready(function () {
           (function () {
             $('#profile').click(function(event){
@@ -390,7 +372,7 @@
             });
           })();
         });
-      </script>  
+      </script>   -->
     </body>
 </html>
 

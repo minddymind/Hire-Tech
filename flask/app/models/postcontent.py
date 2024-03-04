@@ -29,9 +29,12 @@ class PostContent(db.Model, SerializerMixin):
     edited_at = db.Column(db.DateTime())
     hired_at = db.Column(db.DateTime())
     deleted_at = db.Column(db.DateTime())
+    hide_at = db.Column(db.DateTime())
     #functional
     is_deleted = db.Column(db.Boolean, default=False)
+    delete_by = db.Column(db.Integer, default=None)
     is_hired = db.Column(db.Boolean, default=False)
+    is_hide = db.Column(db.Boolean, default=False)
 
     def __init__(self, owner_id, job_time=None,
     job_name=None, message=None,province=None, salary=None, district=None, amphoe=None, zipcode=None, 
@@ -90,48 +93,5 @@ class PostContent(db.Model, SerializerMixin):
         self.salary = salary
         self.edited_at = datetime.now(timezone.utc)
 
-    def deleted(self, owner_id, job_time,
-    job_name, message,province, salary, district=None, amphoe=None, zipcode=None, 
-    location=None):
-        # check is this post have owner and set value of this
-        #  post related to owner
-        owner = Member.query.get(self.owner_id)
-        if owner:
-            email = owner.email 
-            name = owner.name    
-        self.owner_name = name
-        self.owner_email = email
-        self.job_time = job_time
-        self.job_name = job_name
-        self.message = message
-        self.province = province
-        self.district = district
-        self.amphoe = amphoe
-        self.zipcode = zipcode
-        self.location = location
-        self.salary = salary
-        self.deleted_at = datetime.now(timezone.utc)
-        self.is_deleted = True
 
-    def hired(self, owner_id, job_time,
-    job_name, message,province, salary, district=None, amphoe=None, zipcode=None, 
-    location=None):
-        # check is this post have owner and set value of this
-        #  post related to owner
-        owner = Member.query.get(self.owner_id)
-        if owner:
-            email = owner.email 
-            name = owner.name    
-        self.owner_name = name
-        self.owner_email = email
-        self.job_time = job_time
-        self.job_name = job_name
-        self.message = message
-        self.province = province
-        self.district = district
-        self.amphoe = amphoe
-        self.zipcode = zipcode
-        self.location = location
-        self.salary = salary
-        self.hired_at = datetime.now(timezone.utc)
-        self.is_hired = True
+

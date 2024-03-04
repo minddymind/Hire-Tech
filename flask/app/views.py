@@ -12,6 +12,7 @@ from werkzeug.urls import url_parse
 from sqlalchemy.sql import text
 from flask_login import login_user, login_required, logout_user, current_user
 import requests
+from datetime import datetime, timezone
 from app import app
 from app import db
 from app import login_manager   
@@ -27,20 +28,11 @@ def load_user(user_id):
 @app.route('/api')
 def board_api():
     # contain all post that didn't hired or deleted
-    post_query = PostContent.query.all()
-    post = []
-    for this_post in post_query:
-        if this_post.is_deleted:
-            pass
-        elif this_post.is_hired:
-            pass
-        else:
-            post.append(this_post.to_dict())
+    post_query = PostContent.query.filter_by(is_deleted=False, is_hide=False).order_by(PostContent.created_at).all()
+    post = [this_post.to_dict() for this_post in post_query]
 
     app.logger.debug("board_api: " + str(post))
     hired_post = board_hired().json
-    if hired_post != []:
-        post = post.extend(hired_post)
     # print("POST", post)
     json_form = jsonify(post)
     return json_form
@@ -69,6 +61,19 @@ def board_deleted():
     app.logger.debug("board_api_deleted: " + str(post_deleted))
 
     json_form = jsonify(post_deleted)
+    return json_form
+
+@app.route('/api/hide')
+def board_hid():
+    post_query = PostContent.query.all()
+    post_hide = []
+    for this_post in post_query:
+        if this_post.is_hide:
+            post_hide.append(this_post.to_dict())
+
+    app.logger.debug("board_api_hide: " + str(post_hide))
+
+    json_form = jsonify(post_hide)
     return json_form
 
 @app.route('/')
@@ -142,8 +147,10 @@ def board_delete():
         try:
             #if now user is owner of this post
             post = PostContent.query.get(id_)
-            if post.owner_id == current_user.id:
+            if post.owner_id == current_user.id or current_user.id == 1:
                 post.is_deleted = True
+                post.deleted_at = datetime.now(timezone.utc)
+                post.delete_by = current_user.id
                 db.session.commit()
 
             if  post.is_deleted:
@@ -155,8 +162,33 @@ def board_delete():
            raise
     return board_api()
 
+@app.route('/board/undelete', methods=('GET', 'POST'))
+def board_undelete():
+    app.logger.debug("===== UNDELETE FUNCTION =====")
+    if request.method == 'POST':
+        result = request.form.to_dict()
+        id_ = result.get('id', '')
+        try:
+            #if now user is owner of this post
+            post = PostContent.query.get(id_)
+            if post.owner_id == current_user.id or current_user.id == 1:
+                post.is_deleted = False
+                post.deleted_at = None
+                post.delete_by = None
+                db.session.commit()
+
+            if not post.is_deleted:
+                print("Post has been successfully unmarked from deleted.")
+            else:
+                print("Failed to unmark post from deleted.")
+        except Exception as ex:
+           app.logger.error(f"Error unremoving post with id {id_}: {ex}")
+           raise
+    return board_api()
+
 @app.route('/board/hired', methods=('GET', 'POST'))
 def board_hire():
+
     app.logger.debug("===== HIRED FUNCTION =====")
     if request.method == 'POST':
         result = request.form.to_dict()
@@ -166,6 +198,7 @@ def board_hire():
             post = PostContent.query.get(id_)
             if post.owner_id == current_user.id:
                 post.is_hired = True
+                post.hired_at = datetime.now(timezone.utc)
                 db.session.commit()
 
             if  post.is_deleted:
@@ -175,8 +208,55 @@ def board_hire():
         except Exception as ex:
            app.logger.error(f"Error mark post as hried with id {id_}: {ex}")
            raise
-    return board_api()
+    return redirect(url_for("board"))
 
+# @app.route('/board/hide', methods=('GET', 'POST'))
+# def board_hide():
+#     app.logger.debug("===== HIDE FUNCTION =====")
+#     if request.method == 'POST':
+#         result = request.form.to_dict()
+#         #get the post_id
+#         id_ = result.get('id', '')
+#         try:
+#             #if now user is admin
+#             post = PostContent.query.get(id_)
+#             if current_user.id == 1:
+#                 post.is_hide = True
+#                 post.hide_at = datetime.now(timezone.utc)
+#                 db.session.commit()
+
+#             if  post.is_hide:
+#                 print("Post has been successfully marked as hide.")
+#             else:
+#                 print("Failed to mark Post as hide.")
+#         except Exception as ex:
+#            app.logger.error(f"Error mark post as hide with id {id_}: {ex}")
+#            raise
+#     return board_api()
+
+# @app.route('/board/unhide', methods=('GET', 'POST'))
+# def board_unhide():
+    app.logger.debug("===== UNHIDE FUNCTION =====")
+    if request.method == 'POST':
+        result = request.form.to_dict()
+        #get the post_id
+        id_ = result.get('id', '')
+        try:
+            #if now user is admin
+            post = PostContent.query.get(id_)
+            if current_user.id == 1:
+                post.is_hide = False
+                post.hide_at = None
+                db.session.commit()
+
+            if  post.is_hide:
+                print("Post has been successfully unmarked from hide.")
+            else:
+                print("Failed to unmark Post from hide.")
+        except Exception as ex:
+           app.logger.error(f"Error unmark post from hide with id {id_}: {ex}")
+           raise
+    return board_api()
 
 @app.route('/profile')
 def profile():
@@ -282,15 +362,12 @@ def signup():
 @login_required
 def logout():
     user = Member.query.get(current_user.id)
-    type_login = user.login_type
-    tk = user.user_token['access_token']
+    # type_login = user.login_type
     # print("ACTK", user.user_token)
     # print("TK",tk)
     # print("TYPELOGIN", type_login)
 
     # revoke for unbond account from google
-    if type_login == 'google':
-        google_revoke(tk)
     
     logout_user()
     return redirect(url_for('home'))
@@ -344,8 +421,7 @@ def google_auth():
                            password=generate_password_hash(
                                password, method='sha256'),
                             avatar_url=avatar_url,
-                            login_type='google',
-                            user_token=token
+                            login_type='google'
                            )
         db.session.add(new_user)
         db.session.commit()
@@ -399,8 +475,7 @@ def github_auth():
                            password=generate_password_hash(
                                password, method='sha256'),
                             avatar_url=avatar_url,
-                            login_type='github',
-                            user_token='github'
+                            login_type='github'
                            )
         db.session.add(new_user)
         db.session.commit()

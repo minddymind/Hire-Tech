@@ -16,21 +16,19 @@ class Member(db.Model, UserMixin):
     password = db.Column(db.String(100))
     avatar_url = db.Column(db.String(100))
     login_type = db.Column(db.String)
-    user_token = db.Column(MutableDict.as_mutable(JSONB))
+    # user_token = db.Column(MutableDict.as_mutable(JSONB))
 
-    def __init__(self, email, name, password, login_type, avatar_url, user_token=None):
+    def __init__(self, email, name, password, login_type, avatar_url):
         self.email = email
         self.name = name
         self.password = password
         self.login_type = login_type
         self.avatar_url = avatar_url
-        self.user_token = user_token
         
     def update(self, update_email, update_name, update_password,
-    update_avatar_url,login_type=None, user_token=None):
+    update_avatar_url,login_type=None):
         self.email = update_email
         self.name = update_name
         self.password = update_password       
         self.avatar_url = update_avatar_url
         self.login_type = login_type
-        self.user_token = user_token

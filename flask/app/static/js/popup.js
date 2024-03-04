@@ -5,6 +5,8 @@ function popupFunction(){
   });
   document.querySelector('.close').addEventListener('click', function(){
     document.querySelector('.bg-modal').style.display = 'none';
+    $('#post-form')[0].reset();
+    $('#entryid').val('')
   });
   document.getElementById('post-btn').addEventListener('click', function(){
     document.querySelector('.bg-modal').style.display = 'none';
@@ -31,7 +33,4 @@ function editPost(location, district, amphoe, province, zipcode, job_name,
   $('#entryid').val(id)
   $('#owner_email').val(owner_email);
   $('#owner_id').val(owner_id);
-
-}
-
-;
+};

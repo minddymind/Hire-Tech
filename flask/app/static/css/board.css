@@ -358,7 +358,7 @@ ul.links {
 #hired {
   background-color:rgb(138, 138, 138);
   border: none;
-  display: none;
+  /* display: none; */
 }
 
 #hired:hover {
