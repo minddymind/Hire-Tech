@@ -1,5 +1,3 @@
-
-
 //for dropdown menu
 function dropdownFunction(){
     $(".dropdown").click(function() {
