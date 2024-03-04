@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
     <head>
         <!-- Required meta tags -->
         <meta charset="UTF-8">
@@ -19,6 +19,7 @@
 
         <!-- Style sheet-->
         <link rel="stylesheet" href="/static/css/home.css">
+        <!-- <link rel="stylesheet" href="/static/css/promotes.css"> -->
 
         <!-- Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
@@ -47,16 +48,42 @@
                 <li><a href="/login">Log in</a></li>
                 <li><a href="/signup">Sign up</a></li>
               </div>
-            </div>
-
-            
+            </div>  
         </nav>
 
         <div class="text-box-container">
             <h1 class="writer"><b>Welcome to HireTech!</b></h1>
             <h6>click get start to find job or find employer now</h6>
             <a href="/board"><button type="button" class="btn btn-warning btn"><span>Get Start</span></button></a>
-        </div>          
+        </div>  
+        
+        <div class="useweb-container">
+          <div class="useweb animated">
+            <div class="useweb-top left">
+              <h2>How to find partners?</h2>   
+              <div class="howtouse left">
+                <p>post</p>
+                <p>check email</p>
+              </div>
+              <div class="icons left">
+                <div class="material-icons"><img src="/static/icon/post.png" alt=""></div>
+                <div class="material-icons"><img src="/static/icon/tick.png" alt=""></div>
+              </div>
+            </div>
+        
+            <div class="useweb-top right">
+              <h2>How to find jobs?</h2>
+              <div class="howtouse">
+                <p>search</p>
+                <p>send resume</p>
+              </div>
+              <div class="icons">
+                <div class="material-icons"><img src="/static/icon/loupe.png" alt=""></div>
+                <div class="material-icons"><img src="/static/icon/button.png" alt=""></div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="slide">
           <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -94,28 +121,33 @@
                   <span class="visually-hidden">Next</span>
               </button>
           </div>
-
-
           <div class="text-box">
             <h4>Example 10 Jobs for Tech in Thailand</h4>
             <!-- <h4>in Thailand</h4> -->
-            <h6>1. Software Developer</h6>
+            <h6>1. Data Analyst</h6>
             <h6>2. UX/UI Designer</h6>
-            <h6>3. Data Analyst</h6>
-            <h6>4. Data Scientist</h6>
+            <h6>3. Product Manager</h6>
+            <h6>4. Project Manager</h6>
             <h6>5. Cyber Security</h6>
             <h6>6. Software Engineer</h6>
-            <h6>7. Product Manager</h6>
+            <h6>7. Data Scientist</h6>
             <h6>8. Software Tester</h6>
             <h6>9. IT Support</h6>
             <h6>10. DevOps</h6>
           </div>
         </div>
 
-        <div class="description">
-          งานที่เหมาะกับคนที่ชอบเขียน code
+        <!-- <div class="hero-image">
+          <div class="hero-text">
+            <h1 style="font-size:50px">งานที่เหมาะกับคนที่ชอบเขียน code</h1>
+            <p>มาทำความรู้จักเกี่ยวกับอาชีพที่กำลังมาแรงในยุคใหม่ จะเป็นอาชีพสายอื่นไปไม่ได้เลยนอกจาก สาย Tech <br>มารู้จักกันเพิ่มขึ้นกันเถอะ!</p>
+            <button>read more</button>
+          </div>
+        </div> -->
+        <div class="hero-text">
+          <h3 style="font-family: 'Kanit', sans-serif;">มาทำความรู้จักเกี่ยวกับอาชีพสาย Technology ที่กำลังมาแรงในยุคใหม่!</h3>
+          <h1 style="font-family: 'Kanit', sans-serif;">ในปี 2024</h1>
         </div>
-
         <div class="card-container">
           <section>
             <div class="swiper mySwiper1 container">
@@ -273,7 +305,7 @@
           <!-- Initialize Swiper -->
           <script>
             var swiper1 = new Swiper(".mySwiper1", { 
-  // ตั้งชื่อเป็น swiper1 เพื่อแยกจาก swiper2
+            // ตั้งชื่อเป็น swiper1 เพื่อแยกจาก swiper2
               slidesPerView: 3,
               spaceBetween: 30,
               slidesPerGroup: 3,
@@ -290,11 +322,14 @@
             });
           </script>
         </div>  
+        <!-- <div class="hero-image">
+          <div class="hero-text">
+            <h1>งานที่เหมาะกับคนที่ชอบเขียน code</h1>
+            <p>มาทำความรู้จักเกี่ยวกับอาชีพที่กำลังมาแรงในยุคใหม่ จะเป็นอาชีพสายอื่นไปไม่ได้เลยนอกจาก สาย Tech <br>มารู้จักกันเพิ่มขึ้นกันเถอะ!</p>
+            <button>read more</button>
+          </div>
+        </div> -->
 
-        
-        <div class="description">
-          งานที่เหมาะกับคนที่ชอบพูดคุย
-        </div>
         <div class="card-container">
           <section>
             <div class="swiper mySwiper2-class container">
@@ -303,7 +338,51 @@
               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
             
               <div class="swiper-wrapper content">
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                    <img src= "/static/img/Web_Developer.jpg">
+                    </div>
         
+                    <div class="name-profession">
+                      <span class="name">Web Developer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/web-developer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                    <img src= "/static/img/DevOps_Engineer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">DevOps engineer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/articles/what-is-devops"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide card">
+                  <div class="card-content">
+                    <div class="image">
+                  <img src= "/static/img/UX_UI_ Designer.jpg">
+                    </div>
+        
+                    <div class="name-profession">
+                      <span class="name">UX/UI Designer</span>
+                    </div>
+        
+                    <div class="button">
+                      <a href="https://www.coursera.org/in/articles/what-does-a-ux-designer-do"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
+                    </div>
+                  </div>
+                </div>
                 <div class="swiper-slide card">
                   <div class="card-content">
                     <div class="image">
@@ -319,6 +398,7 @@
                     </div>
                   </div>
                 </div>
+                
                 <div class="swiper-slide card">
                   <div class="card-content">
                     <div class="image">
@@ -379,21 +459,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="swiper-slide card">
-                  <div class="card-content">
-                    <div class="image">
-                    <img src= "/static/img/Web_Developer.jpg">
-                    </div>
-        
-                    <div class="name-profession">
-                      <span class="name">Web Developer</span>
-                    </div>
-        
-                    <div class="button">
-                      <a href="https://www.coursera.org/articles/web-developer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
-                    </div>
-                  </div>
-                </div>
+                
                 <div class="swiper-slide card">
                   <div class="card-content">
                     <div class="image">
@@ -406,36 +472,6 @@
         
                     <div class="button">
                       <a href="https://www.coursera.org/articles/video-game-designer"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide card">
-                  <div class="card-content">
-                    <div class="image">
-                  <img src= "/static/img/UX_UI_ Designer.jpg">
-                    </div>
-        
-                    <div class="name-profession">
-                      <span class="name">UX/UI Designer</span>
-                    </div>
-        
-                    <div class="button">
-                      <a href="https://www.coursera.org/in/articles/what-does-a-ux-designer-do"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
-                    </div>
-                  </div>
-                </div>
-                <div class="swiper-slide card">
-                  <div class="card-content">
-                    <div class="image">
-                    <img src= "/static/img/DevOps_Engineer.jpg">
-                    </div>
-        
-                    <div class="name-profession">
-                      <span class="name">DevOps engineer</span>
-                    </div>
-        
-                    <div class="button">
-                      <a href="https://www.coursera.org/articles/what-is-devops"><button type="button" class="btn btn-warning btn"><span>About us</span></button></a>
                     </div>
                   </div>
                 </div>
@@ -469,7 +505,7 @@
           });
           </script>
         </div>  
-           
         <div class="footer"></div>
+        <!-- <script src="/static/js/animation.js"></script> -->
     </body>
 </html>

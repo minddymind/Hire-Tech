@@ -53,7 +53,7 @@ nav.sticky {
 .user-profile {
   border-radius: 50%;
   width: 40px;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
   cursor: pointer;
 }
 
@@ -76,30 +76,79 @@ nav.sticky {
   background: linear-gradient(90deg, rgba(0,17,79,1) 0%, rgba(51,102,204,1) 100%);
 }
 
-
 .nav-left {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.nav-search {
-  display: flex;
-  align-items: center;
-  background-color: #eff2f5;
-  padding: 2px;
-  margin-left: 10px;
-  border-radius: 999px;
+.wrapper {
+  max-width: 450px;
+  /* margin: auto; */
 }
 
-.material-icons {
-  margin-left: 10px;
+.wrapper .search-input {
+  position: relative;
+  background-color: #fff;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
 }
 
-.nav-search input {
+.search-input input{
+  height: 40px;
+  width: 97%;
+  outline: none;
   border: none;
-  background-color: transparent;
-  outline-width: 0;
+  border-radius: 5px;
+  padding: 0 60px 0 20px;
+  font-size: 18px;
+  /* box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1); */
+}
+
+.search-input .material-icons {
+  height: 55px;
+  width: 55px;
+  line-height: 55px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.search-input .autocom-box {
+  padding: 0px;
+  max-height: 280px;
+  overflow-y: auto;
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.search-input.active .autocom-box{
+  padding: 10px 8px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.autocom-box li {
+  list-style: none;
+  padding: 8px 12px;
+  width: 100%;
+  cursor: default;
+  border-radius: 3px;
+  /* color: #333; */
+  display: none
+}
+
+.search-input .autocom-box li{
+  display: block;
+}
+
+.autocom-box li:hover {
+  background-color: #efefef;
 }
 
 .nav-right {
@@ -161,7 +210,7 @@ ul.links {
   display: flex;
   flex-direction: column;
   padding: 25px 10px;
-  flex: 0.33;
+  flex: 0.18;
   /* float: left; */
 }
 
@@ -193,7 +242,7 @@ ul.links {
   background-color: white;
   border-radius: 15px;
   box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
-  width: 100%;
+  width: 90%;
 }
 
 .message-box-top {
@@ -230,7 +279,7 @@ ul.links {
 /* post */
 .post {
   font-family: 'Kanit', sans-serif;
-  width: 100%;
+  width: 90%;
   margin-top: 15px;
   border-radius: 15px;
   background-color: white;
@@ -358,7 +407,7 @@ ul.links {
 #hired {
   background-color:rgb(138, 138, 138);
   border: none;
-  /* display: none; */
+  display: none;
 }
 
 #hired:hover {
@@ -485,7 +534,7 @@ a:hover {
   position: relative;
 }
 
-#place, #district, #amphoe, #province, #zipcode {
+#location, #district, #amphoe, #province, #zipcode {
   width: 90%;
 }
 
@@ -502,6 +551,7 @@ input {
 }
 
 input:focus { 
+  outline: 0;
   border: none;
   border-bottom: 1px solid #333;
 }
@@ -572,6 +622,10 @@ textarea {
 
 textarea:focus {
   outline: none;
+}
+
+#message {
+  font-family: 'Kanit' sans-serif;
 }
 
 .close {
