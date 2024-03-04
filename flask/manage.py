@@ -21,8 +21,7 @@ def seed_db():
         name="admin", 
         password=generate_password_hash('1234',
                                 method='sha256'),
-        avatar_url='https://ui-avatars.com/api/?name=\
-        Admin&background=83ee03&color=98ABEE',
+        avatar_url='https://avatar.iran.liara.run/public/29',
         login_type='hirethec'))
     
     db.session.commit()

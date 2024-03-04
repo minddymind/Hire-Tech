@@ -68,13 +68,10 @@
         </div>
         <h2>{{owner_name}}</h2>
         <p name="email">{{owner_email}}</p>
-        <div class="content">
-          <form action="">
-            <input type="text" name="descript" class="descript" placeholder="describe your self" not required></input>
-            <br>
-            <button type="submit" name="submit" class="btn btn-outline-danger" id="ok" style="width: 25%; display: none;">cancel</button>
-            <button type="submit" name="submit" class="btn btn-primary" id="cancel" style="width: 25%; display: none;">submit</button>
-          </form>
+        <div class="content" id="about_me">
+          <div action="">
+            <p>{{owner_aboutme}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -233,7 +230,7 @@
       //   'border': '2px solid red',
       //   'background-color': 'lightgray'
       // });
-      
+
     $(document).ready(function(){
       $('.toggle_btn').click(function(){
           $('.dropdown_menu').toggleClass('open');

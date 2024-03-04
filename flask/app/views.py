@@ -280,7 +280,10 @@ def oprofile():
         user_name = user.name
         user_email =user.email
         user_avatar = user.avatar_url
-        return render_template('oprofile.html',owner_post=owner_post,owner_name=user_name,owner_email=user_email,owner_avatar=user_avatar)
+        user_describe = user.about_me
+        return render_template('oprofile.html',owner_post=owner_post,
+        owner_name=user_name,owner_email=user_email,
+        owner_avatar=user_avatar,owner_aboutme=user_describe)
     else:  # Handle the GET request
         # You might want to redirect to another page or return an error response
         return "Invalid request"
@@ -372,10 +375,10 @@ def signup():
             if user:
                 # if email was exists. send user to sign up again
 
-                flash('Email address already exists')
+                # flash('Email address already exists')
                 return redirect(url_for('signup'))
             elif password != cfpassword:
-                flash("password doesn't match")
+                # flash("password doesn't match")
                 return redirect(url_for('signup'))
         #Section 3 add new user after validated all
         app.logger.debug("preparing to add")
