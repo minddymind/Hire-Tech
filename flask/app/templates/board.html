@@ -57,7 +57,7 @@
           <div class="nav-right">
             <div class="nav-info right" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account">
               <a href="/profile">
-                <img src="/static/img/tweeterUserSmall.png" alt="user-profile" class="user-profile">
+                <img src="{{current_user.avatar_url}}" alt="user-profile" class="user-profile">
                 <span id="name">{{current_user.name}}</span>
               </a>
             </div>
@@ -124,9 +124,9 @@
           <!-- post start -->
           <div class="post" id="postid{{post.id}}">
             <div class="post-top">
-              <a href="/profile"><img src="{{post.owner_avatar}}" alt="user-profile" class="user-profile post-avatar" id="profile"></a>
+              <a onclick="gotoprofile('{{post.owner_id}}')"><img src="{{post.owner_avatar}}" alt="user-profile" class="user-profile post-avatar" id="profile"></a>
               <div class="post-top-info">
-                <a href="/profile"><h3 id="profile">{{post.owner_name}} <span class="text-muted">- {{post.owner_email}}</span></h3></a> 
+                <a onclick="gotoprofile('{{post.owner_id}}')"><h3 id="profile">{{post.owner_name}} <span class="text-muted">- {{post.owner_email}}</span></h3></a> 
                 <!-- Create at -->
                 <p class="created">{{post.created_at[:10]}} <span id="postC-at-{{ post['id'] }}" ></span></p>
                 {% if post.edited_at != None %}
@@ -139,10 +139,12 @@
               <div class="dropdown-menu-container">
                 <div class="dropdown" style="position: relative;"> <!-- Added dropdown-right class -->
                   <i class="fa-solid fa-ellipsis" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false"></i>
-                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                  aria-expanded="false"></i>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    {% if post.is_hired == false %}
                     <a class="dropdown-item" id="hire" name="hired_at" onclick="hirePost('{{post.id}}')">Hired</a>
-                    {% if current_user.id == post.owner_id %}
+                    {% endif %}
+                    {% if current_user.id == post.owner_id and post.is_hired == false %}
                     <a class="dropdown-item" id="edit" name="edited_at" 
                      onclick="editPost('{{post.location}}','{{post.district}}', '{{post.amphoe}}',
                     '{{post.province}}', '{{post.zipcode}}','{{post.job_name}}', '{{post.salary}}',
@@ -183,7 +185,6 @@
               </div>
               <p><b>{{post.message}}</b></p>
             </div>
-            
             <div class="post-options">
               <div class="post-option">
                 {% if post.is_hired == false %}
@@ -204,7 +205,6 @@
             
           </div>
           <!-- post end -->
-          <!-- เอา script ของหน้า feed ทั้งหมดมาใส่ตรงนี้ -->
         </div>
         <!-- feed end -->
 
@@ -316,21 +316,19 @@
               formData[key] = val;
             }
           })
-          console.log(formData)
+          //console.log(formData)
           let url = $('#post-form').attr('action')
           $('#post-btn').click(function(){
           })
           $.post(url, formData, function (callbackData) {
             //refresh #feed-box to new data
             //callbackData = ajaxTime(callbackData)
-            const parsedHTMLData = $.parseHTML(callbackData);
+            //the callbackData is html because the return of /board is html
+            //const parsedHTMLData = $.parseHTML(callbackData);
             //console.log(parsedHTMLData)
-            const feedbox = $(parsedHTMLData).find('#feed-box')
-            $('#feed-box').html(feedbox.html())
-            calculateTime(); //from utility.js
-            dropdownFunction(); //from board.js
-            popupFunction();//from popup.js
-            editPost();//from popup.js
+            //const feedbox = $(parsedHTMLData).find('#feed-box')
+            //$('#feed-box').html(feedbox.html())
+            refresh();
           });
         })
 
@@ -352,27 +350,6 @@
           });
         });
       </script>
-
-       <!-- AJAX -->
-       <!-- <script>
-        $(document).ready(function () {
-          (function () {
-            $('#profile').click(function(event){
-              event.preventDefault();
-              // $('#login-box').html('http://localhost:30000/signup')
-              $.ajax ({
-                url : '/profile',
-                method: 'GET',
-                success: function(data){
-                  const parsedHTML = $.parseHTML(data);
-                  const selected = $(parsedHTML).find('.body');
-                  $('.main-body').html(selected.html());
-                }
-              });
-            });
-          })();
-        });
-      </script>   -->
     </body>
 </html>
 

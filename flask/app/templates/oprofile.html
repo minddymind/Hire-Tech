@@ -16,6 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
     crossorigin="anonymous">
+
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
@@ -25,10 +26,9 @@
     <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
     <link rel="stylesheet" href="/static/css/board.css">
     <link rel="stylesheet" href="/static/css/profile.css">
-    <!-- <script src="/static/js/popup.js"></script> -->
+    <script src="/static/js/popup.js"></script>
     <script src="/static/js/board.js"></script>
     <script src="/static/js/utility.js"></script>
-    <script src="/static/js/popup.js"></script>
 </head>
 <body>
   <div class="navbar">
@@ -63,30 +63,30 @@
     <div class="cols-container">
       <div class="left-col">
         <div class="img-container">
-          <img src="{{current_user.avatar_url}}" alt="user-profile" class="user-profile" name="avatar" id="avatar" id="profile">
+          <img src="{{owner_avatar}}" alt="user-profile" class="user-profile" name="avatar" id="avatar" id="profile">
           <span></span>
         </div>
-        <h2>{{current_user.name}}</h2>
-        <p name="email">{{current_user.email}}</p>
+        <h2>{{owner_name}}</h2>
+        <p name="email">{{owner_email}}</p>
         <div class="content">
-          <form id="describe-form" action="/describe">
-            <input type="text"id="descript" name="descript" class="descript" placeholder="describe your self" value="{{current_user.about_me}}"></input>
+          <form action="">
+            <input type="text" name="descript" class="descript" placeholder="describe your self" not required></input>
             <br>
-            <button name="submit" class="btn btn-outline-danger" id="ok" style="width: 25%; display: none;">cancel</button>
+            <button type="submit" name="submit" class="btn btn-outline-danger" id="ok" style="width: 25%; display: none;">cancel</button>
             <button type="submit" name="submit" class="btn btn-primary" id="cancel" style="width: 25%; display: none;">submit</button>
           </form>
         </div>
       </div>
     </div>
   <hr>
-  <div class="recent">Your recent post</div>
+  <div class="recent">Recent post</div>
   <!-- main-body start -->
   <div class="main-body" style="margin: auto; width: 95%; justify-content: center;">
   <!-- feed start -->
     <div class="feed" style="width: 100%; padding: 0;">
-      {% for post in user_post %}
+      {% for post in owner_post %}
     <!-- post start -->
-      <div class="post" id="postid{{post.id}}">
+      <div class="post">
         <div class="post-top">
           <a href="/profile"><img src="{{post.owner_avatar}}" alt="user-profile" class="user-profile post-avatar" id="profile"></a>
           <div class="post-top-info">
@@ -183,62 +183,57 @@
   <div class="footer" style="width: 100%; height: 50px;"></div>
 
   <script>
-    calculateTime();
-    dropdownFunction();
-    
-    $("#describe-form").submit(function(event){
-      event.preventDefault()
-    })
-    $(".descript").click(function(e) {
-      e.preventDefault()
-      // $(this).css({"height": "20px"})
-      $("#ok").show();
-      $("#cancel").show();
-    }); 
-
-    $("#cancel").click(function(e){
-      e.preventDefault();
-      $("#ok").hide();
-      $("#cancel").hide();
-      let formData = {};
-      $(":input").each(function () {
-        var key = $(this).attr('name');
-        var val = $(this).val();
-        if (key != 'submit' && key != 'searchbar') {
-          formData[key] = val;
-        }
-      })
-      formData['owner_id']= '{{current_user.id}}'
-      let url = '/describe'
-      $.post(url,formData, function(){
-        refreshprofile(url, formData)
-      })
-    });
-      
-    $("#ok").click(function(e){
-      e.preventDefault()
-      $(".descript").val('');
-      $(this).hide();
-      $("#cancel").hide();
-      url='/describe'
-      formData = {}
-      formData['message'] = $('.descript')
-      console.log('aaa')
-    });
-
-    function deletePost(post_id){
-      // $('#entryid').val('')
-      var url = "board/delete"
-      var formData = { 'id': post_id };
-      $.post(url, formData, function (callbackData) {
-        refreshprofile(url,formData);
-        console.log(url, formData)
+    $(document).ready(function() {
+      $(".dropdown").click(function(e) {
+        e.preventDefault();
+        $(this).find(".dropdown-menu").toggleClass("show");
       });
-    }
+
+      // Close the dropdown menu when clicking outside of it
+      $(document).click(function(e) {
+        if (!$(e.target).closest('.dropdown').length) {
+          $(".dropdown-menu").removeClass("show");
+        }
+      });
+
+      $(".dropdown-item").click(function(e) {
+        e.preventDefault();
+        if ($(this).text().trim() === "Hide") {
+          $(this).closest(".post").hide();
+          $('.undo-hide').show();
+        }
+        if ($(this).text().trim() === "Delete") {
+          $(this).closest(".post").hide();
+          var postId = $(this).closest(".post").attr("id");
+
+          $('.undo-delete').show();
+        }
+        if ($(this).text().trim() === "Hired") {
+          $('#no-hired').hide();
+          $('#hired').show();
+        }
+      });
+
+      $(".undo-text").click(function(e) {
+        e.preventDefault();
+        $(".post").show();
+        $(".undo-hide").hide();
+        $(".undo-delete").hide();
+      });
+
+      $(".close-back").click(function(e) {
+        e.preventDefault();
+        $(".undo-hide").hide();
+        $(".undo-delete").hide();
+      });
+    });
+
     
-
-
-    //hamburger menu
+      // $(".descript").css({
+      //   'border': '2px solid red',
+      //   'background-color': 'lightgray'
+      // });
+      
     $(document).ready(function(){
       $('.toggle_btn').click(function(){
           $('.dropdown_menu').toggleClass('open');
@@ -252,7 +247,7 @@
           }
       });
     });
-  
+
   </script>
 </body>
 </html>

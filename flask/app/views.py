@@ -160,7 +160,7 @@ def board_delete():
         except Exception as ex:
            app.logger.error(f"Error removing post with id {id_}: {ex}")
            raise
-    return board_api()
+    return (board_api())
 
 @app.route('/board/undelete', methods=('GET', 'POST'))
 def board_undelete():
@@ -208,7 +208,7 @@ def board_hire():
         except Exception as ex:
            app.logger.error(f"Error mark post as hried with id {id_}: {ex}")
            raise
-    return redirect(url_for("board"))
+    return board_api()
 
 # @app.route('/board/hide', methods=('GET', 'POST'))
 # def board_hide():
@@ -259,9 +259,42 @@ def board_hire():
     return board_api()
 
 @app.route('/profile')
+@login_required
 def profile():
-    return render_template("profile.html")
+    query = (PostContent.query.filter_by(owner_id=current_user.id,is_deleted=False)
+    .order_by(PostContent.created_at.desc()))
+    user_post = [this_post.to_dict() for this_post in query]
+    
+    return render_template("profile.html",user_post=user_post)
 
+@app.route('/oprofile', methods=('GET', 'POST'))
+def oprofile():
+
+    if request.method == 'POST':
+        result = request.form.to_dict()
+        owner = result.get('id', '')
+        post_query = PostContent.query.filter_by(owner_id=owner,is_deleted=False, is_hide=False).order_by(PostContent.created_at).all()
+        owner_post = [this_post.to_dict() for this_post in post_query]
+        print(owner_post)
+        user = Member.query.get(owner)
+        user_name = user.name
+        user_email =user.email
+        user_avatar = user.avatar_url
+        return render_template('oprofile.html',owner_post=owner_post,owner_name=user_name,owner_email=user_email,owner_avatar=user_avatar)
+    else:  # Handle the GET request
+        # You might want to redirect to another page or return an error response
+        return "Invalid request"
+
+@app.route('/describe',methods=('GET', 'POST'))
+def describe():
+    if request.method == 'POST':
+        result = request.form.to_dict()
+        owner = result.get('owner_id', '')
+        about_me = result.get('descript','')
+        user = Member.query.get(owner)
+        user.about_me = about_me
+        db.session.commit()
+        return board_api()
 @app.route('/db')
 def db_connection():
 # check db connection
