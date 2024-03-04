@@ -47,11 +47,6 @@
         <div class="navbar">
           <div class="nav-left">
             <div class="logo"><a href='/'>HireThec</a></div>
-            <div class="nav-search">
-              <span class="material-icons"><i class="fa-solid fa-magnifying-glass"></i></span>
-              <input name="searchbar" type="text" id="input-box" placeholder="Search" autocomplete="off">
-              <!-- <button>search</button> -->
-            </div>
           </div>
 
           <div class="nav-right">
@@ -94,6 +89,50 @@
               <h4 id="profile">{{current_user.name}}</h4></a>
             </div>
           </div>
+          <!-- <div class="sidebar-row">
+            <h4>Top 5 provices with the most job openings</h4>
+          </div>
+          <div class="sidebar-row">
+            <div class="nav-info provice">
+              <div class="province-name" name="provice"><h4>ประจวบคีรีขันธ์</h4></div>
+            </div>
+            <div class="nav-info count">
+              <div class="count" name="count">count</div>
+            </div>
+          </div>
+          <div class="sidebar-row">
+            <div class="nav-info provice">
+              <div class="province-name" name="provice"><h4>นครราชสีมา</h4></div>
+            </div>
+            <div class="nav-info count">
+              <div class="count" name="count">count</div>
+            </div>
+          </div>
+          <div class="sidebar-row">
+            <div class="nav-info provice">
+              <div class="province-name" name="provice"><h4>นครราชสีมา</h4></div>
+            </div>
+            <div class="nav-info count">
+              <div class="count" name="count">count</div>
+            </div>
+          </div>
+          <div class="sidebar-row">
+            <div class="nav-info provice">
+              <div class="province-name" name="provice"><h4>นครราชสีมา</h4></div>
+            </div>
+            <div class="nav-info count">
+              <div class="count" name="count">count</div>
+            </div>
+          </div>
+          <div class="sidebar-row">
+            <div class="nav-info provice">
+              <div class="province-name" name="provice"><h4>นครราชสีมา</h4></div>
+            </div>
+            <div class="nav-info count">
+              <div class="count" name="count">count</div>
+            </div>
+          </div>
+        </div> -->
         </div>
         <!-- sidebar end -->
         <!-- feed start -->
@@ -171,7 +210,9 @@
             </div>
             <div class="post-options">
               <div class="post-option">
-                <button type="button" class="btn btn-success" id="no-hired">send resume</button>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{post.email}}&su=subject_here&body=body_here" target="_blank">
+                  <button type="button" class="btn btn-success" id="no-hired">send resume</button>
+                </a>
                 <!-- hired start -->
                 <button type="button" class="btn btn-success hired" id="hired" disabled>hired</button>
                 <!-- hired end -->
@@ -224,7 +265,6 @@
             </div>
           </div>
           <!-- post end -->
-          <!-- เอา script ของหน้า feed ทั้งหมดมาใส่ตรงนี้ -->
         </div>
         <!-- feed end -->
 
@@ -232,50 +272,19 @@
         
         <!-- sidebar start -->
         <div class="sidebar right">
-          <div class="sidebar-row">
-            <h4>Top 5 provices with the most job openings</h4>
-          </div>
-          <div class="sidebar-row">
-            <div class="nav-info provice">
-              <div class="province-name" name="provice"><h4>ประจวบคีรีขันธ์</h4></div>
-            </div>
-            <div class="nav-info count">
-              <div class="count" name="count">count</div>
-            </div>
-          </div>
-          <div class="sidebar-row">
-            <div class="nav-info provice">
-              <div class="province-name" name="provice"><h4>นครราชสีมา</h4></div>
-            </div>
-            <div class="nav-info count">
-              <div class="count" name="count">count</div>
+          <div class="wrapper">
+            <div class="search-input">
+              <input name="searchbar" type="text" id="input-box" placeholder="Search">
+              <div class="autocom-box" id="autocom-box">
+                <li>Backend Developer</li>
+                <li>Data Analyst</li>
+                <li>DevOps Engineer</li>
+                <li>IT Project Manager</li>
+                <li>Software QA Manager</li>
+              </div>
+              <div class="material-icons"><i class="fa-solid fa-magnifying-glass"></i></div>
             </div>
           </div>
-          <div class="sidebar-row">
-            <div class="nav-info provice">
-              <div class="province-name" name="provice"><h4>นครราชสีมา</h4></div>
-            </div>
-            <div class="nav-info count">
-              <div class="count" name="count">count</div>
-            </div>
-          </div>
-          <div class="sidebar-row">
-            <div class="nav-info provice">
-              <div class="province-name" name="provice"><h4>นครราชสีมา</h4></div>
-            </div>
-            <div class="nav-info count">
-              <div class="count" name="count">count</div>
-            </div>
-          </div>
-          <div class="sidebar-row">
-            <div class="nav-info provice">
-              <div class="province-name" name="provice"><h4>นครราชสีมา</h4></div>
-            </div>
-            <div class="nav-info count">
-              <div class="count" name="count">count</div>
-            </div>
-          </div>
-        </div>
         <!-- sidebar end -->
       </div>
       <!-- main-body end -->
@@ -318,6 +327,13 @@
             </form>
           </div> 
       </div>
+      <script src="/static/js/suggestions.js"></script> 
+      <script src="/static/js/autocom.js"></script> 
+      <script>
+        $('#input-box').click(function() {
+          $('#autocom-box').show();
+        })
+      </script>
       <script>
         dropdownFunction(); //from board.js
         popupFunction();//from popup.js
@@ -390,7 +406,7 @@
             });
           })();
         });
-      </script>  
+      </script> 
     </body>
 </html>
 
