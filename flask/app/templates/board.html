@@ -141,7 +141,7 @@
                   <i class="fa-solid fa-ellipsis" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false"></i>
                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    {% if post.is_hired == false %}
+                    {% if post.is_hired == false and current_user.id == post.owner_id %}
                     <a class="dropdown-item" id="hire" name="hired_at" onclick="hirePost('{{post.id}}')">Hired</a>
                     {% endif %}
                     {% if current_user.id == post.owner_id and post.is_hired == false %}
