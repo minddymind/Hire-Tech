@@ -701,9 +701,9 @@ textarea:focus {
 		width: 200px;
 	}
 
-   /* .nav-search {
-    display: none;
-  } */
+  .message-box {
+    width: 400px;
+  }
 
   .sidebar-row {
     display: none;
@@ -713,6 +713,10 @@ textarea:focus {
     width: 400px;
     justify-content: center;
   } 
+
+  .search-input {
+    display: none;
+  }
 
   .nav-info.right {
     display: none;
@@ -733,6 +737,10 @@ textarea:focus {
     left: 55%;
 		width: 200px;
 	}
+  
+  .message-box {
+    width: 400px;
+  }
 
   /* .nav-search {
     display: none;
@@ -760,7 +768,7 @@ textarea:focus {
     margin-right: 10px;
   }
 
-  .nav-search {
-    width: 220px;
+  .search-input {
+    display: none;
   }
 }
