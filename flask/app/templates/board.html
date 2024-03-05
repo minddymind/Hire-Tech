@@ -234,20 +234,20 @@
             <form id='post-form' action="">
               <label for="location">สถานที่ตั้ง</label>
               <div style="display: grid; grid-template-columns: auto auto;">
-                <input required name="location" type="text" id="location" placeholder="ที่อยู่">
-                <input required name="district"  type="text" id="district" placeholder="ตำบล">
-                <input required name="amphoe" type="text" id="amphoe" placeholder="อำเภอ">
-                <input required name="province" type="text" id="province" placeholder=จังหวัด>
-                <input required name="zipcode" type="text" id="zipcode" placeholder="รหัสไปรษณีย์">
+                <input  name="location" type="text" id="location" placeholder="ที่อยู่">
+                <input  name="district"  type="text" id="district" placeholder="ตำบล">
+                <input  name="amphoe" type="text" id="amphoe" placeholder="อำเภอ">
+                <input  name="province" type="text" id="province" placeholder=จังหวัด>
+                <input  name="zipcode" type="text" id="zipcode" placeholder="รหัสไปรษณีย์">
               </div>
               <!-- <div class="input-group"> -->
               <label for="job_name">ตำแหน่งงาน</label>
-              <input required name="job_name" type="text" id="job_name">
+              <input  name="job_name" type="text" id="job_name">
               <!-- </div> -->
               <div style="display: grid; grid-template-columns: auto auto; margin-bottom: 10px;">
                 <div class="input-group">
                   <label for="salary">เงินเดือน</label>
-                  <span><input required name="salary" type="int" id="salary"></span>
+                  <span><input  name="salary" type="int" id="salary"></span>
                 </div>
                 <div class="input-group">
                   <label for="jobType" style="align-items: center;">ลักษณะการทำงาน</label>
@@ -259,9 +259,9 @@
                 </div>
               </div>
               <textarea name="message" id="message" value="" placeholder="Type More Description..."></textarea>
-              <input required type="hidden" id="entryid" name="id" value="">
-              <input required hidden name="owner_email" id="owner_email" value="{{current_user.email}}">
-              <input required hidden name="owner_id" id="owner_id"  value="{{current_user.id}}">
+              <input type="hidden" id="entryid" name="id" value="">
+              <input hidden name="owner_email" id="owner_email" value="{{current_user.email}}">
+              <input hidden name="owner_id" id="owner_id"  value="{{current_user.id}}">
               <button id="post-btn" class="btn-submit" style="color: #FFF;">Post</button>
             </form>
           </div> 
