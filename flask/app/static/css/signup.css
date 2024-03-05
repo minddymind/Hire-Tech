@@ -162,12 +162,13 @@ nav {
 	height: 0;
 	background-color: rgb(255, 255, 255, 0.1);
 	backdrop-filter: blur(15px);
+	border-radius: 10px;
 	overflow: hidden;
 	transition: height .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .dropdown_menu.open {
-	height: 240px;
+	height: auto;
 }
 
 .dropdown_menu li {
@@ -177,7 +178,7 @@ nav {
 	justify-content: center;
 }
 
-@media(max-width: 992px){
+@media(max-width: 991.98px){
 	.navbar .links {
 		display: none;
 	}
@@ -191,10 +192,19 @@ nav {
 	}
 }
 
-@media(max-width: 576px){
+@media(max-width: 767.98px){
 	.dropdown_menu {
-		left: 2rem;
-		width: unset;
+		right: 2rem;
+    left: 55%;
+		width: 200px;
+	}
+}
+
+@media(max-width: 575.98px){
+	.dropdown_menu {
+		right: 2rem;
+    left: 55%;
+		width: 200px;
 	}
 }
 

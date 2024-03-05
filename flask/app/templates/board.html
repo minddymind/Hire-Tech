@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+        <!-- Bootstrap CSS-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+        crossorigin="anonymous">
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-vZ5Aa19V9H+h73E9+Gti7GvDLxufM0oy2ltQ6pAgS5PZXpvaNbTFSuZjLegxhjGj" crossorigin="anonymous"></script> -->
+      
+        <!-- Font awsome Libary-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+      
+        <!-- Style sheet-->
+        <link rel="stylesheet" href="/static/css/board.css">
+        <!-- <link rel="stylesheet" href="/static/css/home.css"> -->
+
+        <!-- Font -->
+        <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
+
+        <!-- icon -->
+        <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
+
+        <!-- Jquery Thailand autocomplete -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+        <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/JQL.min.js"></script>
+        <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
+        <link rel="stylesheet" href="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.css">
+        <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
+
+        <script defer src="static/js/navbar.js"></script>
+        <script defer src="static/js/utility.js"></script>
+        <script src="/static/js/popup.js"></script>
+        <script src="/static/js/board.js"></script>
+        <title>HireThec - Board</title>
+    </head>
+      
+    <body>
+      <nav>
+        <div class="navbar">
+          <div class="nav-left">
+            <div class="logo"><a href='/'>HireThec</a></div>
+          </div>
+
+          <div class="nav-right">
+            <div class="nav-info right" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account">
+              <a href="/profile">
+                <img src="{{current_user.avatar_url}}" alt="user-profile" class="user-profile">
+                <span id="name">{{current_user.name}}</span>
+              </a>
+            </div>
+            <div class="nav-info hide" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account">
+              <a href="/profile"><img src="{{current_user.avatar_url}}" alt="user-profile" class="user-profile-info" id="profile">
+            </div>
+            <ul class="links">
+              <li><a href="/">Home</a></li>
+              <li><a href="/board">Board</a></li>
+              <li><a href="/logout">Log out</a></li>
+            </ul>
+            <div class="toggle_btn">
+              <i class="fas fa-bars"></i>
+            </div>
+          </div>
+          <div class="dropdown_menu open">
+            <li><a href="/">Home</a></li>
+            <li><a href="/board">Board</a></li>
+            <li><a href="/logout">Log out</a></li>
+          </div>
+        </div>
+
+
+      </nav>
+      <!-- nav end-->
+
+      <!-- main-body start -->
+      <div class="main-body">
+        <!-- sidebar start -->
+        <div class="sidebar">
+          <div class="sidebar-row">
+            <div class="nav-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Account">
+              <a href="/profile"><img src="{{current_user.avatar_url}}" alt="user-profile" class="user-profile-info" id="profile">
+              <h4 id="profile">{{current_user.name}}</h4></a>
+            </div>
+          </div>
+        </div>
+        <!-- sidebar end -->
+        <!-- feed start -->
+        <div class="feed" id="feed-box">
+          <!-- message-box satrt -->
+          <div class="message-box">
+            <div class="message-box-top">
+              <img src="{{current_user.avatar_url}}" alt="user-profile" class="user-profile" name="avatar" id="avatar" id="profile">
+              <button id="btn-post">Start a post to find your partner</button>
+            </div>
+          </div>
+          <!-- message-box end -->
+          <div class="undo-hide">
+            <p class="close-back">+</p>
+            <p class="undo-text">undo</p>
+            <p class="undo-text hid" style="text-decoration: none;">Hid</p>
+          </div>
+          <!-- undo hide end-->
+
+          <!-- undo delete start-->
+          <div class="undo-delete">
+            <p class="close-back"->+</p>
+            <p class="undo-text delete">undo</p>
+            <p class="undo-text deleted" style="text-decoration: none;">Deleted</p>
+          </div>
+          <!-- undo deleted end-->
+          {% for post in allpost %}
+          <!-- post start -->
+          <div class="post" id="postid{{post.id}}">
+            <div class="post-top">
+              <a onclick="gotoprofile('{{post.owner_id}}')"><img src="{{post.owner_avatar}}" alt="user-profile" class="user-profile post-avatar" id="profile"></a>
+              <div class="post-top-info">
+                <a onclick="gotoprofile('{{post.owner_id}}')"><h3 id="profile">{{post.owner_name}} <span class="text-muted">- {{post.owner_email}}</span></h3></a> 
+                <!-- Create at -->
+                <p class="created">{{post.created_at[:10]}} <span id="postC-at-{{ post['id'] }}" ></span></p>
+                {% if post.edited_at != None %}
+                <p class="edit">edited:{{post.edited_at[:10]}} <span id="postU-at-{{ post['id'] }}"></span></p>
+                {% else %}
+                <p class="edit">not edit</p>
+                {% endif %}
+              </div>
+              {% if current_user.id == post.owner_id or current_user.id == 1 %}
+              <div class="dropdown-menu-container">
+                <div class="dropdown" style="position: relative;"> <!-- Added dropdown-right class -->
+                  <i class="fa-solid fa-ellipsis" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false"></i>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    {% if post.is_hired == false and current_user.id == post.owner_id %}
+                    <a class="dropdown-item" id="hire" name="hired_at" onclick="hirePost('{{post.id}}')">Hired</a>
+                    {% endif %}
+                    {% if current_user.id == post.owner_id and post.is_hired == false %}
+                    <a class="dropdown-item" id="edit" name="edited_at" 
+                     onclick="editPost('{{post.location}}','{{post.district}}', '{{post.amphoe}}',
+                    '{{post.province}}', '{{post.zipcode}}','{{post.job_name}}', '{{post.salary}}',
+                    '{{post.job_time}}', '{{post.message}}','{{post.id}}', 
+                    '{{post.owner_email}}', '{{post.owner_id}}')">Edit</a>
+                    {% endif %}
+                    <!-- only owner and admin can delete -->
+                    {% if current_user.id == post.owner_id or current_user.id == 1 %}
+                    <a class="dropdown-item" id="delete" name="deleted_at"
+                    onclick="deletePost('{{post.id}}')" style="color: red;">Delete</a>
+                    {% endif %}
+                    <!-- only admin can hide post -->
+                    <!-- {% if current_user.id == 1 %} 
+                    <a class="dropdown-item" id="hide" style="color: red;" onclick="hidePost('{{post.id}}')">Hide</a>
+                    {% endif %} -->
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+            <div class="tag">
+              {% if post.salary != "" %}
+                <span class="tag salary">{{post.salary}}</span>
+              {% endif %}
+              {% if post.province != "" %}
+                <span class="tag province">{{post.province}}</span>
+              {% endif %}
+              {% if post.job_time != "" %}
+              <span class="tag jobType">{{post.job_time}}</span>
+              {% endif %}
+            </div>
+            <div class="post-bottom">
+              <div class="address">
+                <p>ที่อยู่: {{post.location}}</p>
+                <p>อำเภอ: {{post.amphoe}}</p>
+                <p>ตำบล: {{post.district}}</p>
+                <p>ตำแหน่งงาน: {{post.job_name}}</p>
+                <br>
+              </div>
+              <p><b>{{post.message}}</b></p>
+            </div>
+            <div class="post-options">
+              <div class="post-option">
+                {% if post.is_hired == false %}
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{post.email}}&su=subject_here&body=body_here" target="_blank">
+                <button type="button" class="btn btn-success" id="no-hired">send resume</button>
+                </a>
+                <!-- hired start -->
+                {% else %}
+                <button type="button" class="btn btn-success hired" id="hired"  disabled>hired</button>
+                <!-- hired end -->
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <!-- post end -->
+          {% endfor %}
+
+          <!-- post start -->
+          <div class="post">
+            
+          </div>
+          <!-- post end -->
+        </div>
+        <!-- feed end -->
+
+        <!-- Undo -->
+        
+        <!-- sidebar start -->
+        <div class="sidebar right">
+          <div class="wrapper">
+            <div class="search-input">
+              <input name="searchbar" type="text" id="input-box" placeholder="Search">
+              <div class="autocom-box" id="autocom-box">
+                <li>Backend Developer</li>
+                <li>Data Analyst</li>
+                <li>DevOps Engineer</li>
+                <li>IT Project Manager</li>
+                <li>Software QA Manager</li>
+              </div>
+              <div class="material-icons"><i class="fa-solid fa-magnifying-glass"></i></div>
+            </div>
+          </div>
+        </div>
+        <!-- sidebar end -->
+      </div>
+      <!-- main-body end -->
+      
+      <div class="bg-modal">
+          <div class="modal-content">
+            <div class="close">+</div>
+            <form id='post-form' action="">
+              <label for="location">สถานที่ตั้ง</label>
+              <div style="display: grid; grid-template-columns: auto auto;">
+                <input name="location" type="text" id="location" placeholder="ที่อยู่">
+                <input name="district"  type="text" id="district" placeholder="ตำบล">
+                <input name="amphoe" type="text" id="amphoe" placeholder="อำเภอ">
+                <input name="province" type="text" id="province" placeholder=จังหวัด>
+                <input name="zipcode" type="text" id="zipcode" placeholder="รหัสไปรษณีย์">
+              </div>
+              <!-- <div class="input-group"> -->
+              <label for="job_name">ตำแหน่งงาน</label>
+              <input name="job_name" type="text" id="job_name">
+              <!-- </div> -->
+              <div style="display: grid; grid-template-columns: auto auto; margin-bottom: 10px;">
+                <div class="input-group">
+                  <label for="salary">เงินเดือน</label>
+                  <span><input name="salary" type="int" id="salary"></span>
+                </div>
+                <div class="input-group">
+                  <label for="jobType" style="align-items: center;">ลักษณะการทำงาน</label>
+                  <span><select name="job_time" id="job_time">
+                    <option id="fullTime" value="Full-time">Full-time</option>
+                    <option id="partTime" value="Part-time">Part-time</option>
+                    <option id="hybrid" value="Hybrid">Hybrid</option>
+                  </select></span>
+                </div>
+              </div>
+              <textarea name="message" id="message" value="" placeholder="Type More Description..."></textarea>
+              <input type="hidden" id="entryid" name="id" value="">
+              <input hidden name="owner_email" id="owner_email" value="{{current_user.email}}">
+              <input hidden name="owner_id" id="owner_id"  value="{{current_user.id}}">
+              <button id="post-btn" class="btn-submit" style="color: #FFF;">Post</button>
+            </form>
+          </div> 
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+      <script src="/static/js/suggestions.js"></script> 
+      <script src="/static/js/autocom.js"></script> 
+      <script>
+        //$('#input-box').click(function() {
+          //$('#autocom-box').show();
+        //})
+      </script>
+      <script>
+        dropdownFunction(); //from board.js
+        popupFunction();//from popup.js
+        editPost();//from popup.js
+        //handle post method to backend
+        
+        $('#post-form').submit(function(event){
+          event.preventDefault();
+          //contain all input to dictionary
+          let formData = {};
+          $(":input").each(function () {
+            var key = $(this).attr('name');
+            var val = $(this).val();
+            if (key != 'submit' && key != 'searchbar') {
+              formData[key] = val;
+            }
+          })
+          //console.log(formData)
+          let url = $('#post-form').attr('action')
+          $('#post-btn').click(function(){
+          })
+          $.post(url, formData, function (callbackData) {
+            //refresh #feed-box to new data
+            //callbackData = ajaxTime(callbackData)
+            //the callbackData is html because the return of /board is html
+            //const parsedHTMLData = $.parseHTML(callbackData);
+            //console.log(parsedHTMLData)
+            //const feedbox = $(parsedHTMLData).find('#feed-box')
+            //$('#feed-box').html(feedbox.html())
+            refresh();
+          });
+        })
+
+      </script>
+      <script>
+        $(document).ready(function() {
+          $('.toggle_btn').click(function() {
+        // Toggle the 'active' class on the toggle button to change the icon
+            $(this).toggleClass('active');
+            
+              // Check if the toggle button has the 'active' class
+              if ($(this).hasClass('active')) {
+                  // If it has the 'active' class, change the icon to 'fa-xmark'
+                  $(this).find('i').removeClass('fa-xmark').addClass('fa-bars');
+              } else {
+                  // If it doesn't have the 'active' class, change the icon to 'fa-bars'
+                  $(this).find('i').removeClass('fa-bars').addClass('fa-xmark');
+              }
+          });
+        });
+      </script>
+    </body>
+</html>

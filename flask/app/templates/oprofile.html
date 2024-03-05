@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireThec - Profile</title>
+    <!-- icon -->
+    <link rel="icon" type="image/x-icon" href="/static/icon/job-search.png">
+    <!-- Font awsome Libary-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!-- Font -->
+    <link href='https://fonts.googleapis.com/css?family=Kanit&subset=thai,latin' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+    crossorigin="anonymous">
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+    <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/JQL.min.js"></script>
+    <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
+    <link rel="stylesheet" href="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.css">
+    <script type="text/javascript" src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
+    <link rel="stylesheet" href="/static/css/board.css">
+    <link rel="stylesheet" href="/static/css/profile.css">
+    <script src="/static/js/popup.js"></script>
+    <script src="/static/js/board.js"></script>
+    <script src="/static/js/utility.js"></script>
+</head>
+<body>
+  <div class="navbar">
+    <div class="nav-left">
+      <div class="logo"><a href='/'>HireThec</a></div>
+    </div>
+
+    <div class="nav-right">
+      <div class="nav-info right" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Accout">
+        <a href="/profile"><img src="{{current_user.avatar_url}}" alt="user-profile" class="user-profile">
+        <div class="nav-name"><span id="name" name="name">{{current_user.name}}</span></a></div>
+      </div>
+      
+      <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/board">Board</a></li>
+        <li><a href="/logout">Log out</a></li>
+      </ul>
+      <div class="toggle_btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+    <div class="dropdown_menu open">
+      <li><a href="/">Home</a></li>
+      <li><a href="/board">Board</a></li>
+      <li><a href="/logout">Log out</a></li>
+    </div>
+  </div>
+
+  <div class="header-wrapper">
+    <header></header>
+    <div class="cols-container">
+      <div class="left-col">
+        <div class="img-container">
+          <img src="{{owner_avatar}}" alt="user-profile" class="user-profile" name="avatar" id="avatar" id="profile">
+          <span></span>
+        </div>
+        <h2>{{owner_name}}</h2>
+        <p name="email">{{owner_email}}</p>
+        <div class="content" id="about_me">
+          <div action="">
+            <p>{{owner_aboutme}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <hr>
+  <div class="recent">Recent post</div>
+  <!-- main-body start -->
+  <div class="main-body" style="margin: auto; width: 95%; justify-content: center;">
+  <!-- feed start -->
+    <div class="feed" style="width: 100%; padding: 0;">
+      {% for post in owner_post %}
+    <!-- post start -->
+      <div class="post">
+        <div class="post-top">
+          <a href="/profile"><img src="{{post.owner_avatar}}" alt="user-profile" class="user-profile post-avatar" id="profile"></a>
+          <div class="post-top-info">
+            <a href="/profile"><h3 id="profile">{{post.owner_name}}</h3></a>
+            <p class="created">{{post.created_at[:10]}} <span id="postC-at-{{ post['id'] }}" ></span></p>
+            {% if post.edited_at != None %}
+            <p class="edit">edited:{{post.edited_at[:10]}} <span id="postU-at-{{ post['id'] }}"></span></p>
+            {% else %}
+            <p class="edit">not edit</p>
+            {% endif %}
+          </div>
+          {% if current_user.id == post.owner_id or current_user.id == 1 %}
+          <div class="dropdown-menu-container">
+            <div class="dropdown" style="position: relative;"> <!-- Added dropdown-right class -->
+              <i class="fa-solid fa-ellipsis" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false"></i>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                {% if post.is_hired == false %}
+                <a class="dropdown-item" id="hire" name="hired_at" onclick="hirePost('{{post.id}}')">Hired</a>
+                {% endif %}
+                {% if current_user.id == post.owner_id and post.is_hired == false %}
+                <a class="dropdown-item" id="edit" name="edited_at" 
+                 onclick="editPost('{{post.location}}','{{post.district}}', '{{post.amphoe}}',
+                '{{post.province}}', '{{post.zipcode}}','{{post.job_name}}', '{{post.salary}}',
+                '{{post.job_time}}', '{{post.message}}','{{post.id}}', 
+                '{{post.owner_email}}', '{{post.owner_id}}')">Edit</a>
+                {% endif %}
+                <!-- only owner and admin can delete -->
+                {% if current_user.id == post.owner_id or current_user.id == 1 %}
+                <a class="dropdown-item" id="delete" name="deleted_at"
+                onclick="deletePost('{{post.id}}')" style="color: red;">Delete</a>
+                {% endif %}
+                <!-- only admin can hide post -->
+                <!-- {% if current_user.id == 1 %} 
+                <a class="dropdown-item" id="hide" style="color: red;" onclick="hidePost('{{post.id}}')">Hide</a>
+                {% endif %} -->
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        <div class="tag">
+          {% if post.salary != "" %}
+          <span class="tag salary">{{post.salary}}</span>
+          {% endif %}
+          {% if post.province != "" %}
+          <span class="tag province">{{post.province}}</span>
+          {% endif %}
+          {% if post.job_time != "" %}
+          <span class="tag jobType">{{post.job_time}}</span>
+          {% endif %}
+        </div>
+        <div class="post-bottom">
+          <div class="address">
+            <p>ที่อยู่: {{post.location}}</p>
+            <p>อำเภอ: {{post.amphoe}}</p>
+            <p>ตำบล: {{post.district}}</p>
+            <br>
+          </div>
+          <p><b>{{post.message}}</b></p>
+        </div>
+        <div class="post-options">
+          <div class="post-option">
+            {% if post.is_hired == false %}
+            <button type="button" class="btn btn-success" id="no-hired">send resume</button>
+            <!-- hired start -->
+            {% else %}
+            <button type="button" class="btn btn-success hired" id="hired"  disabled>hired</button>
+            <!-- hired end -->
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <!-- post end -->
+
+      <!-- undo hide start-->
+      <div class="undo-hide">
+        <p class="close-back">+</p>
+        <p class="undo-text">undo</p>
+        <p class="undo-text hid" style="text-decoration: none;">Hid</p>
+      </div>
+      <!-- undo hide end-->
+
+      <!-- undo delete start-->
+      <div class="undo-delete">
+        <p class="close-back">+</p>
+        <p class="undo-text delete">undo</p>
+        <p class="undo-text deleted" style="text-decoration: none;">Deleted</p>
+      </div>
+      <!-- undo deleted end-->
+    </div>
+  </div>
+  <div class="footer" style="width: 100%; height: 50px;"></div>
+
+  <script>
+    $(document).ready(function() {
+      $(".dropdown").click(function(e) {
+        e.preventDefault();
+        $(this).find(".dropdown-menu").toggleClass("show");
+      });
+
+      // Close the dropdown menu when clicking outside of it
+      $(document).click(function(e) {
+        if (!$(e.target).closest('.dropdown').length) {
+          $(".dropdown-menu").removeClass("show");
+        }
+      });
+
+      $(".dropdown-item").click(function(e) {
+        e.preventDefault();
+        if ($(this).text().trim() === "Hide") {
+          $(this).closest(".post").hide();
+          $('.undo-hide').show();
+        }
+        if ($(this).text().trim() === "Delete") {
+          $(this).closest(".post").hide();
+          var postId = $(this).closest(".post").attr("id");
+
+          $('.undo-delete').show();
+        }
+        if ($(this).text().trim() === "Hired") {
+          $('#no-hired').hide();
+          $('#hired').show();
+        }
+      });
+
+      $(".undo-text").click(function(e) {
+        e.preventDefault();
+        $(".post").show();
+        $(".undo-hide").hide();
+        $(".undo-delete").hide();
+      });
+
+      $(".close-back").click(function(e) {
+        e.preventDefault();
+        $(".undo-hide").hide();
+        $(".undo-delete").hide();
+      });
+    });
+
+    
+      // $(".descript").css({
+      //   'border': '2px solid red',
+      //   'background-color': 'lightgray'
+      // });
+
+    $(document).ready(function(){
+      $('.toggle_btn').click(function(){
+          $('.dropdown_menu').toggleClass('open');
+          const isOpen = $('.dropdown_menu').hasClass('open');
+          const toggleBtnIcon = $('.toggle_btn i');
+
+          if (isOpen) {
+              toggleBtnIcon.removeClass('fa-bars').addClass('fa-xmark');
+          } else {
+              toggleBtnIcon.removeClass('fa-xmark').addClass('fa-bars');
+          }
+      });
+    });
+
+  </script>
+</body>
+</html>
