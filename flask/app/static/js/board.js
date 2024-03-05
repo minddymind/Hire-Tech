@@ -112,7 +112,7 @@ function hirePost(post_id){
   var formData = { 'id': post_id };
   $.post(url, formData, function (callbackData) {
     refresh(url,formData);
-    $('.btn.btn-success.hired').show();
+    $('#hired').show();
   });
 }
 
