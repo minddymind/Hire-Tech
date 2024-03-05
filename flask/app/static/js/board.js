@@ -23,7 +23,10 @@ function dropdownFunction(){
       }
       if ($(this).text().trim() === "Hired") {
         $('#no-hired').hide();
-        $('#hired').show();
+        
+        $('.postoption').css({
+          'border-top': 'none'
+        })
       }
     });
   
@@ -109,6 +112,7 @@ function hirePost(post_id){
   var formData = { 'id': post_id };
   $.post(url, formData, function (callbackData) {
     refresh(url,formData);
+    $('#hired').show();
   });
 }
 

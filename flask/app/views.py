@@ -268,6 +268,7 @@ def profile():
     return render_template("profile.html",user_post=user_post)
 
 @app.route('/oprofile', methods=('GET', 'POST'))
+@login_required
 def oprofile():
 
     if request.method == 'POST':
@@ -408,6 +409,16 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+google = oauth.register(
+        name='google',
+        client_id=app.config['GOOGLE_CLIENT_ID'],
+        client_secret=app.config['GOOGLE_CLIENT_SECRET'],
+        server_metadata_url=app.config['GOOGLE_DISCOVERY_URL'],
+        client_kwargs={
+            'scope': 'openid email profile'
+        }
+    )
+
 @app.route('/google/revoke', methods=['POST'])
 def google_revoke(token):
     response = requests.post('https://oauth2.googleapis.com/revoke',
@@ -419,15 +430,7 @@ def google_revoke(token):
         print("Failed to revoke token")
 @app.route('/google/')
 def google():
-    oauth.register(
-        name='google',
-        client_id=app.config['GOOGLE_CLIENT_ID'],
-        client_secret=app.config['GOOGLE_CLIENT_SECRET'],
-        server_metadata_url=app.config['GOOGLE_DISCOVERY_URL'],
-        client_kwargs={
-            'scope': 'openid email profile'
-        }
-    )
+
    # Redirect to google_auth function
     redirect_uri = url_for('google_auth', _external=True)
     return oauth.google.authorize_redirect(redirect_uri)
