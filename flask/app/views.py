@@ -236,27 +236,27 @@ def board_hire():
 
 # @app.route('/board/unhide', methods=('GET', 'POST'))
 # def board_unhide():
-    app.logger.debug("===== UNHIDE FUNCTION =====")
-    if request.method == 'POST':
-        result = request.form.to_dict()
-        #get the post_id
-        id_ = result.get('id', '')
-        try:
-            #if now user is admin
-            post = PostContent.query.get(id_)
-            if current_user.id == 1:
-                post.is_hide = False
-                post.hide_at = None
-                db.session.commit()
+#     app.logger.debug("===== UNHIDE FUNCTION =====")
+#     if request.method == 'POST':
+#         result = request.form.to_dict()
+#         #get the post_id
+#         id_ = result.get('id', '')
+#         try:
+#             #if now user is admin
+#             post = PostContent.query.get(id_)
+#             if current_user.id == 1:
+#                 post.is_hide = False
+#                 post.hide_at = None
+#                 db.session.commit()
 
-            if  post.is_hide:
-                print("Post has been successfully unmarked from hide.")
-            else:
-                print("Failed to unmark Post from hide.")
-        except Exception as ex:
-           app.logger.error(f"Error unmark post from hide with id {id_}: {ex}")
-           raise
-    return board_api()
+#             if  post.is_hide:
+#                 print("Post has been successfully unmarked from hide.")
+#             else:
+#                 print("Failed to unmark Post from hide.")
+#         except Exception as ex:
+#            app.logger.error(f"Error unmark post from hide with id {id_}: {ex}")
+#            raise
+#     return board_api()
 
 @app.route('/profile')
 @login_required
@@ -439,7 +439,6 @@ def google():
 def google_auth():
     try:
         token = oauth.google.authorize_access_token()
-
     except authlib.integrations.base_client.errors.OAuthError:
         return redirect(url_for('login'))
     app.logger.debug(str(token))
@@ -500,7 +499,7 @@ def github_auth():
     name = gh_resp['login']
     if email == None:
         email = name
-    print(email)
+    # print(email)
 
     user = Member.query.filter_by(email=email).first()
 
@@ -522,20 +521,21 @@ def github_auth():
     login_user(user)
     return redirect('/board')
 
+facebook = oauth.register(
+    name='facebook',
+    client_id=app.config['FACEBOOK_CLIENT_ID'],
+    client_secret=app.config['FACEBOOK_CLIENT_SECRET'],
+    access_token_url='https://graph.facebook.com/oauth/access_token',
+    access_token_params=None,
+    authorize_url='https://www.facebook.com/v13.0/dialog/oauth',
+# base_url = "https://www.facebook.com/v13.0/dialog/oauth"
+    authorize_params=None,
+    api_base_url='https://graph.facebook.com/',
+    client_kwargs={'scope': 'email'},
+)
 @app.route('/facebook/')
 def facebook_login():
-    facebook = oauth.register(
-        name='facebook',
-        client_id=app.config['FACEBOOK_CLIENT_ID'],
-        client_secret=app.config['FACEBOOK_CLIENT_SECRET'],
-        access_token_url='https://graph.facebook.com/oauth/access_token',
-        access_token_params=None,
-        authorize_url='https://www.facebook.com/dialog/oauth',
-# base_url = "https://www.facebook.com/v13.0/dialog/oauth"
-        authorize_params=None,
-        api_base_url='https://graph.facebook.com/',
-        client_kwargs={'scope': 'email'},
-    )
+
     redirect_uri = url_for('facebook_auth', _external=True)
     return oauth.facebook.authorize_redirect(redirect_uri)
 
