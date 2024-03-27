@@ -87,7 +87,7 @@
         <div class="post-top">
           <a href="/profile"><img src="{{post.owner_avatar}}" alt="user-profile" class="user-profile post-avatar" id="profile"></a>
           <div class="post-top-info">
-            <a href="/profile"><h3 id="profile">{{post.owner_name}}</h3></a>
+            <a href="/profile"><h3 id="profile">{{post.owner_id}}</h3></a>
             <p class="created">{{post.created_at[:10]}} <span id="postC-at-{{ post['id'] }}" ></span></p>
             {% if post.edited_at != None %}
             <p class="edit">edited:{{post.edited_at[:10]}} <span id="postU-at-{{ post['id'] }}"></span></p>
