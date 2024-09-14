@@ -1,0 +1,32 @@
+{
+    "requiresCompatibilities": [
+       "FARGATE"
+   ],
+   "containerDefinitions": [
+       {
+           "name": "app-container",
+           "image": "913258321759.dkr.ecr.us-east-1.amazonaws.com/web-app:latest",
+           "cpu": 512,
+           "memoryReservation": 512,
+           "portMappings": [
+               {
+                   "containerPort": 5000,
+                   "hostPort": 30000,
+                   "protocol": "tcp"
+               }
+           ],
+           "essential": true,
+           "environment": [],
+           "mountPoints": [],
+           "volumesFrom": [],
+           "secrets": [
+              
+           ]
+       }
+   ],
+   "family": "web-app-task-def",
+   "networkMode": "awsvpc",
+   "volumes": [],
+   "placementConstraints": [],
+   "tags": []
+}
