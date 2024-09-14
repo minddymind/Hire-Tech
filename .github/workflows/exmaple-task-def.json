@@ -10,8 +10,8 @@
            "memoryReservation": 512,
            "portMappings": [
                {
-                   "containerPort": 5000,
-                   "hostPort": 30000,
+                   "containerPort": 3000,
+                   "hostPort": 3000,
                    "protocol": "tcp"
                }
            ],
