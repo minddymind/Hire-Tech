@@ -38,6 +38,7 @@ jobs:
         ECR_URI: "913258321759.dkr.ecr.us-east-1.amazonaws.com/web-app"
         IMAGE_TAG: "latest"
       run: |
-        docker build -t $ECR_URI:$IMAGE_TAG .
+        # Navigate to the flask folder and build the Docker image from there
+        docker build -t $ECR_URI:$IMAGE_TAG ./flask
         docker push $ECR_URI:$IMAGE_TAG
 
