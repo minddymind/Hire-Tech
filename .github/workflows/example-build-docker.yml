@@ -27,6 +27,10 @@ jobs:
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }} # Use the session token
         aws-region: us-east-1 # Change to your AWS region
 
+    - name: Log in to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+
     - name: Build, tag, and push Docker image
       env:
         ECR_URI: "913258321759.dkr.ecr.us-east-1.amazonaws.com/web-app"
@@ -35,10 +39,7 @@ jobs:
         docker build -t $ECR_URI:$IMAGE_TAG .
         docker push $ECR_URI:$IMAGE_TAG
 
-    - name: Sleep to ensure image is available in the registry
-      run: sleep 20 # Wait for 20 seconds to ensure the image is pushed successfully
-
     - name: Get Image Digest
       run: |
-        IMAGE_DIGEST=$(aws ecr describe-images --repository-name web-app --image-ids imageTag=${{ github.sha }} --query 'imageDetails[0].imageDigest' --output text)
+        IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' $ECR_URI:${{ github.sha }})
         echo "Docker image pushed: $IMAGE_DIGEST"
