@@ -26,10 +26,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }} # Use the session token
         aws-region: us-east-1 # Change to your AWS region
-    
-    - name: Log in to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v2
 
     - name: Build, tag, and push Docker image
       env:
@@ -38,4 +34,8 @@ jobs:
       run: |
         docker build -t $ECR_URI:$IMAGE_TAG .
         docker push $ECR_URI:$IMAGE_TAG
+
+    - name: Log in to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
 
