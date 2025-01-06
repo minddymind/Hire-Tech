@@ -46,7 +46,7 @@ Follow these steps to set up the project locally:
    git clone https://github.com/your-repo/hire-tech.git
    ```
 
-2. **Navigate to the project directory***
+2. **Navigate to the project directory**
    ```bash
    cd hire-tech
    ```
