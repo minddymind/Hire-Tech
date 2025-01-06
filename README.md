@@ -24,7 +24,8 @@
 
 - **Frontend**  
   - HTML  
-  - Bootstrap  
+  - Bootstrap
+  - Jinja
 
 - **Backend**  
   - Flask (Python)  
