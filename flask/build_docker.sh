@@ -1,7 +1,7 @@
 #!/bin/sh
 
-#read the enviroment variables from .env.dev
-[ -e "$PWD"/.env.dev ] && . "$PWD"/.env.dev
+#read the enviroment variables from 
+[ -e "$PWD"/.env ] && . "$PWD"/.env
 
 app="hirethec-app"
 docker build -t ${app} .
